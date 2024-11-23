@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTOLayer.AboutDto
 {
-    internal class ResultAboutDto
+    public class ResultAboutDto
     {
     }
 }
