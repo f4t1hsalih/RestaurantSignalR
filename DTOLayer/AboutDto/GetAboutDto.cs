@@ -1,6 +1,6 @@
 ﻿namespace DTOLayer.AboutDto
 {
-    public class ResultAboutDto
+    public class GetAboutDto
     {
         public int AboutId { get; set; }
         public string ImageUrl { get; set; }
