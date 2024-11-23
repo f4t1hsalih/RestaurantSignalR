@@ -1,6 +1,6 @@
-﻿namespace DTOLayer.Discount
+﻿namespace DTOLayer.DiscountDto
 {
-    public class ResultDiscountDto
+    public class UpdateDiscountDto
     {
         public int DiscountId { get; set; }
         public string Title { get; set; }
