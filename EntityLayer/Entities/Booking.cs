@@ -1,4 +1,4 @@
-﻿namespace SignalRApi.DAL.Entities
+﻿namespace EntityLayer.Entities
 {
     public class Booking
     {
