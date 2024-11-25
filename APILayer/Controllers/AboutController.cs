@@ -21,14 +21,13 @@ namespace APILayer.Controllers
             var value = _aboutService.TGetListAll();
             return Ok(value);
         }
-
         [HttpGet("{id}")]
         public IActionResult GetAboutByID(int id)
         {
             var about = _aboutService.TGetById(id);
-            if (about == null)
-                return NotFound("Kayıt bulunamadı");
-            return Ok(about);
+            if (about != null)
+                return Ok(about);
+            return NotFound("Kayıt bulunamadı");
         }
 
 

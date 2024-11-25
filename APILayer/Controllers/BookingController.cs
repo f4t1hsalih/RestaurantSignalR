@@ -25,12 +25,13 @@ namespace APILayer.Controllers
         public IActionResult BookingListBtID(int id)
         {
             var value = _bookingService.TGetById(id);
-            if (value == null)
+            if (value != null)
             {
-                return NotFound();
+                return Ok(value);
             }
-            return Ok(value);
+            return NotFound();
         }
+
         [HttpPost]
         public IActionResult InsertBooking(InsertBookingDto insertBookingDto)
         {
@@ -45,6 +46,7 @@ namespace APILayer.Controllers
             _bookingService.TInsert(booking);
             return Ok("Kayıt Başarıyla Eklendi");
         }
+
         [HttpPut]
         public IActionResult UpdateBooking(UpdateBookingDto updateBookingDto)
         {
@@ -59,6 +61,7 @@ namespace APILayer.Controllers
             };
             return Ok("Kayıt Başarıyla Güncellendi");
         }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteBooking(int id)
         {

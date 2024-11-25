@@ -12,7 +12,6 @@ namespace APILayer.Controllers
     {
         private readonly IContactService _contactService;
         private readonly IMapper _mapper;
-
         public ContactController(IContactService contactService, IMapper mapper)
         {
             _contactService = contactService;
@@ -28,14 +27,14 @@ namespace APILayer.Controllers
         [HttpGet("{id}")]
         public IActionResult ContactListByID(int id)
         {
-            var value = _contactService.TGetById(id);
+            var value = _mapper.Map<GetContactDto>(_contactService.TGetById(id));
             if (value != null)
             {
-                var result = _mapper.Map<GetContactDto>(value);
-                return Ok(result);
+                return Ok(value);
             }
             return NotFound("Kayıt Bulunamadı");
         }
+
         [HttpPost]
         public IActionResult InsertContact(InsertContactDto insertContactDto)
         {
@@ -43,6 +42,7 @@ namespace APILayer.Controllers
             _contactService.TInsert(value);
             return Ok("Kayıt Başarıyla Eklendi");
         }
+
         [HttpPut]
         public IActionResult UpdateContact(UpdateContactDto updateContactDto)
         {
@@ -50,6 +50,7 @@ namespace APILayer.Controllers
             _contactService.TUpdate(value);
             return Ok("Kayıt Başarıyla Güncellendi");
         }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteContact(int id)
         {

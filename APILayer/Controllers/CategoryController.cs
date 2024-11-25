@@ -27,11 +27,10 @@ namespace APILayer.Controllers
         [HttpGet("{id}")]
         public IActionResult GetCategoryByID(int id)
         {
-            var category = _categoryService.TGetById(id);
+            var category = _mapper.Map<GetCategoryDto>(_categoryService.TGetById(id));
             if (category != null)
             {
-                var result = _mapper.Map<GetCategoryDto>(category);
-                return Ok(result);
+                return Ok(category);
             }
             return NotFound();
         }
@@ -43,6 +42,7 @@ namespace APILayer.Controllers
             _categoryService.TInsert(category);
             return Ok("Kayıt başarıyla eklendi.");
         }
+
         [HttpPut]
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
@@ -50,6 +50,7 @@ namespace APILayer.Controllers
             _categoryService.TUpdate(category);
             return Ok("Kayıt başarıyla güncellendi.");
         }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {

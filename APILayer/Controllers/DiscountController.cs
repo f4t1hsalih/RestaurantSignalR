@@ -12,12 +12,12 @@ namespace APILayer.Controllers
     {
         private readonly IDiscountService _discountService;
         private readonly IMapper _mapper;
-
         public DiscountController(IDiscountService discountService, IMapper mapper)
         {
             _discountService = discountService;
             _mapper = mapper;
         }
+
         [HttpGet]
         public IActionResult DiscountList()
         {
@@ -27,14 +27,14 @@ namespace APILayer.Controllers
         [HttpGet("{id}")]
         public IActionResult DiscountListByID(int id)
         {
-            var value = _discountService.TGetById(id);
+            var value = _mapper.Map<GetDiscountDto>(_discountService.TGetById(id));
             if (value != null)
             {
-                var result = _mapper.Map<GetDiscountDto>(value);
-                return Ok(result);
+                return Ok(value);
             }
             return NotFound("Kayıt Bulunamadı");
         }
+
         [HttpPost]
         public IActionResult InsertDiscount(InsertDiscountDto insertDiscountDto)
         {
@@ -42,6 +42,7 @@ namespace APILayer.Controllers
             _discountService.TInsert(value);
             return Ok("Kayıt Başarıyla Eklendi");
         }
+
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDto updateDiscountDto)
         {
@@ -49,6 +50,7 @@ namespace APILayer.Controllers
             _discountService.TUpdate(value);
             return Ok("Kayıt Başarıyla Güncellendi");
         }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteDiscount(int id)
         {
