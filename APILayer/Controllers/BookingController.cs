@@ -59,6 +59,7 @@ namespace APILayer.Controllers
                 PersonCount = updateBookingDto.PersonCount,
                 Date = updateBookingDto.Date
             };
+            _bookingService.TUpdate(booking);
             return Ok("Kayıt Başarıyla Güncellendi");
         }
 
