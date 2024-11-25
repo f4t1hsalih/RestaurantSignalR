@@ -26,8 +26,11 @@ namespace APILayer.Controllers
         public IActionResult GetAboutByID(int id)
         {
             var about = _aboutService.TGetById(id);
+            if (about == null)
+                return NotFound("Kayıt bulunamadı");
             return Ok(about);
         }
+
 
         [HttpPost]
         public IActionResult InsertAbout(InsertAboutDto insertAboutDto)
@@ -60,8 +63,12 @@ namespace APILayer.Controllers
         public IActionResult DeleteAbout(int id)
         {
             var about = _aboutService.TGetById(id);
+            if (about == null)
+                return NotFound("Kayıt bulunamadı");
+
             _aboutService.TDelete(about);
-            return Ok("Kayıt Başarıyla Silindi");
+            return NoContent(); // Veri dönmeden başarılı silme işlemi
         }
+
     }
 }

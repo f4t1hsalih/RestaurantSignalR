@@ -16,6 +16,7 @@ namespace DataAccessLayer.Repositories
         public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
+            _context.SaveChanges();
         }
 
         public T GetById(int id)
@@ -36,11 +37,13 @@ namespace DataAccessLayer.Repositories
         public void Insert(T entity)
         {
             _context.Set<T>().Add(entity);
+            _context.SaveChanges();
         }
 
         public void Update(T entity)
         {
             _context.Set<T>().Update(entity);
+            _context.SaveChanges();
         }
     }
 }
