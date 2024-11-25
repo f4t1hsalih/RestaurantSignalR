@@ -1,6 +1,6 @@
 ﻿namespace DTOLayer.DiscountDto
 {
-    public class InserDiscountDto
+    public class InsertDiscountDto
     {
         public string Title { get; set; }
         public string Amount { get; set; }

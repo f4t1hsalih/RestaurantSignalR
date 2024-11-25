@@ -1,6 +1,6 @@
 ﻿namespace DTOLayer.TestimonialDto
 {
-    internal class GetTestimonialDto
+    public class GetTestimonialDto
     {
         public int TestimonialId { get; set; }
         public string Name { get; set; }
