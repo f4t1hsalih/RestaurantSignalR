@@ -16,13 +16,13 @@ namespace APILayer.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult BookingList()
         {
             var values = _bookingService.TGetListAll();
             return Ok(values);
         }
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult BookingListBtID(int id)
         {
             var value = _bookingService.TGetById(id);
             if (value == null)
@@ -32,7 +32,7 @@ namespace APILayer.Controllers
             return Ok(value);
         }
         [HttpPost]
-        public IActionResult Post(InsertBookingDto insertBookingDto)
+        public IActionResult InsertBooking(InsertBookingDto insertBookingDto)
         {
             Booking booking = new Booking
             {
@@ -46,7 +46,7 @@ namespace APILayer.Controllers
             return Ok("Kayıt Başarıyla Eklendi");
         }
         [HttpPut]
-        public IActionResult Put(UpdateBookingDto updateBookingDto)
+        public IActionResult UpdateBooking(UpdateBookingDto updateBookingDto)
         {
             Booking booking = new Booking
             {
@@ -60,7 +60,7 @@ namespace APILayer.Controllers
             return Ok("Kayıt Başarıyla Güncellendi");
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult DeleteBooking(int id)
         {
             var value = _bookingService.TGetById(id);
             if (value == null)
