@@ -7,8 +7,12 @@ using DataAccessLayer.EntityFramework;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<Context>();
+
 builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
+
+builder.Services.AddScoped<IBookingService, BookingManager>();
+builder.Services.AddScoped<IBookingDal, EfBookingDal>();
 
 // Add services to the container.
 
