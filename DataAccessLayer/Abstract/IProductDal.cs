@@ -1,9 +1,10 @@
-﻿using EntityLayer.Entities;
+﻿using DTOLayer.ProductDto;
+using EntityLayer.Entities;
 
 namespace DataAccessLayer.Abstract
 {
     public interface IProductDal : IGenericDal<Product>
     {
-        List<Product> GetProductsWithCategories();
+        List<GetProductWithCategoryDto> GetProductsWithCategories();
     }
 }

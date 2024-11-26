@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using DTOLayer.ProductDto;
 using EntityLayer.Entities;
 using System.Linq.Expressions;
 
@@ -13,7 +14,7 @@ namespace BusinessLayer.Concrete
             _productDal = productDal;
         }
 
-        public List<Product> TGetProductsWithCategories()
+        public List<GetProductWithCategoryDto> TGetProductsWithCategories()
         {
             return _productDal.GetProductsWithCategories();
         }
