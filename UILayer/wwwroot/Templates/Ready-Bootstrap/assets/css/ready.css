@@ -2119,29 +2119,34 @@ body {
   width: 100%;
   height: 100%;
 }
-.sidebar .user .info a {
-  white-space: nowrap;
-  display: block;
-  position: relative;
-}
-.sidebar .user .info a:hover, .sidebar .user .info a:focus {
-  text-decoration: none;
-}
-.sidebar .user .info a > span {
-  font-size: 14px;
-  font-weight: 600;
-  color: #777;
-  letter-spacing: 0.04em;
-  display: flex;
-  flex-direction: column;
-}
-.sidebar .user .info a > span .user-level {
-  color: #555;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.05em;
-  margin-top: 5px;
-}
+    .sidebar .user .info .user-info {
+        white-space: nowrap;
+        display: block;
+        position: relative;
+    }
+
+        .sidebar .user .info .user-info:hover,
+        .sidebar .user .info .user-info:focus {
+            text-decoration: none;
+        }
+
+        .sidebar .user .info .user-info > span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #777;
+            letter-spacing: 0.04em;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .sidebar .user .info .user-info > span .user-level {
+                color: #555;
+                font-weight: 700;
+                font-size: 13px;
+                letter-spacing: 0.05em;
+                margin-top: 5px;
+            }
+
 .sidebar .user .info a .link-collapse {
   padding: 7px 0;
 }

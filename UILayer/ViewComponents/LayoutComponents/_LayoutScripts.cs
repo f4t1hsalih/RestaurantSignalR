@@ -2,7 +2,7 @@
 
 namespace UILayer.ViewComponents.LayoutComponents
 {
-    public class _LayoutSidebar : ViewComponent
+    public class _LayoutScripts : ViewComponent
     {
         public IViewComponentResult Invoke()
         {
