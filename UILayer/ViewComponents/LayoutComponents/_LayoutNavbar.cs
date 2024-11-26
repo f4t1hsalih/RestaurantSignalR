@@ -2,7 +2,7 @@
 
 namespace UILayer.ViewComponents.LayoutComponents
 {
-    public class _LayoutHeaderPartialComponents : ViewComponent
+    public class _LayoutNavbar : ViewComponent
     {
         public IViewComponentResult Invoke()
         {
