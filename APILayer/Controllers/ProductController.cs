@@ -34,6 +34,12 @@ namespace APILayer.Controllers
             }
             return NotFound("Kayıt Bulunamadı");
         }
+        [HttpGet("ProductWithCategories")]
+        public IActionResult ProductWithCategories()
+        {
+            var products = _mapper.Map<List<GetProductWithCategoryDto>>(_productService.TGetProductsWithCategories());
+            return Ok(products);
+        }
 
         [HttpPost]
         public IActionResult InsertProduct(InsertProductDto insertProductDto)

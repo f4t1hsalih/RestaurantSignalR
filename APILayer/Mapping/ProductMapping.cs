@@ -4,7 +4,7 @@ using EntityLayer.Entities;
 
 namespace APILayer.Mapping
 {
-    public class ProductMapping:Profile
+    public class ProductMapping : Profile
     {
         public ProductMapping()
         {
@@ -12,6 +12,7 @@ namespace APILayer.Mapping
             CreateMap<Product, InsertProductDto>().ReverseMap();
             CreateMap<Product, UpdateProductDto>().ReverseMap();
             CreateMap<Product, GetProductDto>().ReverseMap();
+            CreateMap<Product, GetProductWithCategoryDto>().ReverseMap();
         }
     }
 }
