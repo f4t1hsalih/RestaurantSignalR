@@ -48,7 +48,34 @@ namespace UILayer.Controllers
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.DeleteAsync($"https://localhost:7068/api/Category/{id}" );
+            var response = await client.DeleteAsync($"https://localhost:7068/api/Category/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateCategory(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync($"https://localhost:7068/api/Category/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                var category = JsonConvert.DeserializeObject<CategoryUpdateDTO>(jsonData);
+                return View(category);
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateCategory(CategoryUpdateDTO category)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var json = JsonConvert.SerializeObject(category);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync("https://localhost:7068/api/Category/", data);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

@@ -1,6 +1,6 @@
-﻿@model UILayer.DTO.CategoryDTO.CategoryCreateDTO
+﻿@model UILayer.DTO.CategoryDTO.CategoryUpdateDTO
 @{
-    ViewData["Title"] = "Kategori Ekle";
+    ViewData["Title"] = "Kategori Güncelle";
     Layout = "~/Views/Admin/Index.cshtml";
 }
 
@@ -9,16 +9,21 @@
         <form method="post">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Kategori Ekle</div>
+                    <div class="card-title">Categori Güncelle</div>
                 </div>
                 <div class="card-body">
+                    <input type="hidden" asp-for="CategoryId" />
                     <div class="form-group">
                         <label for="name">Kategori Adı</label>
                         <input type="text" class="form-control" asp-for="Name" id="name">
                     </div>
+                    <div class="form-group">
+                        <label for="status">Kategori Durumu</label>
+                        <input type="text" class="form-control" asp-for="Status" id="status">
+                    </div>
                 </div>
                 <div class="card-action">
-                    <button type="submit" class="btn btn-success">Ekle</button>
+                    <button type="submit" class="btn btn-success">Kaydet</button>
                 </div>
             </div>
         </form>
