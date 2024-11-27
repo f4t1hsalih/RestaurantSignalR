@@ -1,4 +1,4 @@
-﻿
+﻿@model List<UILayer.DTO.CategoryDTO.CategoryResultDTO>
 @{
     ViewData["Title"] = "Kategoriler";
     Layout = "~/Views/Admin/Index.cshtml";
@@ -21,29 +21,24 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Kategori Adı</th>
+                                    <th scope="col">Durum</th>
+                                    <th scope="col">Güncelle</th>
+                                    <th scope="col">Sil</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>fat</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>twitter</td>
-                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.CategoryId</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Status</td>
+                                        <td><a href="#" class="btn btn-outline-warning">Güncelle</a></td>
+                                        <td><a href="#" class="btn btn-outline-danger">Sil</a></td>
+                                    </tr>
+                                }
+
                             </tbody>
                         </table>
                     </div>
