@@ -15,8 +15,11 @@
         @await Component.InvokeAsync("_LayoutSidebar")
 
         <div class="main-panel">
-
-            @RenderBody()
+            <div class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
             @await Component.InvokeAsync("_LayoutFooter")
 
         </div>

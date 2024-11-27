@@ -4,45 +4,38 @@
     Layout = "~/Views/Admin/Index.cshtml";
 }
 
-<div class="content">
-    <div class="container-fluid">
-        <h4 class="page-title">Tables</h4>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Basic Table</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-sub">
-                            This is the basic table view of the ready dashboard :
-                        </div>
-                        <table class="table mt-3">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Kategori Adı</th>
-                                    <th scope="col">Durum</th>
-                                    <th scope="col">Güncelle</th>
-                                    <th scope="col">Sil</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@item.CategoryId</td>
-                                        <td>@item.Name</td>
-                                        <td>@item.Status</td>
-                                        <td><a href="#" class="btn btn-outline-warning">Güncelle</a></td>
-                                        <td><a href="#" class="btn btn-outline-danger">Sil</a></td>
-                                    </tr>
-                                }
-
-                            </tbody>
-                        </table>
-                    </div>
+<h4 class="page-title">Kategoriler</h4>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-sub">
+                    Kategori İşlemlerini Bu Tablodan Yapabilirsin
+                    <a href="/Category/CreateCategory/" class="btn btn-primary float-right">Kategori Ekle</a>
                 </div>
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Kategori Adı</th>
+                            <th scope="col">Durum</th>
+                            <th scope="col">Güncelle</th>
+                            <th scope="col">Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.CategoryId</td>
+                                <td>@item.Name</td>
+                                <td>@item.Status</td>
+                                <td><a href="#" class="btn btn-outline-warning">Güncelle</a></td>
+                                <td><a href="#" class="btn btn-outline-danger">Sil</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

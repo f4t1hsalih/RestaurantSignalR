@@ -5104,6 +5104,12 @@ body {
   padding: 0.85rem 1.5rem;
   border-radius: 4px;
 }
+    .card .card-sub a {
+        display: unset;
+        position: relative;
+        top: -9px; /* Butonu yukarý taþý */
+    }
+
 .card .card-category {
   margin-top: 5px;
   font-size: 14px;

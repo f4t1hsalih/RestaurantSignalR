@@ -1,0 +1,26 @@
+﻿@model UILayer.DTO.CategoryDTO.CategoryCreateDTO
+@{
+    ViewData["Title"] = "Categori Ekle";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Categori Ekle</div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="name">Kategori Adı</label>
+                        <input type="text" class="form-control" asp-for="Name" id="name">
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button type="submit" class="btn btn-success">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
