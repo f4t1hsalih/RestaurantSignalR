@@ -1,4 +1,4 @@
-﻿@model List<UILayer.DTO.CategoryDTO.CategoryResultDTO>
+﻿@model List<CategoryResultDTO>
 @{
     ViewData["Title"] = "Kategoriler";
     Layout = "~/Views/Admin/Index.cshtml";
@@ -31,7 +31,7 @@
                                 <td>@item.Name</td>
                                 <td>@item.Status</td>
                                 <td><a href="/Category/UpdateCategory/@item.CategoryId" class="btn btn-outline-warning">Güncelle</a></td>
-                                <td><a href="/Category/DeleteCategory/@item.CategoryId" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Category/DeleteCategory/@item.CategoryId" class="btn btn-outline-danger" onclick="return confirm('Bu kategoriyi silmek istediğinize emin misiniz?');">Sil</a></td>
                             </tr>
                         }
                     </tbody>

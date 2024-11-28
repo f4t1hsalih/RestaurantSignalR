@@ -1,8 +1,7 @@
-﻿namespace DTOLayer.ProductDto
+﻿namespace UILayer.DTO.ProductDTO
 {
-    public class ResultProductDto
+    public class ProductCreateDTO
     {
-        public int ProductId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }

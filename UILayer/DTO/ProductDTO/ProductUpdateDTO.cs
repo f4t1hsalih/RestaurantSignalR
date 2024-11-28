@@ -1,6 +1,6 @@
-﻿namespace DTOLayer.ProductDto
+﻿namespace UILayer.DTO.ProductDTO
 {
-    public class ResultProductDto
+    public class ProductUpdateDTO
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
