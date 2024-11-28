@@ -73,6 +73,18 @@ namespace UILayer.Controllers
         public async Task<IActionResult> UpdateProduct(int id)
         {
             var client = _httpClientFactory.CreateClient();
+
+            var responseForCategory = await client.GetAsync("https://localhost:7068/api/Category");
+            var jsonForCategory = await responseForCategory.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<CategoryResultDTO>>(jsonForCategory);
+            List<SelectListItem> categoryNames = (from x in values
+                                                  select new SelectListItem
+                                                  {
+                                                      Text = x.Name,
+                                                      Value = x.CategoryId.ToString()
+                                                  }).ToList();
+            ViewBag.CategoryNames = categoryNames;
+
             var response = await client.GetAsync($"https://localhost:7068/api/Product/{id}");
             if (response.IsSuccessStatusCode)
             {
