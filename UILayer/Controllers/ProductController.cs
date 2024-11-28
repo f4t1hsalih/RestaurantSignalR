@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Text;
+using UILayer.DTO.CategoryDTO;
 using UILayer.DTO.ProductDTO;
 
 namespace UILayer.Controllers
@@ -27,8 +29,19 @@ namespace UILayer.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateProduct()
+        public async Task<IActionResult> CreateProduct()
         {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync("https://localhost:7068/api/Category");
+            var json = await response.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<CategoryResultDTO>>(json);
+            List<SelectListItem> categoryNames = (from x in values
+                                            select new SelectListItem
+                                            {
+                                                Text = x.Name,
+                                                Value = x.CategoryId.ToString()
+                                            }).ToList();
+            ViewBag.CategoryNames = categoryNames;
             return View();
         }
         [HttpPost]

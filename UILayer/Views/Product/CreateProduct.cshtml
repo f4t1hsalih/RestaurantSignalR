@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label for="category">Ürün Kategorisi</label>
-                        <input type="text" class="form-control" asp-for="CategoryId" id="category">
+                        @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.CategoryNames, new { @class = "form-control", @id = "category" })
                     </div>
                     <div class="form-group">
                         <label for="description">Ürün Açıklaması</label>
