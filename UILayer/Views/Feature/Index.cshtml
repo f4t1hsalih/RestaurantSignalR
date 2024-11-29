@@ -1,0 +1,45 @@
+﻿@model List<FeatureResultDTO>
+@{
+    ViewData["Title"] = "Slider'lar";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<h4 class="page-title">Slider'lar</h4>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-sub">
+                    Slider İşlemlerini Bu Tablodan Yapabilirsin
+                </div>
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Başlık1</th>
+                            <th scope="col">Açıklama1</th>
+                            <th scope="col">Başlık2</th>
+                            <th scope="col">Açıklama2</th>
+                            <th scope="col">Başlık3</th>
+                            <th scope="col">Açıklama3</th>
+                            <th scope="col">Düzenle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Title1</td>
+                                <td>@item.Description1</td>
+                                <td>@item.Title2</td>
+                                <td>@item.Description2</td>
+                                <td>@item.Title3</td>
+                                <td>@item.Description3</td>
+                                <td><a href="/Feature/UpdateFeature/@item.FeatureId" class="btn btn-outline-primary">Düzenle</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
