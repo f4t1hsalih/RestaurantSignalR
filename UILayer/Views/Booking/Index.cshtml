@@ -1,0 +1,48 @@
+﻿@model List<BookingResultDTO>
+@{
+    ViewData["Title"] = "Rezervasyonlar";
+    Layout = "~/Views/Admin/Index.cshtml";
+    int counter = 0;
+}
+
+<h4 class="page-title">Rezervasyonlar</h4>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-sub">
+                    Rezervasyon Alanı İşlemlerini Bu Tablodan Yapabilirsin
+                    <a href="/Booking/CreateBooking/" class="btn btn-primary float-right">Rezervasyon Oluştur</a>
+                </div>
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">İsim</th>
+                            <th scope="col">Telefon</th>
+                            <th scope="col">Kişi Sayısı</th>
+                            <th scope="col">Tarih</th>
+                            <th scope="col">Güncelle</th>
+                            <th scope="col">Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            counter++;
+                            <tr>
+                                <td>@counter</td>
+                                <td>@item.Name</td>
+                                <td>@item.Phone</td>
+                                <td>@item.PersonCount</td>
+                                <td>@(item.Date.ToShortDateString())</td>
+                                <td><a href="/Booking/UpdateBooking/@item.BookingId" class="btn btn-outline-warning btn-round">Güncelle</a></td>
+                                <td><a href="/Booking/DeleteBooking/@item.BookingId" class="btn btn-outline-danger btn-round" onclick="return confirm('Bu rezervasyonu silmek istediğinize emin misiniz?');">Sil</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
