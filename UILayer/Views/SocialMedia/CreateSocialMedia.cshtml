@@ -1,0 +1,34 @@
+﻿@model SocialMediaCreateDTO
+@{
+    ViewData["Title"] = "Sosyal Media Hesabı Ekle";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Sosyal Media Hesabı Ekle</div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="title">Başlık</label>
+                        <input type="text" class="form-control" asp-for="Title" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="icon">Icon</label>
+                        <input type="text" class="form-control" asp-for="Icon" id="icon">
+                    </div>
+                    <div class="form-group">
+                        <label for="url">Link</label>
+                        <input type="url" class="form-control" asp-for="Url" id="url">
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button type="submit" class="btn btn-success">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
