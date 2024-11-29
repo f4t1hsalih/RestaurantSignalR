@@ -1,0 +1,41 @@
+﻿@model List<ContactResultDTO>
+@{
+    ViewData["Title"] = "İletişim";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<h4 class="page-title">İletişim</h4>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-sub">
+                    İletişim Alanı İşlemlerini Bu Tablodan Yapabilirsin
+                </div>
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Lokasyon</th>
+                            <th scope="col">E-Mail</th>
+                            <th scope="col">Telefon</th>
+                            <th scope="col">Alt Açıklama</th>
+                            <th scope="col">Güncelle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Location</td>
+                                <td>@item.Email</td>
+                                <td>@item.PhoneNumber</td>
+                                <td>@item.FooterDescription</td>
+                                <td><a href="/Contact/UpdateContact/@item.ContactId" class="btn btn-outline-warning btn-round">Güncelle</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

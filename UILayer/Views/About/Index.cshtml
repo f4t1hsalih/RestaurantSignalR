@@ -15,7 +15,6 @@
                 <table class="table mt-3">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Başlık</th>
                             <th scope="col">Açıklama</th>
                             <th scope="col">Güncelle</th>
@@ -25,7 +24,6 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.AboutId</td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <img class="photo mr-2" src="@item.ImageUrl" alt="@item.Title">
