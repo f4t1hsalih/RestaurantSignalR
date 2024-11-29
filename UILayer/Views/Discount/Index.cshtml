@@ -1,0 +1,47 @@
+﻿@model List<DiscountResultDTO>
+@{
+    ViewData["Title"] = "İndirimler";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<h4 class="page-title">İndirimler</h4>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-sub">
+                    İndirim İşlemlerini Bu Tablodan Yapabilirsin
+                    <a href="/Discount/CreateDiscount/" class="btn btn-primary float-right">İndirim Ekle</a>
+                </div>
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ürün</th>
+                            <th scope="col">Fiyat</th>
+                            <th scope="col">Açıklama</th>
+                            <th scope="col">Güncelle</th>
+                            <th scope="col">Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="photo mr-2" src="@item.ImageUrl" alt="@item.Title">
+                                        <span>@item.Title</span>
+                                    </div>
+                                </td>
+                                <td>@item.Amount</td>
+                                <td>@item.Description</td>
+                                <td><a href="/Discount/UpdateDiscount/@item.DiscountId" class="btn btn-outline-warning">Güncelle</a></td>
+                                <td><a href="/Discount/DeleteDiscount/@item.DiscountId" class="btn btn-outline-danger" onclick="return confirm('Bu indirimi kaldırmak istediğinize emin misiniz?');">Sil</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
