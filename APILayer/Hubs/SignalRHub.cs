@@ -4,6 +4,5 @@ namespace APILayer.Hubs
 {
     public class SignalRHub : Hub
     {
-
     }
 }
