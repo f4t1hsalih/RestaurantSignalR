@@ -19,6 +19,9 @@
                         <div class="alert alert-success">
                             Bağlantının Durumu: <strong id="connstatus">Bağlantı bekleniyor...</strong>
                         </div>
+                        <div class="alert alert-info">
+                            Kategori Sayısı: <strong id="categorycount"></strong>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,5 +53,11 @@
         connection.onclose(() => {
             $("#connstatus").text("Bağlantı kapalı");
         });
+
+        connection.invoke("SendCategoryCount");
+        connection.on("ReceiveCategoryCount",(categoryCount)=>{
+
+        })
+
     });
 </script>
