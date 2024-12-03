@@ -15,6 +15,11 @@ namespace BusinessLayer.Concrete
             _orderDal = orderDal;
         }
 
+        public int TActiveOrderCount()
+        {
+            return _orderDal.ActiveOrderCount();
+        }
+
         public void TDelete(Order entity)
         {
             _orderDal.Delete(entity);
@@ -38,6 +43,11 @@ namespace BusinessLayer.Concrete
         public void TInsert(Order entity)
         {
             _orderDal.Insert(entity);
+        }
+
+        public int TTotalOrderCount()
+        {
+            return _orderDal.TotalOrderCount();
         }
 
         public void TUpdate(Order entity)
