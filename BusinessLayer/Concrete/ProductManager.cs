@@ -78,5 +78,10 @@ namespace BusinessLayer.Concrete
         {
             return _productDal.MinPriceProductName();
         }
+
+        public decimal TProductAvgPriceByHamburger()
+        {
+            return _productDal.ProductAvgPriceByHamburger();
+        }
     }
 }

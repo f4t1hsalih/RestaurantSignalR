@@ -57,5 +57,10 @@ namespace DataAccessLayer.EntityFramework
         {
             return _context.Products.Average(x => x.Price);
         }
+
+        public decimal ProductAvgPriceByHamburger()
+        {
+            return _context.Products.Where(x => x.Categories.Name == "Hamburger").Average(y => y.Price);
+        }
     }
 }

@@ -100,5 +100,10 @@ namespace APILayer.Controllers
         {
             return Ok(_productService.TMaxPriceProductName());
         }
+        [HttpGet("ProductAvgPriceByHamburger")]
+        public IActionResult ProductAvgPriceByHamburger()
+        {
+            return Ok(_productService.TProductAvgPriceByHamburger());
+        }
     }
 }
