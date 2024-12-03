@@ -16,6 +16,13 @@ namespace DataAccessLayer.EntityFramework
             return _context.Orders.Count(x => x.Description == "Müşteri Masada");
         }
 
+        public decimal LastOrderPrice()
+        {
+            var lastOrder = _context.Orders.OrderByDescending(x => x.Date).FirstOrDefault();
+            return lastOrder?.TotalPrice ?? 0m;  // Null kontrolü ekledik, eğer sipariş yoksa 0 döner.
+        }
+
+
         public int TotalOrderCount()
         {
             return _context.Orders.Count();

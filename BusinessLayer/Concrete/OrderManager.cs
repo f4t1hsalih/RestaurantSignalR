@@ -45,6 +45,11 @@ namespace BusinessLayer.Concrete
             _orderDal.Insert(entity);
         }
 
+        public decimal TLastOrderPrice()
+        {
+            return _orderDal.LastOrderPrice();
+        }
+
         public int TTotalOrderCount()
         {
             return _orderDal.TotalOrderCount();
