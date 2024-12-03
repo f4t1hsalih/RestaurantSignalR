@@ -9,6 +9,9 @@ namespace BusinessLayer.Abstract
         int TProductCount();
         int TProductCountByCategoryNameHamburger();
         int TProductCountByCategoryNameDrink();
+        decimal TProductPriceAvg();
+        string TMaxPriceProductName();
+        string TMinPriceProductName();
 
     }
 }

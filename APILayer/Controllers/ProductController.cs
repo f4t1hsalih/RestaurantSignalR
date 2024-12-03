@@ -85,5 +85,20 @@ namespace APILayer.Controllers
         {
             return Ok(_productService.TProductCountByCategoryNameDrink());
         }
+        [HttpGet("ProductPriceAvg")]
+        public IActionResult ProductPriceAvg()
+        {
+            return Ok(_productService.TProductPriceAvg());
+        }
+        [HttpGet("MinPriceProductName")]
+        public IActionResult MinPriceProductName()
+        {
+            return Ok(_productService.TMinPriceProductName());
+        }
+        [HttpGet("MaxPriceProductName")]
+        public IActionResult MaxPriceProductName()
+        {
+            return Ok(_productService.TMaxPriceProductName());
+        }
     }
 }

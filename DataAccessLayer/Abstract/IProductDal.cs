@@ -9,6 +9,9 @@ namespace DataAccessLayer.Abstract
         int ProductCount();
         int ProductCountByCategoryNameHamburger();
         int ProductCountByCategoryNameDrink();
+        decimal ProductPriceAvg();
+        string MinPriceProductName();
+        string MaxPriceProductName();
 
     }
 }

@@ -28,6 +28,16 @@ namespace DataAccessLayer.EntityFramework
             return values;
         }
 
+        public string MaxPriceProductName()
+        {
+            return _context.Products.Where(x => x.Price == (_context.Products.Max(y => y.Price))).Select(z => z.Name).FirstOrDefault();
+        }
+
+        public string MinPriceProductName()
+        {
+            return _context.Products.Where(x => x.Price == (_context.Products.Min(y => y.Price))).Select(z => z.Name).FirstOrDefault();
+        }
+
         public int ProductCount()
         {
             return _context.Products.Count();
@@ -35,12 +45,17 @@ namespace DataAccessLayer.EntityFramework
 
         public int ProductCountByCategoryNameDrink()
         {
-            return _context.Products.Where(x => x.CategoryId == (_context.Categories.Where(y => y.Name == "İçecek").Select(z=>z.CategoryId)).FirstOrDefault()).Count();
+            return _context.Products.Where(x => x.CategoryId == (_context.Categories.Where(y => y.Name == "İçecek").Select(z => z.CategoryId)).FirstOrDefault()).Count();
         }
 
         public int ProductCountByCategoryNameHamburger()
         {
             return _context.Products.Count(x => x.Categories.Name == "Hamburger");
+        }
+
+        public decimal ProductPriceAvg()
+        {
+            return _context.Products.Average(x => x.Price);
         }
     }
 }
