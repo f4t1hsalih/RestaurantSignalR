@@ -27,5 +27,10 @@ namespace DataAccessLayer.EntityFramework
             }).ToList();
             return values;
         }
+
+        public int ProductCount()
+        {
+            return _context.Products.Count();
+        }
     }
 }

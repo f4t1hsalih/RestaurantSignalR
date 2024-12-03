@@ -68,5 +68,12 @@ namespace APILayer.Controllers
             }
             return NotFound("Kayıt Bulunamadı");
         }
+
+        [HttpGet("ProductCount")]
+        public IActionResult ProductCount()
+        {
+            return Ok(_productService.TProductCount());
+        }
+
     }
 }

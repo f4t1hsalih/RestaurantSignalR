@@ -6,5 +6,6 @@ namespace BusinessLayer.Abstract
     public interface IProductService : IGenericService<Product>
     {
         List<GetProductWithCategoryDto> TGetProductsWithCategories();
+        int TProductCount();
     }
 }

@@ -48,5 +48,10 @@ namespace BusinessLayer.Concrete
         {
             _productDal.Update(entity);
         }
+
+        public int TProductCount()
+        {
+            return _productDal.ProductCount();
+        }
     }
 }
