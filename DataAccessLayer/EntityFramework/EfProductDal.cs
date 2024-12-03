@@ -32,5 +32,15 @@ namespace DataAccessLayer.EntityFramework
         {
             return _context.Products.Count();
         }
+
+        public int ProductCountByCategoryNameDrink()
+        {
+            return _context.Products.Where(x => x.CategoryId == (_context.Categories.Where(y => y.Name == "İçecek").Select(z=>z.CategoryId)).FirstOrDefault()).Count();
+        }
+
+        public int ProductCountByCategoryNameHamburger()
+        {
+            return _context.Products.Count(x => x.Categories.Name == "Hamburger");
+        }
     }
 }

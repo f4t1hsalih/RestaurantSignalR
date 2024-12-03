@@ -7,5 +7,8 @@ namespace BusinessLayer.Abstract
     {
         List<GetProductWithCategoryDto> TGetProductsWithCategories();
         int TProductCount();
+        int TProductCountByCategoryNameHamburger();
+        int TProductCountByCategoryNameDrink();
+
     }
 }

@@ -53,5 +53,15 @@ namespace BusinessLayer.Concrete
         {
             return _productDal.ProductCount();
         }
+
+        public int TProductCountByCategoryNameHamburger()
+        {
+            return _productDal.ProductCountByCategoryNameHamburger();
+        }
+
+        public int TProductCountByCategoryNameDrink()
+        {
+            return _productDal.ProductCountByCategoryNameDrink();
+        }
     }
 }
