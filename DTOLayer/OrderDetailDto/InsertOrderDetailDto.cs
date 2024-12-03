@@ -1,12 +1,9 @@
-﻿namespace EntityLayer.Entities
+﻿namespace DTOLayer.OrderDetailDto
 {
-    public class OrderDetail
+    public class InsertOrderDetailDto
     {
-        public int OrderDetailId { get; set; }
         public int OrderId { get; set; }
-        private Order Order { get; set; }
         public int ProductId { get; set; }
-        private Product Product { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal TotalPrice { get; set; }
