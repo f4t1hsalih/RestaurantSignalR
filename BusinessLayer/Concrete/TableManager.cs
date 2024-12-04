@@ -14,6 +14,11 @@ namespace BusinessLayer.Concrete
             _tableDal = tableDal;
         }
 
+        public int TTableCount()
+        {
+            return _tableDal.TableCount();
+        }
+
         public void TDelete(Table entity)
         {
             throw new NotImplementedException();

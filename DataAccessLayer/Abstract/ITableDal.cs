@@ -4,5 +4,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface ITableDal : IGenericDal<Table>
     {
+        int TableCount();
     }
 }

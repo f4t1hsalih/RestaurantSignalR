@@ -10,5 +10,10 @@ namespace DataAccessLayer.EntityFramework
         public EfTableDal(Context context) : base(context)
         {
         }
+
+        public int TableCount()
+        {
+            return _context.Tables.Count();
+        }
     }
 }
