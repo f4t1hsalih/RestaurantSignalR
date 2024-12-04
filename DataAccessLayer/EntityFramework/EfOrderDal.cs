@@ -22,6 +22,10 @@ namespace DataAccessLayer.EntityFramework
             return lastOrder?.TotalPrice ?? 0m;  // Null kontrolü ekledik, eğer sipariş yoksa 0 döner.
         }
 
+        public decimal TodayTotalPrice()
+        {
+            return _context.Orders.Where(x => x.Date.Date == System.DateTime.Now.Date).Sum(x => x.TotalPrice);
+        }
 
         public int TotalOrderCount()
         {
