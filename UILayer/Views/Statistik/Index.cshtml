@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Aktif Kategori Sayısı</p>
+                            <p class="card-category">Aktif Kategori</p>
                             <h4 class="card-title" id="activeCategoryCounter">***</h4>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Pasif Kategori Sayısı</p>
+                            <p class="card-category">Pasif Kategori</p>
                             <h4 class="card-title" id="passiveCategoryCounter">***</h4>
                         </div>
                     </div>
@@ -336,10 +336,7 @@
             .then(() => {
                 $("#connstatus").text("Bağlantı kuruldu");
                 setInterval(() => {
-                    connection.invoke("SendCategoryCount");
-                    connection.invoke("SendActiveCategoryCount");
-                    connection.invoke("SendPassiveCategoryCount");
-                    connection.invoke("SendActiveProductCount");
+                    connection.invoke("SendStatistics");
                 }, 1000);
             })
             .catch((err) => {

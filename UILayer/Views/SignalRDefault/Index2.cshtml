@@ -44,7 +44,7 @@
             .then(() => {
                 $("#connstatus").text("Bağlantı kuruldu");
                 setInterval(() => {
-                    connection.invoke("SendCategoryCount");
+                    connection.invoke("SendStatistics");
                 }, 3000);
             })
             .catch((err) => {
