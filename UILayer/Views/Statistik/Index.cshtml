@@ -17,7 +17,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Visitors</p>
-                            <h4 class="card-title">1,294</h4>
+                            <h4 class="card-title" id="categorycounter">***</h4>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Sales</p>
-                            <h4 class="card-title">$ 1,345</h4>
+                            <h4 class="card-title">$ ***</h4>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Subscribers</p>
-                            <h4 class="card-title">1303</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Order</p>
-                            <h4 class="card-title">576</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Visitors</p>
-                            <h4 class="card-title">1,294</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Sales</p>
-                            <h4 class="card-title">$ 1,345</h4>
+                            <h4 class="card-title">$ ***</h4>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Subscribers</p>
-                            <h4 class="card-title">1303</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Order</p>
-                            <h4 class="card-title">576</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Visitors</p>
-                            <h4 class="card-title">1,294</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Sales</p>
-                            <h4 class="card-title">$ 1,345</h4>
+                            <h4 class="card-title">$ ***</h4>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Subscribers</p>
-                            <h4 class="card-title">1303</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -230,7 +230,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Order</p>
-                            <h4 class="card-title">576</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -251,7 +251,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Visitors</p>
-                            <h4 class="card-title">1,294</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -270,7 +270,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Sales</p>
-                            <h4 class="card-title">$ 1,345</h4>
+                            <h4 class="card-title">$ ***</h4>
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Subscribers</p>
-                            <h4 class="card-title">1303</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -308,7 +308,7 @@
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
                             <p class="card-category">Order</p>
-                            <h4 class="card-title">576</h4>
+                            <h4 class="card-title">***</h4>
                         </div>
                     </div>
                 </div>
@@ -317,3 +317,41 @@
     </div>
 </div>
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(() => {
+        // SignalR bağlantısı oluştur
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:7068/SignalRHub")
+            .build();
+
+        // Başlangıç durumu
+        $("#connstatus").text(connection.state);
+
+        // Bağlantı başlatma
+        connection.start()
+            .then(() => {
+                $("#connstatus").text("Bağlantı kuruldu");
+                setInterval(() => {
+                    connection.invoke("SendCategoryCount");
+                }, 1000);
+            })
+            .catch((err) => {
+                $("#connstatus").text("Bağlantı hatası");
+                console.error(err.toString());
+            });
+
+        // Bağlantı durum değişikliklerini dinle
+        connection.onclose(() => {
+            $("#connstatus").text("Bağlantı kapalı");
+        });
+
+        connection.on("ReceiveCategoryCount",(categoryCount)=>{
+            $("#categorycounter").text(categoryCount);
+        })
+
+    });
+</script>
