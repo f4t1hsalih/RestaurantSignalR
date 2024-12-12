@@ -20,7 +20,7 @@
                             Bağlantının Durumu: <strong id="connstatus">Bağlantı bekleniyor...</strong>
                         </div>
                         <div class="alert alert-info">
-                            Kategori Sayısı: <strong id="categorycounter">Yükleniyor...</strong>
+                            Kategori Sayısı: <strong id="categoryCounter">Yükleniyor...</strong>
                         </div>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
             $("#connstatus").text("Bağlantı kapalı");
         });
 
-        connection.on("ReceiveCategoryCount",(categoryCount)=>{
-            $("#categorycounter").text(categoryCount);
+        connection.on("ReceiveActiveCategoryCount",(categoryCount)=>{
+            $("#categoryCounter").text(categoryCount);
         })
 
     });

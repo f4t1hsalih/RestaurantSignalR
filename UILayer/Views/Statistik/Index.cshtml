@@ -1,9 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Anlık İstatistikler";
     Layout = "~/Views/Admin/Index.cshtml";
 }
 
-<h4 class="page-title">İstatistikler</h4>
+<h4 class="page-title">Anlık İstatistikler</h4>
 <div class="row">
     <div class="col-md-3">
         <div class="card card-stats card-warning">
@@ -11,13 +11,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-users"></i>
+                            <i class="la la-certificate"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Visitors</p>
-                            <h4 class="card-title" id="categorycounter">***</h4>
+                            <p class="card-category">Kategori Sayısı</p>
+                            <h4 class="card-title" id="categoryCounter">***</h4>
                         </div>
                     </div>
                 </div>
@@ -30,13 +30,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-bar-chart"></i>
+                            <i class="la la-shopping-cart"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Sales</p>
-                            <h4 class="card-title">$ ***</h4>
+                            <p class="card-category">Ürün Sayısı</p>
+                            <h4 class="card-title" id="productCounter">***</h4>
                         </div>
                     </div>
                 </div>
@@ -337,6 +337,7 @@
                 $("#connstatus").text("Bağlantı kuruldu");
                 setInterval(() => {
                     connection.invoke("SendCategoryCount");
+                    connection.invoke("SendProductCount");
                 }, 1000);
             })
             .catch((err) => {
@@ -349,8 +350,11 @@
             $("#connstatus").text("Bağlantı kapalı");
         });
 
-        connection.on("ReceiveCategoryCount",(categoryCount)=>{
-            $("#categorycounter").text(categoryCount);
+        connection.on("ReceiveActiveCategoryCount",(categoryCount)=>{
+            $("#categoryCounter").text(categoryCount);
+        })
+        connection.on("ReceiveActiveProductCount",(productCount)=>{
+            $("#productCounter").text(productCount);
         })
 
     });

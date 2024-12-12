@@ -83,5 +83,10 @@ namespace BusinessLayer.Concrete
         {
             return _productDal.ProductAvgPriceByHamburger();
         }
+
+        public int TActiveProductCount()
+        {
+            return _productDal.ActiveProductCount();
+        }
     }
 }

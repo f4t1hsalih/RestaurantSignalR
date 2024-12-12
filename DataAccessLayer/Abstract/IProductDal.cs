@@ -7,6 +7,7 @@ namespace DataAccessLayer.Abstract
     {
         List<GetProductWithCategoryDto> GetProductsWithCategories();
         int ProductCount();
+        int ActiveProductCount();
         int ProductCountByCategoryNameHamburger();
         int ProductCountByCategoryNameDrink();
         decimal ProductPriceAvg();

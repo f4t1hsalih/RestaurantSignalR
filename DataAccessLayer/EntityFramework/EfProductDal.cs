@@ -62,5 +62,10 @@ namespace DataAccessLayer.EntityFramework
         {
             return _context.Products.Where(x => x.Categories.Name == "Hamburger").Average(y => y.Price);
         }
+
+        public int ActiveProductCount()
+        {
+            return _context.Products.Count(x => x.Status == true);
+        }
     }
 }

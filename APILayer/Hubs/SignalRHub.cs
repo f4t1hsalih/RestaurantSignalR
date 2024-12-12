@@ -1,21 +1,30 @@
-﻿using DataAccessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.SignalR;
 
 namespace APILayer.Hubs
 {
     public class SignalRHub : Hub
     {
-        private readonly Context _context;
+        private readonly ICategoryService _categoryService;
+        private readonly IProductService _productService;
 
-        public SignalRHub(Context context)
+        public SignalRHub(ICategoryService categoryService, IProductService productService)
         {
-            _context = context;
+            _categoryService = categoryService;
+            _productService = productService;
         }
 
         public async Task SendCategoryCount()
         {
-            var categoryCount = _context.Categories.Count();
-            await Clients.All.SendAsync("ReceiveCategoryCount", categoryCount);
+            var activeCategoryCount = _categoryService.TActiveCategoryCount();
+            await Clients.All.SendAsync("ReceiveActiveCategoryCount", activeCategoryCount);
         }
+
+        public async Task SendProductCount()
+        {
+            var activeProductCount = _productService.TActiveProductCount();
+            await Clients.All.SendAsync("ReceiveActiveProductCount", activeProductCount);
+        }
+
     }
 }

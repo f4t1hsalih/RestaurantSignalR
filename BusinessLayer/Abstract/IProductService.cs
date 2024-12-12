@@ -7,6 +7,7 @@ namespace BusinessLayer.Abstract
     {
         List<GetProductWithCategoryDto> TGetProductsWithCategories();
         int TProductCount();
+        int TActiveProductCount();
         int TProductCountByCategoryNameHamburger();
         int TProductCountByCategoryNameDrink();
         decimal TProductPriceAvg();
