@@ -16,11 +16,21 @@ namespace APILayer.Hubs
 
         public async Task SendCategoryCount()
         {
+            var categoryCount = _categoryService.TCategoryCount();
+            await Clients.All.SendAsync("ReceiveCategoryCount", categoryCount);
+        }
+        public async Task SendActiveCategoryCount()
+        {
             var activeCategoryCount = _categoryService.TActiveCategoryCount();
             await Clients.All.SendAsync("ReceiveActiveCategoryCount", activeCategoryCount);
         }
+        public async Task SendPassiveCategoryCount()
+        {
+            var passiveCategoryCount = _categoryService.TPassiveCategoryCount();
+            await Clients.All.SendAsync("ReceivePassiveCategoryCount", passiveCategoryCount);
+        }
 
-        public async Task SendProductCount()
+        public async Task SendActiveProductCount()
         {
             var activeProductCount = _productService.TActiveProductCount();
             await Clients.All.SendAsync("ReceiveActiveProductCount", activeProductCount);

@@ -35,8 +35,8 @@
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Ürün Sayısı</p>
-                            <h4 class="card-title" id="productCounter">***</h4>
+                            <p class="card-category">Aktif Kategori Sayısı</p>
+                            <h4 class="card-title" id="activeCategoryCounter">***</h4>
                         </div>
                     </div>
                 </div>
@@ -54,8 +54,8 @@
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Subscribers</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">Pasif Kategori Sayısı</p>
+                            <h4 class="card-title" id="passiveCategoryCounter">***</h4>
                         </div>
                     </div>
                 </div>
@@ -73,8 +73,8 @@
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Order</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">Ürün Sayısı</p>
+                            <h4 class="card-title" id="activeProductCounter">***</h4>
                         </div>
                     </div>
                 </div>
@@ -337,7 +337,9 @@
                 $("#connstatus").text("Bağlantı kuruldu");
                 setInterval(() => {
                     connection.invoke("SendCategoryCount");
-                    connection.invoke("SendProductCount");
+                    connection.invoke("SendActiveCategoryCount");
+                    connection.invoke("SendPassiveCategoryCount");
+                    connection.invoke("SendActiveProductCount");
                 }, 1000);
             })
             .catch((err) => {
@@ -350,11 +352,17 @@
             $("#connstatus").text("Bağlantı kapalı");
         });
 
-        connection.on("ReceiveActiveCategoryCount",(categoryCount)=>{
+        connection.on("ReceiveCategoryCount",(categoryCount)=>{
             $("#categoryCounter").text(categoryCount);
         })
-        connection.on("ReceiveActiveProductCount",(productCount)=>{
-            $("#productCounter").text(productCount);
+        connection.on("ReceiveActiveCategoryCount",(activeCategoryCount)=>{
+            $("#activeCategoryCounter").text(activeCategoryCount);
+        })
+        connection.on("ReceivePassiveCategoryCount",(passiveCategoryCount)=>{
+            $("#passiveCategoryCounter").text(passiveCategoryCount);
+        })
+        connection.on("ReceiveActiveProductCount",(activeProductCount)=>{
+            $("#activeProductCounter").text(activeProductCount);
         })
 
     });

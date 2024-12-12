@@ -57,7 +57,7 @@
             $("#connstatus").text("Bağlantı kapalı");
         });
 
-        connection.on("ReceiveActiveCategoryCount",(categoryCount)=>{
+        connection.on("ReceiveCategoryCount",(categoryCount)=>{
             $("#categoryCounter").text(categoryCount);
         })
 
