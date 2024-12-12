@@ -167,13 +167,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-users"></i>
+                            <i class="la la-tag"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Visitors</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">En Ucuz Ürün</p>
+                            <h4 class="card-title" id="minPriceProductName">***</h4>
                         </div>
                     </div>
                 </div>
@@ -191,8 +191,8 @@
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Sales</p>
-                            <h4 class="card-title">$ ***</h4>
+                            <p class="card-category">Ortalama Hamburger Fiyatı</p>
+                            <h4 class="card-title" id="avgHamburgerPrice">***</h4>
                         </div>
                     </div>
                 </div>
@@ -205,13 +205,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-newspaper-o"></i>
+                            <i class="la la-lemon-o"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Subscribers</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">Toplam Sipariş</p>
+                            <h4 class="card-title" id="totalOrderCount">***</h4>
                         </div>
                     </div>
                 </div>
@@ -224,13 +224,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-check-circle"></i>
+                            <i class="la la-heart-o"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Order</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">Aktif Sipariş Sayısı</p>
+                            <h4 class="card-title" id="activeOrderCount">***</h4>
                         </div>
                     </div>
                 </div>
@@ -373,7 +373,17 @@
         connection.on("ReceiveMaxPriceProductName",(value)=>{
             $("#maxPriceProductName").text(value);
         })
-
-
+        connection.on("ReceiveMinPriceProductName",(value)=>{
+            $("#minPriceProductName").text(value);
+        })
+        connection.on("ReceiveAvgHamburgerPrice",(value)=>{
+            $("#avgHamburgerPrice").text(value);
+        })
+        connection.on("ReceiveTotalOrderCount",(value)=>{
+            $("#totalOrderCount").text(value);
+        })
+        connection.on("ReceiveActiveOrderCount",(value)=>{
+            $("#activeOrderCount").text(value);
+        })
     });
 </script>

@@ -7,11 +7,13 @@ namespace APILayer.Hubs
     {
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService)
         {
             _categoryService = categoryService;
             _productService = productService;
+            _orderService = orderService;
         }
 
         public async Task SendStatistics()
@@ -39,6 +41,18 @@ namespace APILayer.Hubs
 
             var maxPriceProductName = _productService.TMaxPriceProductName();
             await Clients.All.SendAsync("ReceiveMaxPriceProductName", maxPriceProductName);
+
+            var minPriceProductName = _productService.TMinPriceProductName();
+            await Clients.All.SendAsync("ReceiveMinPriceProductName", minPriceProductName);
+
+            var avgHamburgerPrice = _productService.TProductAvgPriceByHamburger();
+            await Clients.All.SendAsync("ReceiveAvgHamburgerPrice", avgHamburgerPrice.ToString("0.00" + " ₺"));
+
+            var totalOrderCount = _orderService.TTotalOrderCount();
+            await Clients.All.SendAsync("ReceiveTotalOrderCount", totalOrderCount);
+
+            var activeOrderCount = _orderService.TActiveOrderCount();
+            await Clients.All.SendAsync("ReceiveActiveOrderCount", activeOrderCount);
         }
 
     }
