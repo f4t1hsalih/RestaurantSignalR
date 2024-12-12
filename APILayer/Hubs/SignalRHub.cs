@@ -8,12 +8,16 @@ namespace APILayer.Hubs
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
         private readonly IOrderService _orderService;
+        private readonly IMoneyCaseService _moneyCaseService;
+        private readonly ITableService _tableService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, ITableService tableService)
         {
             _categoryService = categoryService;
             _productService = productService;
             _orderService = orderService;
+            _moneyCaseService = moneyCaseService;
+            _tableService = tableService;
         }
 
         public async Task SendStatistics()
@@ -53,6 +57,18 @@ namespace APILayer.Hubs
 
             var activeOrderCount = _orderService.TActiveOrderCount();
             await Clients.All.SendAsync("ReceiveActiveOrderCount", activeOrderCount);
+
+            var lastOrderPrice = _orderService.TLastOrderPrice();
+            await Clients.All.SendAsync("ReceiveLastOrderPrice", lastOrderPrice.ToString("0.00" + " ₺"));
+
+            var moneyCaseAmount = _moneyCaseService.TGetMoneyCaseAmount();
+            await Clients.All.SendAsync("ReceiveMoneyCaseAmount", moneyCaseAmount.ToString("0.00" + " ₺"));
+
+            var todayTotalPrice = _orderService.TTodayTotalPrice();
+            await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice.ToString("0.00" + " ₺"));
+
+            var tableCount = _tableService.TTableCount();
+            await Clients.All.SendAsync("ReceiveTableCount", tableCount);
         }
 
     }

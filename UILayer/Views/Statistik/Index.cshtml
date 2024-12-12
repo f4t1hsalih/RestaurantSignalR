@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-certificate"></i>
+                            <i class="la la-tags"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-newspaper-o"></i>
+                            <i class="la la-check"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -49,7 +49,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-close"></i>
+                            <i class="la la-ban"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -68,7 +68,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-shopping-cart"></i>
+                            <i class="la la-cogs"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -108,7 +108,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-umbrella"></i>
+                            <i class="la la-coffee"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -127,7 +127,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-money"></i>
+                            <i class="la la-dollar"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -186,7 +186,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-bar-chart"></i>
+                            <i class="la la-balance-scale"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -205,7 +205,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-lemon-o"></i>
+                            <i class="la la-shopping-cart"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -224,7 +224,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-heart-o"></i>
+                            <i class="la la-check-circle"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -250,8 +250,8 @@
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Visitors</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">Son Sipariş Tutarı</p>
+                            <h4 class="card-title" id="lastOrderPrice">***</h4>
                         </div>
                     </div>
                 </div>
@@ -264,13 +264,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-bar-chart"></i>
+                            <i class="la la-credit-card"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Sales</p>
-                            <h4 class="card-title">$ ***</h4>
+                            <p class="card-category">Kasadaki Tutar</p>
+                            <h4 class="card-title" id="moneyCaseAmount">***</h4>
                         </div>
                     </div>
                 </div>
@@ -283,13 +283,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-newspaper-o"></i>
+                            <i class="la la-calendar"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Subscribers</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">Bugünkü Kazanç</p>
+                            <h4 class="card-title" id="todayTotalPrice">***</h4>
                         </div>
                     </div>
                 </div>
@@ -302,13 +302,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-check-circle"></i>
+                            <i class="la la-table"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Order</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">Masa Sayısı</p>
+                            <h4 class="card-title" id="tableCount">***</h4>
                         </div>
                     </div>
                 </div>
@@ -384,6 +384,18 @@
         })
         connection.on("ReceiveActiveOrderCount",(value)=>{
             $("#activeOrderCount").text(value);
+        })
+        connection.on("ReceiveLastOrderPrice",(value)=>{
+            $("#lastOrderPrice").text(value);
+        })
+        connection.on("ReceiveMoneyCaseAmount",(value)=>{
+            $("#moneyCaseAmount").text(value);
+        })
+        connection.on("ReceiveTodayTotalPrice",(value)=>{
+            $("#todayTotalPrice").text(value);
+        })
+        connection.on("ReceiveTableCount",(value)=>{
+            $("#tableCount").text(value);
         })
     });
 </script>
