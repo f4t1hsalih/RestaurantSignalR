@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-shopping-cart"></i>
+                            <i class="la la-newspaper-o"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -49,7 +49,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-newspaper-o"></i>
+                            <i class="la la-close"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -68,7 +68,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-check-circle"></i>
+                            <i class="la la-shopping-cart"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
@@ -89,13 +89,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-users"></i>
+                            <i class="la la-support"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Visitors</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">Hamburger Sayısı</p>
+                            <h4 class="card-title" id="hamburgerCounter">***</h4>
                         </div>
                     </div>
                 </div>
@@ -108,13 +108,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-bar-chart"></i>
+                            <i class="la la-umbrella"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Sales</p>
-                            <h4 class="card-title">$ ***</h4>
+                            <p class="card-category">İçecek Sayısı</p>
+                            <h4 class="card-title" id="drinkCounter">***</h4>
                         </div>
                     </div>
                 </div>
@@ -127,13 +127,13 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="la la-newspaper-o"></i>
+                            <i class="la la-money"></i>
                         </div>
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Subscribers</p>
-                            <h4 class="card-title">***</h4>
+                            <p class="card-category">Ürün Ortalama Fiyat</p>
+                            <h4 class="card-title" id="productPriceAvg">***</h4>
                         </div>
                     </div>
                 </div>
@@ -349,18 +349,29 @@
             $("#connstatus").text("Bağlantı kapalı");
         });
 
-        connection.on("ReceiveCategoryCount",(categoryCount)=>{
-            $("#categoryCounter").text(categoryCount);
+        connection.on("ReceiveCategoryCount",(value)=>{
+            $("#categoryCounter").text(value);
         })
-        connection.on("ReceiveActiveCategoryCount",(activeCategoryCount)=>{
-            $("#activeCategoryCounter").text(activeCategoryCount);
+        connection.on("ReceiveActiveCategoryCount",(value)=>{
+            $("#activeCategoryCounter").text(value);
         })
-        connection.on("ReceivePassiveCategoryCount",(passiveCategoryCount)=>{
-            $("#passiveCategoryCounter").text(passiveCategoryCount);
+        connection.on("ReceivePassiveCategoryCount",(value)=>{
+            $("#passiveCategoryCounter").text(value);
         })
-        connection.on("ReceiveActiveProductCount",(activeProductCount)=>{
-            $("#activeProductCounter").text(activeProductCount);
+        connection.on("ReceiveActiveProductCount",(value)=>{
+            $("#activeProductCounter").text(value);
         })
+        connection.on("ReceiveProductCountByCategoryNameHamburger",(value)=>{
+            $("#hamburgerCounter").text(value);
+        })
+        connection.on("ReceiveProductCountByCategoryNameDrink",(value)=>{
+            $("#drinkCounter").text(value);
+        })
+        connection.on("ReceiveProductPriceAvg",(value)=>{
+            $("#productPriceAvg").text(value);
+        })
+
+
 
     });
 </script>

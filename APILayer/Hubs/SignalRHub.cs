@@ -27,6 +27,15 @@ namespace APILayer.Hubs
 
             var activeProductCount = _productService.TActiveProductCount();
             await Clients.All.SendAsync("ReceiveActiveProductCount", activeProductCount);
+
+            var productCountByCategoryNameHamburger = _productService.TProductCountByCategoryNameHamburger();
+            await Clients.All.SendAsync("ReceiveProductCountByCategoryNameHamburger", productCountByCategoryNameHamburger);
+
+            var productCountByCategoryNameDrink = _productService.TProductCountByCategoryNameDrink();
+            await Clients.All.SendAsync("ReceiveProductCountByCategoryNameDrink", productCountByCategoryNameDrink);
+
+            var productPriceAvg = _productService.TProductPriceAvg();
+            await Clients.All.SendAsync("ReceiveProductPriceAvg", productPriceAvg);
         }
 
     }
