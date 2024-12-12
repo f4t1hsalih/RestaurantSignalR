@@ -35,7 +35,10 @@ namespace APILayer.Hubs
             await Clients.All.SendAsync("ReceiveProductCountByCategoryNameDrink", productCountByCategoryNameDrink);
 
             var productPriceAvg = _productService.TProductPriceAvg();
-            await Clients.All.SendAsync("ReceiveProductPriceAvg", productPriceAvg);
+            await Clients.All.SendAsync("ReceiveProductPriceAvg", productPriceAvg.ToString("0.00" + " ₺"));
+
+            var maxPriceProductName = _productService.TMaxPriceProductName();
+            await Clients.All.SendAsync("ReceiveMaxPriceProductName", maxPriceProductName);
         }
 
     }
