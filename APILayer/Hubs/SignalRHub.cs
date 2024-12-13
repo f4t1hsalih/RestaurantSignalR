@@ -22,104 +22,85 @@ namespace APILayer.Hubs
 
         public async Task SendStatistics()
         {
+            // Kategori Sayısı
             var categoryCount = _categoryService.TCategoryCount();
             await Clients.All.SendAsync("ReceiveCategoryCount", categoryCount);
 
+            // Aktif Kategori Sayısı
             var activeCategoryCount = _categoryService.TActiveCategoryCount();
             await Clients.All.SendAsync("ReceiveActiveCategoryCount", activeCategoryCount);
 
+            // Pasif Kategori Sayısı
             var passiveCategoryCount = _categoryService.TPassiveCategoryCount();
             await Clients.All.SendAsync("ReceivePassiveCategoryCount", passiveCategoryCount);
 
+            // Aktif Ürün Sayısı
             var activeProductCount = _productService.TActiveProductCount();
             await Clients.All.SendAsync("ReceiveActiveProductCount", activeProductCount);
 
+            // Hamburger Kategorisindeki Ürün Sayısı
             var productCountByCategoryNameHamburger = _productService.TProductCountByCategoryNameHamburger();
             await Clients.All.SendAsync("ReceiveProductCountByCategoryNameHamburger", productCountByCategoryNameHamburger);
 
+            // İçecek Kategorisindeki Ürün Sayısı
             var productCountByCategoryNameDrink = _productService.TProductCountByCategoryNameDrink();
             await Clients.All.SendAsync("ReceiveProductCountByCategoryNameDrink", productCountByCategoryNameDrink);
 
+            // Ürünlerin Ortalama Fiyatı
             var productPriceAvg = _productService.TProductPriceAvg();
             await Clients.All.SendAsync("ReceiveProductPriceAvg", productPriceAvg.ToString("0.00" + " ₺"));
 
+            // En Pahalı Ürünün Adı
             var maxPriceProductName = _productService.TMaxPriceProductName();
             await Clients.All.SendAsync("ReceiveMaxPriceProductName", maxPriceProductName);
 
+            // En Ucuz Ürünün Adı
             var minPriceProductName = _productService.TMinPriceProductName();
             await Clients.All.SendAsync("ReceiveMinPriceProductName", minPriceProductName);
 
+            // Hamburger Kategorisindeki Ürünlerin Ortalama Fiyatı
             var avgHamburgerPrice = _productService.TProductAvgPriceByHamburger();
             await Clients.All.SendAsync("ReceiveAvgHamburgerPrice", avgHamburgerPrice.ToString("0.00" + " ₺"));
 
+            // Toplam Sipariş Sayısı
             var totalOrderCount = _orderService.TTotalOrderCount();
             await Clients.All.SendAsync("ReceiveTotalOrderCount", totalOrderCount);
 
+            // Aktif Sipariş Sayısı
             var activeOrderCount = _orderService.TActiveOrderCount();
             await Clients.All.SendAsync("ReceiveActiveOrderCount", activeOrderCount);
 
+            // Son Sipariş Fiyatı
             var lastOrderPrice = _orderService.TLastOrderPrice();
             await Clients.All.SendAsync("ReceiveLastOrderPrice", lastOrderPrice.ToString("0.00" + " ₺"));
 
+            // Kasa Miktarı
             var moneyCaseAmount = _moneyCaseService.TGetMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveMoneyCaseAmount", moneyCaseAmount.ToString("0.00" + " ₺"));
 
+            // Bugünkü Toplam Satış Fiyatı
             var todayTotalPrice = _orderService.TTodayTotalPrice();
             await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice.ToString("0.00" + " ₺"));
 
+            // Masa Sayısı
             var tableCount = _tableService.TTableCount();
             await Clients.All.SendAsync("ReceiveTableCount", tableCount);
         }
 
         public async Task SendProgress()
         {
-            var categoryCount = _categoryService.TCategoryCount();
-            await Clients.All.SendAsync("ReceiveCategoryCount", categoryCount);
-
-            var activeCategoryCount = _categoryService.TActiveCategoryCount();
-            await Clients.All.SendAsync("ReceiveActiveCategoryCount", activeCategoryCount);
-
-            var passiveCategoryCount = _categoryService.TPassiveCategoryCount();
-            await Clients.All.SendAsync("ReceivePassiveCategoryCount", passiveCategoryCount);
-
-            var activeProductCount = _productService.TActiveProductCount();
-            await Clients.All.SendAsync("ReceiveActiveProductCount", activeProductCount);
-
-            var productCountByCategoryNameHamburger = _productService.TProductCountByCategoryNameHamburger();
-            await Clients.All.SendAsync("ReceiveProductCountByCategoryNameHamburger", productCountByCategoryNameHamburger);
-
-            var productCountByCategoryNameDrink = _productService.TProductCountByCategoryNameDrink();
-            await Clients.All.SendAsync("ReceiveProductCountByCategoryNameDrink", productCountByCategoryNameDrink);
-
-            var productPriceAvg = _productService.TProductPriceAvg();
-            await Clients.All.SendAsync("ReceiveProductPriceAvg", productPriceAvg.ToString("0.00" + " ₺"));
-
-            var maxPriceProductName = _productService.TMaxPriceProductName();
-            await Clients.All.SendAsync("ReceiveMaxPriceProductName", maxPriceProductName);
-
-            var minPriceProductName = _productService.TMinPriceProductName();
-            await Clients.All.SendAsync("ReceiveMinPriceProductName", minPriceProductName);
-
-            var avgHamburgerPrice = _productService.TProductAvgPriceByHamburger();
-            await Clients.All.SendAsync("ReceiveAvgHamburgerPrice", avgHamburgerPrice.ToString("0.00" + " ₺"));
-
-            var totalOrderCount = _orderService.TTotalOrderCount();
-            await Clients.All.SendAsync("ReceiveTotalOrderCount", totalOrderCount);
-
+            // Aktif Sipariş Sayısı
             var activeOrderCount = _orderService.TActiveOrderCount();
             await Clients.All.SendAsync("ReceiveActiveOrderCount", activeOrderCount);
 
-            var lastOrderPrice = _orderService.TLastOrderPrice();
-            await Clients.All.SendAsync("ReceiveLastOrderPrice", lastOrderPrice.ToString("0.00" + " ₺"));
-
+            // Kasa Miktarı
             var moneyCaseAmount = _moneyCaseService.TGetMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveMoneyCaseAmount", moneyCaseAmount.ToString("0.00" + " ₺"));
 
+            // Bugünkü Toplam Satış Fiyatı
             var todayTotalPrice = _orderService.TTodayTotalPrice();
             await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice.ToString("0.00" + " ₺"));
 
-            var tableCount = _tableService.TTableCount();
-            await Clients.All.SendAsync("ReceiveTableCount", tableCount);
         }
 
     }
