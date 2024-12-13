@@ -35,6 +35,10 @@ $textCol: #1f1f1f;
     font-weight: bold;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     @include main-font;
     color: #0c0c0c;
@@ -624,18 +628,6 @@ a:focus {
             }
         }
 
-        .map_container {
-            width: 100%;
-            height: 345px;
-            border-radius: 10px;
-            overflow: hidden;
-
-            #googleMap {
-                height: 100%;
-                min-height: 100%;
-                width: 100%;
-            }
-        }
     }
     // end book section
     /* client section start */
