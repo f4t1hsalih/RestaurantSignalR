@@ -4,7 +4,7 @@ using EntityLayer.Entities;
 
 namespace APILayer.Mapping
 {
-    public class FeatureMapping:Profile
+    public class FeatureMapping : Profile
     {
         public FeatureMapping()
         {

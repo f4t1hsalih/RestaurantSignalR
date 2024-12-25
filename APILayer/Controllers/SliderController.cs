@@ -1,4 +1,6 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
+using DTOLayer.SliderDto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -8,16 +10,18 @@ namespace APILayer.Controllers
     public class SliderController : ControllerBase
     {
         private readonly ISliderService _sliderService;
+        private readonly IMapper _mapper;
 
-        public SliderController(ISliderService sliderService)
+        public SliderController(ISliderService sliderService, IMapper mapper)
         {
             _sliderService = sliderService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult SliderList()
         {
-            var values = _sliderService.TGetListAll();
+            var values = _mapper.Map<List<ResultSliderDto>>(_sliderService.TGetListAll());
             return Ok(values);
         }
     }

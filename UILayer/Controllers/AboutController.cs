@@ -20,7 +20,7 @@ namespace UILayer.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();
-                var abouts = JsonConvert.DeserializeObject<List<ResultSliderDto>>(jsonData);
+                var abouts = JsonConvert.DeserializeObject<List<AboutResultDTO>>(jsonData);
                 return View(abouts);
             }
             return View();
