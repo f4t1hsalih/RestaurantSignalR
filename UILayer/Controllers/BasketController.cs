@@ -15,7 +15,7 @@ namespace UILayer.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7068/api/Basket?tableNumber");
+            var response = await client.GetAsync("https://localhost:7068/api/Basket?tableNumber=4");
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();

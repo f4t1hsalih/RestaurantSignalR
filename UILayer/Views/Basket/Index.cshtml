@@ -6,44 +6,66 @@
 
 <!DOCTYPE html>
 <html>
-
-@await Component.InvokeAsync("_UILayoutHeader")
-
 <body class="sub_page">
 
+    @await Component.InvokeAsync("_UILayoutHeader")
+
     @await Component.InvokeAsync("_UILayoutNavbar")
-    </div> <!-- Bu div'i silme -->
+    </div>
 
     <br />
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div col-12>
-                <nav class="breadcrumb bg-dark mb-30">
+    <div class="container-fluid py-4">
+        <div class="row px-xl-5 mb-4">
+            <div class="col-12">
+                <nav class="breadcrumb bg-dark mb-30 p-3">
                     <a href="/Home/Index/" class="breadcrumb-item text-white">Ana Sayfa</a>
                     <a href="/Menu/Index/" class="breadcrumb-item text-white">Menü</a>
                     <span class="breadcrumb-item active">Sepetiniz</span>
                 </nav>
             </div>
-
         </div>
-    </div>
 
-    <div class="container-fluid">
-        <div class="row-px-xl-5">
-            <div class="col-lg-8 table-responsive mb-5">
-                <table class="table table-light table-borderless table-hover text-center mb-0">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Ürün Adı</th>
-                        <th>Adet</th>
-                        <th>Fiyat</th>
-                        <th>Toplam</th>
-                        <th>Sil</th>
-                    </tr>
+        <div class="row px-xl-5">
+            <div class="col-lg-12 table-responsive">
+                <table class="table table-bordered table-hover text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Ürün Adı</th>
+                            <th>Adet</th>
+                            <th>Fiyat</th>
+                            <th>Toplam</th>
+                            <th>Sil</th>
+                        </tr>
                     </thead>
-                    <tbody>
-                        <td></td>
+                    <tbody class="align-middle">
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.ProductId</td>
+                                    <td>@item.Count</td>
+                                    <td>@string.Format("{0:C}", item.Price)</td>
+                                    <td>@string.Format("{0:C}", item.TotalPrice)</td>
+                                    <td>
+                                        <button data-basketid="@item.BasketId"
+                                                id="btndelete"
+                                                class="btn btn-sm btn-danger btn-delete">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">Sepetiniz boş.</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -51,10 +73,7 @@
     </div>
 
     @await Component.InvokeAsync("_UILayoutFooter")
-
     @await Component.InvokeAsync("_UILayoutScripts")
 
 </body>
-
 </html>
-
