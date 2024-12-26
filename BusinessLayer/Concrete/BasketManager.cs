@@ -47,7 +47,7 @@ namespace BusinessLayer.Concrete
 
         public void TInsert(Basket entity)
         {
-            throw new NotImplementedException();
+            _basketDal.Insert(entity);
         }
 
         public void TUpdate(Basket entity)

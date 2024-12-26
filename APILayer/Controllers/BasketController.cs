@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using DTOLayer.BasketDto;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -29,6 +31,22 @@ namespace APILayer.Controllers
         {
             var values = _mapper.Map<List<ResultBasketWithProductNamesDto>>(_basketService.TGetBasketByTableNumberWithProductNames(tableNumber));
             return Ok(values);
+        }
+
+        [HttpPost]
+        public IActionResult InsertBasket(InsertBasketDto insertBasketDto)
+        {
+            using var context = new Context();
+            Basket basket = new Basket
+            {
+                Count = 1,
+                TableId = 4,
+                Price = context.Products.Where(x => x.ProductId == insertBasketDto.ProductId).Select(x => x.Price).FirstOrDefault(),
+                TotalPrice = 0,
+                ProductId = insertBasketDto.ProductId
+            };
+            _basketService.TInsert(basket);
+            return Ok();
         }
     }
 }
