@@ -23,5 +23,11 @@ namespace APILayer.Controllers
             var values = _mapper.Map<List<ResultBasketDto>>(_basketService.TGetBasketByTableNumber(tableNumber));
             return Ok(values);
         }
+        [HttpGet("GetBasketByTableNumberWithProductNames")]
+        public IActionResult GetBasketByTableNumberWithProductNames(int tableNumber)
+        {
+            var values = _mapper.Map<List<ResultBasketWithProductNamesDto>>(_basketService.TGetBasketByTableNumberWithProductNames(tableNumber));
+            return Ok(values);
+        }
     }
 }

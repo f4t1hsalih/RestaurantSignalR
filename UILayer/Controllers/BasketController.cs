@@ -15,11 +15,11 @@ namespace UILayer.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7068/api/Basket?tableNumber=4");
+            var response = await client.GetAsync("https://localhost:7068/api/Basket/GetBasketByTableNumberWithProductNames?tableNumber=4");
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();
-                var basket = JsonConvert.DeserializeObject<List<BasketResultDTO>>(jsonData);
+                var basket = JsonConvert.DeserializeObject<List<BasketResultWithProductNamesDto>>(jsonData);
                 return View(basket);
             }
             return View();

@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using DTOLayer.BasketDto;
 using EntityLayer.Entities;
 using System.Linq.Expressions;
 
@@ -22,6 +23,11 @@ namespace BusinessLayer.Concrete
         public List<Basket> TGetBasketByTableNumber(int tableNumber)
         {
             return _basketDal.GetBasketByTableNumber(tableNumber);
+        }
+
+        public List<ResultBasketWithProductNamesDto> TGetBasketByTableNumberWithProductNames(int tableNumber)
+        {
+            return _basketDal.GetBasketByTableNumberWithProductNames(tableNumber);
         }
 
         public Basket TGetById(int id)

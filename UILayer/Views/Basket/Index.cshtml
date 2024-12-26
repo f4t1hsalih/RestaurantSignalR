@@ -1,4 +1,4 @@
-﻿@model List<BasketResultDTO>
+﻿@model List<BasketResultWithProductNamesDto>
 @{
     Layout = null;
     int count = 0;
@@ -31,6 +31,7 @@
                     <thead class="table-dark">
                         <tr>
                             <th>#</th>
+                            <th>Masa Adı</th>
                             <th>Ürün Adı</th>
                             <th>Adet</th>
                             <th>Fiyat</th>
@@ -46,7 +47,8 @@
                                 count++;
                                 <tr>
                                     <td>@count</td>
-                                    <td>@item.ProductId</td>
+                                    <td>@item.TableName</td>
+                                    <td>@item.ProductName</td>
                                     <td>@item.Count</td>
                                     <td>@string.Format("{0:C}", item.Price)</td>
                                     <td>@string.Format("{0:C}", item.TotalPrice)</td>
