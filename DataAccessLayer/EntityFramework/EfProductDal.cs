@@ -67,5 +67,26 @@ namespace DataAccessLayer.EntityFramework
         {
             return _context.Products.Count(x => x.Status == true);
         }
+
+        public List<GetProductWithCategoryDto> GetProductsWithCategoriesFirstNine()
+        {
+            var values = _context.Products
+                .Include(x => x.Categories)
+                .Where(x => x.Status)
+                .Select(x => new GetProductWithCategoryDto
+                {
+                    ProductId = x.ProductId,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Price = x.Price,
+                    ImageUrl = x.ImageUrl,
+                    Status = x.Status,
+                    CategoryName = x.Categories.Name
+                })
+                .Take(9)
+                .ToList();
+            return values;
+
+        }
     }
 }

@@ -213,27 +213,12 @@ a:focus {
   color: #ffbe33;
 }
 
-.user_option .cart_link {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.cart_link i {
+    color: #ffffff;
 }
 
-.user_option .cart_link svg {
-  width: 17px;
-  height: auto;
-  fill: #ffffff;
-  margin-bottom: 2px;
-}
-
-.user_option .cart_link:hover svg {
-  fill: #ffbe33;
+.cart_link:hover i{
+    color: #0094ff;
 }
 
 .user_option .order_online {

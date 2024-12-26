@@ -40,6 +40,12 @@ namespace APILayer.Controllers
             var products = _mapper.Map<List<GetProductWithCategoryDto>>(_productService.TGetProductsWithCategories());
             return Ok(products);
         }
+        [HttpGet("ProductWithCategoriesFirstNine")]
+        public IActionResult ProductWithCategoriesFirstNine()
+        {
+            var products = _mapper.Map<List<GetProductWithCategoryDto>>(_productService.TGetProductsWithCategoriesFirstNine());
+            return Ok(products);
+        }
 
         [HttpPost]
         public IActionResult InsertProduct(InsertProductDto insertProductDto)

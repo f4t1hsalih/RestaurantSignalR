@@ -6,6 +6,8 @@ namespace BusinessLayer.Abstract
     public interface IProductService : IGenericService<Product>
     {
         List<GetProductWithCategoryDto> TGetProductsWithCategories();
+        List<GetProductWithCategoryDto> TGetProductsWithCategoriesFirstNine();
+
         int TProductCount();
         int TActiveProductCount();
         int TProductCountByCategoryNameHamburger();

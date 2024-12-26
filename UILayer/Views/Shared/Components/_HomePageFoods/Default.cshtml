@@ -8,11 +8,22 @@
             </h2>
         </div>
 
+        <ul class="filters_menu">
+            <li class="active" data-filter="*">Tüm Ürünler</li>
+            <li data-filter=".Hamburger">Hamburger</li>
+            <li data-filter=".Pizza">Pizza</li>
+            <li data-filter=".Makarna">Makarna</li>
+            <li data-filter=".Kızartma">Kızarmalar</li>
+            <li data-filter=".Salata">Salatalar</li>
+            <li data-filter=".İçecek">İçecekler</li>
+            <li data-filter=".Tatlı">Tatlılar</li>
+        </ul>
+
         <div class="filters-content">
             <div class="row grid">
                 @foreach (var item in Model)
                 {
-                    <div class="col-sm-6 col-lg-4 all">
+                    <div class="col-sm-6 col-lg-4 all @item.CategoryName">
                         <div class="box">
                             <div>
                                 <div class="img-box">

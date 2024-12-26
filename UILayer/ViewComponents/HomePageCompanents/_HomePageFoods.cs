@@ -15,7 +15,7 @@ namespace UILayer.ViewComponents.HomePageCompanents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7068/api/Product");
+            var response = await client.GetAsync("https://localhost:7068/api/Product/ProductWithCategoriesFirstNine");
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();

@@ -88,5 +88,10 @@ namespace BusinessLayer.Concrete
         {
             return _productDal.ActiveProductCount();
         }
+
+        public List<GetProductWithCategoryDto> TGetProductsWithCategoriesFirstNine()
+        {
+            return _productDal.GetProductsWithCategoriesFirstNine();
+        }
     }
 }

@@ -6,6 +6,7 @@ namespace DataAccessLayer.Abstract
     public interface IProductDal : IGenericDal<Product>
     {
         List<GetProductWithCategoryDto> GetProductsWithCategories();
+        List<GetProductWithCategoryDto> GetProductsWithCategoriesFirstNine();
         int ProductCount();
         int ActiveProductCount();
         int ProductCountByCategoryNameHamburger();
