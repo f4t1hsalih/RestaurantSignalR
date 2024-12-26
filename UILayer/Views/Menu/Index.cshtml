@@ -79,7 +79,8 @@
             $.ajax(
                 {
                 type: "POST",
-                data: { item: id },
+                URL:"/Menu/AddBasket/",
+                data: { ProductId: id },
                 contentType: 'json',
                 success: function ()
                 {
@@ -91,7 +92,6 @@
                     });
                 }
                 });
-
         }
     </script>
 
