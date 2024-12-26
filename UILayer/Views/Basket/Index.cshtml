@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        @if (Model != null && Model.Any())
+                        @if (Model?.Any() == true)
                         {
                             foreach (var item in Model)
                             {
@@ -55,7 +55,8 @@
                                     <td>
                                         <button data-basketid="@item.BasketId"
                                                 id="btndelete"
-                                                class="btn btn-sm btn-danger btn-delete">
+                                                class="btn btn-sm btn-danger btn-delete"
+                                                title="Bu ürünü sepetten sil">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </td>
@@ -65,7 +66,7 @@
                         else
                         {
                             <tr>
-                                <td colspan="6" class="text-center">Sepetiniz boş.</td>
+                                <td colspan="7" class="text-center text-muted"><i>Sepetiniz boş.</i></td>
                             </tr>
                         }
                     </tbody>
@@ -74,15 +75,38 @@
             <div class="col-lg-4">
                 <form>
                     <div class="input-group">
-                        <input type="text" id="salecode" class="form-control p-4" placeholder="İndirim Kodunuz"/>
+                        <input type="text" id="salecode" class="form-control p-4" placeholder="İndirim Kodunuz" />
                         <div>
                             <a style="height:48px;padding-top:11px;margin-left:5px;" class="btn btn-primary text-white" id="btnsalecode">Kodu Uygula</a>
                         </div>
                     </div>
                 </form>
+                <br />
+                <h5 class="section-title position-relative text-uppercase text-primary mb-3"><span class="pr-3">Sepet Özeti</span></h5>
+                <div class="p-30 mb-5">
+                    <div class="border-bottom pb-2" id="container">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Toplam Tutar</h6>
+                            <h6><span id="totalprice">200</span>₺</h6>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6 class="font-weight-medium">KDV Oranı</h6>
+                            <h6 id="kdv" class="font-weight-medium">20 ₺</h6>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5>Toplam Tutar</h5>
+                            <h5><span id="totalpricewithkdv">220</span>₺</h5>
+                        </div>
+                        <br />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 
     @await Component.InvokeAsync("_UILayoutFooter")
     @await Component.InvokeAsync("_UILayoutScripts")
