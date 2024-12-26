@@ -1,0 +1,60 @@
+﻿@model List<BasketResultDTO>
+@{
+    Layout = null;
+    int count = 0;
+}
+
+<!DOCTYPE html>
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeader")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_UILayoutNavbar")
+    </div> <!-- Bu div'i silme -->
+
+    <br />
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div col-12>
+                <nav class="breadcrumb bg-dark mb-30">
+                    <a href="/Home/Index/" class="breadcrumb-item text-white">Ana Sayfa</a>
+                    <a href="/Menu/Index/" class="breadcrumb-item text-white">Menü</a>
+                    <span class="breadcrumb-item active">Sepetiniz</span>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-light table-borderless table-hover text-center mb-0">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ürün Adı</th>
+                        <th>Adet</th>
+                        <th>Fiyat</th>
+                        <th>Toplam</th>
+                        <th>Sil</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <td></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @await Component.InvokeAsync("_UILayoutFooter")
+
+    @await Component.InvokeAsync("_UILayoutScripts")
+
+</body>
+
+</html>
+
