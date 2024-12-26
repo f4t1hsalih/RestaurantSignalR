@@ -5,7 +5,7 @@ using EntityLayer.Entities;
 
 namespace DataAccessLayer.EntityFramework
 {
-    internal class EfBasketDal : GenericRepository<Basket>, IBasketDal
+    public class EfBasketDal : GenericRepository<Basket>, IBasketDal
     {
         public EfBasketDal(Context context) : base(context)
         {
