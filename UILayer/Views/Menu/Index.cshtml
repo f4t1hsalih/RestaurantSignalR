@@ -73,16 +73,24 @@
     @await Component.InvokeAsync("_UILayoutScripts")
 
     <script>
-        function showproductid(value){
+        function showproductid(value)
+        {
             var id = value;
-            $.ajax({
+            $.ajax(
+                {
                 type: "POST",
                 data: { item: id },
                 contentType: 'json',
-                success: function () {
-                    alert("Tıkladığınız Ürünün ID Değeri: " + id);
+                success: function ()
+                {
+                    Swal.fire(
+                    {
+                    title: "Ürün",
+                    text: "Seçtiğiniz Ürün'ün ID Değeri: " + id,
+                    icon: "success"
+                    });
                 }
-            });
+                });
 
         }
     </script>
