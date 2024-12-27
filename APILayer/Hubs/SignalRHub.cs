@@ -10,14 +10,16 @@ namespace APILayer.Hubs
         private readonly IOrderService _orderService;
         private readonly IMoneyCaseService _moneyCaseService;
         private readonly ITableService _tableService;
+        private readonly IBookingService _bookingService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, ITableService tableService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, ITableService tableService, IBookingService bookingService)
         {
             _categoryService = categoryService;
             _productService = productService;
             _orderService = orderService;
             _moneyCaseService = moneyCaseService;
             _tableService = tableService;
+            _bookingService = bookingService;
         }
 
         public async Task SendStatistics()
@@ -101,6 +103,12 @@ namespace APILayer.Hubs
             var todayTotalPrice = _orderService.TTodayTotalPrice();
             await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice.ToString("0.00" + " ₺"));
 
+        }
+
+        public async Task GetBookingList()
+        {
+            var values = _bookingService.TGetListAll();
+            await Clients.All.SendAsync("ReceiveBookingList", values);
         }
 
     }

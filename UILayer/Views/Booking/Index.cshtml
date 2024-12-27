@@ -46,3 +46,41 @@
         </div>
     </div>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(() => {
+        // SignalR bağlantısı oluştur
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:7068/SignalRHub")
+            .build();
+
+        // Başlangıç durumu
+        $("#connstatus").text(connection.state);
+
+        // Bağlantı başlatma
+        connection.start()
+            .then(() => {
+                $("#connstatus").text("Bağlantı kuruldu");
+                setInterval(() => {
+                    connection.invoke("GetBookingList");
+                }, 5000);
+            })
+            .catch((err) => {
+                $("#connstatus").text("Bağlantı hatası");
+                console.error(err.toString());
+            });
+
+        // Bağlantı durum değişikliklerini dinle
+        connection.onclose(() => {
+            $("#connstatus").text("Bağlantı kapalı");
+        });
+
+        connection.on("ReceiveBookingList",(value)=>{
+            console.log(value);
+        })
+    });
+</script>
