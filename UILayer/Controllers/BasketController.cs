@@ -25,5 +25,16 @@ namespace UILayer.Controllers
             return View();
         }
 
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.DeleteAsync($"https://localhost:7068/api/Basket/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return NoContent();
+        }
+
     }
 }

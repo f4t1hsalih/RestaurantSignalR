@@ -47,12 +47,11 @@
                                     <td>@string.Format("{0:C}", item.Price)</td>
                                     <td>@string.Format("{0:C}", item.TotalPrice)</td>
                                     <td>
-                                        <button data-basketid="@item.BasketId"
-                                                id="btndelete"
-                                                class="btn btn-sm btn-danger btn-delete"
-                                                title="Bu ürünü sepetten sil">
-                                            <i class="fa fa-times"></i>
-                                        </button>
+                                        <a class="btn btn-sm btn-danger btn-delete"
+                                           title="Bu ürünü sepetten sil"
+                                           href="/Basket/DeleteProduct/@item.BasketId">
+                                           <i class="fa fa-times"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             }

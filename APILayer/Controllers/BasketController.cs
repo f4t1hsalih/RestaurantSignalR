@@ -47,7 +47,7 @@ namespace APILayer.Controllers
             });
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteBasket(int id)
         {
             var value = _basketService.TGetById(id);
