@@ -1,5 +1,7 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using DTOLayer.BookingDto;
+using DTOLayer.ContactDto;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +12,12 @@ namespace APILayer.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
-        public BookingController(IBookingService bookingService)
+        private readonly IMapper _mapper;
+
+        public BookingController(IBookingService bookingService, IMapper mapper)
         {
             _bookingService = bookingService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -35,15 +40,8 @@ namespace APILayer.Controllers
         [HttpPost]
         public IActionResult InsertBooking(InsertBookingDto insertBookingDto)
         {
-            Booking booking = new Booking
-            {
-                Name = insertBookingDto.Name,
-                Phone = insertBookingDto.Phone,
-                Email = insertBookingDto.Email,
-                PersonCount = insertBookingDto.PersonCount,
-                Date = insertBookingDto.Date
-            };
-            _bookingService.TInsert(booking);
+            var value = _mapper.Map<Booking>(insertBookingDto);
+            _bookingService.TInsert(value);
             return Ok("Kayıt Başarıyla Eklendi");
         }
 
