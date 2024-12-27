@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeader")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_UILayoutNavbar")
+    </div> <!-- Bu div'i silme -->
+
+    @await Component.InvokeAsync("_HomePageBookTable")
+
+    @await Component.InvokeAsync("_UILayoutFooter")
+
+    @await Component.InvokeAsync("_UILayoutScripts")
+
+</body>
+
+</html>
