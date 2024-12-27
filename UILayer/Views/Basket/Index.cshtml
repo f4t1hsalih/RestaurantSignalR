@@ -2,6 +2,9 @@
 @{
     Layout = null;
     int count = 0;
+    decimal basketPrice = Model.Sum(x => x.Price);
+    decimal basketTaxAmount = (basketPrice / 100) * 1;
+    decimal basketTotalPrice = basketPrice + basketTaxAmount;
 }
 
 <!DOCTYPE html>
@@ -78,18 +81,18 @@
                     <div class="border-bottom pb-2" id="container">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Toplam Tutar</h6>
-                            <h6><span id="totalprice">200</span>₺</h6>
+                            <h6><span id="totalprice">@basketPrice</span> ₺</h6>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <h6 class="font-weight-medium">KDV Oranı</h6>
-                            <h6 id="kdv" class="font-weight-medium">20 ₺</h6>
+                            <h6 id="kdv" class="font-weight-medium">@basketTaxAmount ₺</h6>
                         </div>
                         <br />
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h5>Toplam Tutar</h5>
-                            <h5><span id="totalpricewithkdv">220</span>₺</h5>
+                            <h5><span id="totalpricewithkdv">@basketTotalPrice</span> ₺</h5>
                         </div>
                         <br />
                         <button id="btnchecked" class="btn btn-block btn-primary font-weight-bold my-3">Siparişi Tamamla</button>
