@@ -28,17 +28,20 @@ namespace UILayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBasket(BasketInsertDTO basketInsertDTO)
+        public async Task<IActionResult> AddBasket(int id)
         {
+            BasketInsertDTO dto = new BasketInsertDTO();
+            dto.ProductId = id;
+
             var client = _httpClientFactory.CreateClient();
-            var json = JsonConvert.SerializeObject(basketInsertDTO);
+            var json = JsonConvert.SerializeObject(dto);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PutAsync("https://localhost:7068/api/Basket/", data);
+            var response = await client.PostAsync("https://localhost:7068/api/Basket", data);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
             }
-            return View();
+            return Json(dto);
         }
     }
 }

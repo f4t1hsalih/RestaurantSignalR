@@ -2,7 +2,6 @@
 {
     public class InsertBasketDto
     {
-        public int BasketId { get; set; }
         public int TableId { get; set; }
         public int ProductId { get; set; }
         public int Count { get; set; }

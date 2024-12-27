@@ -53,8 +53,8 @@
                                             <h6>
                                                 @item.Price ₺
                                             </h6>
-                                            <a href="#" onclick="showproductid(@item.ProductId)" class="cart_link">
-                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            <a href="#" onclick="showproductid('@item.ProductId', '@item.Name')" class="cart_link">
+                                                <i class="fa fa-shopping-cart"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -73,21 +73,20 @@
     @await Component.InvokeAsync("_UILayoutScripts")
 
     <script>
-        function showproductid(value)
+        function showproductid(id, name)
         {
-            var id = value;
             $.ajax(
                 {
                 type: "POST",
-                URL:"/Menu/AddBasket/",
+                url: "/Menu/AddBasket/" + id,
                 data: { ProductId: id },
                 contentType: 'json',
                 success: function ()
                 {
                     Swal.fire(
                     {
-                    title: "Ürün",
-                    text: "Seçtiğiniz Ürün'ün ID Değeri: " + id,
+                    title: name,
+                    text: "Seçtiğiniz Ürün Sepete Eklendi",
                     icon: "success"
                     });
                 }

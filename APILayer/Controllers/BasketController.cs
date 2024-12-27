@@ -37,15 +37,14 @@ namespace APILayer.Controllers
         public IActionResult InsertBasket(InsertBasketDto insertBasketDto)
         {
             using var context = new Context();
-            Basket basket = new Basket
+            _basketService.TInsert(new Basket()
             {
+                ProductId = insertBasketDto.ProductId,
                 Count = 1,
                 TableId = 4,
                 Price = context.Products.Where(x => x.ProductId == insertBasketDto.ProductId).Select(x => x.Price).FirstOrDefault(),
-                TotalPrice = 0,
-                ProductId = insertBasketDto.ProductId
-            };
-            _basketService.TInsert(basket);
+                TotalPrice = 0
+            });
             return Ok();
         }
     }
