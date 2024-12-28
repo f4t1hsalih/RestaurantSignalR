@@ -20,5 +20,11 @@ namespace APILayer.Controllers
             return Ok(_notificationService.TGetListAll());
         }
 
+        [HttpGet("StatusFalse")]
+        public ActionResult GetNotificationCountByStatusFalse()
+        {
+            return Ok(_notificationService.TGetNotificationCountByStatusFalse());
+        }
+
     }
 }

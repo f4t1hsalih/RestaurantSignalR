@@ -11,8 +11,9 @@ namespace APILayer.Hubs
         private readonly IMoneyCaseService _moneyCaseService;
         private readonly ITableService _tableService;
         private readonly IBookingService _bookingService;
+        private readonly INotificationService _notificationService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, ITableService tableService, IBookingService bookingService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, ITableService tableService, IBookingService bookingService, INotificationService notificationService)
         {
             _categoryService = categoryService;
             _productService = productService;
@@ -20,6 +21,7 @@ namespace APILayer.Hubs
             _moneyCaseService = moneyCaseService;
             _tableService = tableService;
             _bookingService = bookingService;
+            _notificationService = notificationService;
         }
 
         public async Task SendStatistics()
@@ -109,6 +111,12 @@ namespace APILayer.Hubs
         {
             var values = _bookingService.TGetListAll();
             await Clients.All.SendAsync("ReceiveBookingList", values);
+        }
+
+        public async Task SendNotificatioCount()
+        {
+            var value = _notificationService.TGetNotificationCountByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationCount", value);
         }
 
     }
