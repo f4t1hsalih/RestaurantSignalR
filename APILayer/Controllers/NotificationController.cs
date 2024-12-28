@@ -1,4 +1,7 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
+using DTOLayer.NotificationDto;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -8,10 +11,12 @@ namespace APILayer.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
+        private readonly IMapper _mapper;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationController(INotificationService notificationService, IMapper mapper)
         {
             _notificationService = notificationService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -24,6 +29,14 @@ namespace APILayer.Controllers
         public ActionResult GetNotificationCountByStatusFalse()
         {
             return Ok(_notificationService.TGetNotificationCountByStatusFalse());
+        }
+
+        [HttpPost]
+        public IActionResult InsertNotification(InsertNotificationDto insertNotificationDto)
+        {
+            var value = _mapper.Map<Notification>(insertNotificationDto);
+            _notificationService.TInsert(value);
+            return Ok("Kayıt Başarıyla Eklendi");
         }
 
     }

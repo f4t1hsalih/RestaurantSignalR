@@ -37,11 +37,11 @@
 				<li class="nav-item dropdown hidden-caret">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="la la-bell"></i>
-						<span class="notification">3</span>
+							<span class="notification" id="notificationcount1">0</span>
 					</a>
 					<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
 						<li>
-							<div class="dropdown-title">4 yeni bildirim var</div>
+                                <div class="dropdown-title"><span id ="notificationcount2">0</span><sapn> Yeni bildirim var</sapn></div>
 						</li>
 						<li>
 							<div class="notif-center">
@@ -119,3 +119,46 @@
 		</div>
 	</nav>
 </div>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+	<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(() => {
+			// SignalR bağlantısı oluştur
+			const connection = new signalR.HubConnectionBuilder()
+				.withUrl("https://localhost:7068/SignalRHub")
+				.build();
+
+			// Başlangıç durumu
+			$("#connstatus").text(connection.state);
+
+			// Bağlantı başlatma
+			connection.start()
+				.then(() => {
+					$("#connstatus").text("Bağlantı kuruldu");
+					setInterval(() => {
+						connection.invoke("SendNotificatioCount");
+					}, 2000);
+				})
+				.catch((err) => {
+					$("#connstatus").text("Bağlantı hatası");
+					console.error(err.toString());
+				});
+
+			// Bağlantı durum değişikliklerini dinle
+			connection.onclose(() => {
+				$("#connstatus").text("Bağlantı kapalı");
+			});
+
+			connection.on("ReceiveNotificationCount",(value)=>{
+				$("#notificationcount1").text(value);
+			})
+
+			connection.on("ReceiveNotificationCount",(value)=>{
+				$("#notificationcount2").text(value);
+			})
+
+		});
+	</script>
