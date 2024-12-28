@@ -22,19 +22,31 @@ namespace APILayer.Controllers
         [HttpGet]
         public ActionResult NotificationList()
         {
-            return Ok(_notificationService.TGetListAll());
+            var notifications = _mapper.Map<List<ResultNotificationDto>>(_notificationService.TGetListAll());
+            return Ok(notifications);
         }
 
-        [HttpGet("StatusFalse")]
+        [HttpGet("{id}")]
+        public IActionResult GetNotificationByID(int id)
+        {
+            var notification = _notificationService.TGetById(id);
+            if (notification != null)
+                return Ok(notification);
+
+            return NotFound("Kayıt bulunamadı");
+        }
+
+        [HttpGet("StatusFalseCount")]
         public ActionResult GetNotificationCountByStatusFalse()
         {
             return Ok(_notificationService.TGetNotificationCountByStatusFalse());
         }
 
-        [HttpGet("GetNotificationByStatusFalse")]
+        [HttpGet("StatusFalse")]
         public ActionResult GetNotificationByStatusFalse()
         {
-            return Ok(_notificationService.TGetNotificationsByStatusFalse());
+            var notifications = _mapper.Map<List<ResultNotificationDto>>(_notificationService.TGetNotificationsByStatusFalse());
+            return Ok(notifications);
         }
 
         [HttpPost]
@@ -42,6 +54,26 @@ namespace APILayer.Controllers
         {
             var value = _mapper.Map<Notification>(insertNotificationDto);
             _notificationService.TInsert(value);
+            return Ok("Kayıt Başarıyla Eklendi");
+        }
+
+        [HttpPut]
+        public IActionResult UpdateNotification(UpdateNotificationDto updateNotificationDto)
+        {
+            var value = _mapper.Map<Notification>(updateNotificationDto);
+            _notificationService.TUpdate(value);
+
+            return Ok("Kayıt Başarıyla Güncellendi");
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteNotification(int id)
+        {
+            var value = _notificationService.TGetById(id);
+            if (value == null)
+                return NotFound("Kayıt bulunamadı");
+
+            _notificationService.TDelete(value);
             return Ok("Kayıt Başarıyla Eklendi");
         }
 
