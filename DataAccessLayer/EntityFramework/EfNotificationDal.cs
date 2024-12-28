@@ -15,5 +15,10 @@ namespace DataAccessLayer.EntityFramework
         {
             return _context.Notifications.Where(x => x.Status == false).Count();
         }
+
+        public List<Notification> GetNotificationsByStatusFalse()
+        {
+            return _context.Notifications.Where(x=>x.Status==false).ToList();
+        }
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace EntityLayer.Entities
+﻿namespace UILayer.DTO.NotificationDTO
 {
-    public class Notification
+    public class NotificationCreateDTO
     {
-        public int NotificationId { get; set; }
         public string Type { get; set; }
         public string Icon { get; set; }
         public string Description { get; set; }

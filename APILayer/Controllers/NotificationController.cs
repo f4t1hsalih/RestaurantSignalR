@@ -31,6 +31,12 @@ namespace APILayer.Controllers
             return Ok(_notificationService.TGetNotificationCountByStatusFalse());
         }
 
+        [HttpGet("GetNotificationByStatusFalse")]
+        public ActionResult GetNotificationByStatusFalse()
+        {
+            return Ok(_notificationService.TGetNotificationsByStatusFalse());
+        }
+
         [HttpPost]
         public IActionResult InsertNotification(InsertNotificationDto insertNotificationDto)
         {

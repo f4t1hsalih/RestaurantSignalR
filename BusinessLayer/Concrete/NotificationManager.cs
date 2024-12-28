@@ -39,6 +39,11 @@ namespace BusinessLayer.Concrete
             return _notificationDal.GetNotificationCountByStatusFalse();
         }
 
+        public List<Notification> TGetNotificationsByStatusFalse()
+        {
+            return _notificationDal.GetNotificationsByStatusFalse();
+        }
+
         public void TInsert(Notification entity)
         {
             _notificationDal.Insert(entity);
