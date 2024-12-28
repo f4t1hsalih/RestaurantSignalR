@@ -5,6 +5,42 @@
 }
 
 <h4 class="page-title">Bildirimler</h4>
+
+<style>
+    .alert-custom {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        color: white;
+        display: none;
+    }
+
+    .alert-success-custom {
+        background-color: #81c784;
+    }
+
+    .alert-danger-custom {
+        background-color: #dc3545;
+    }
+</style>
+
+
+<!-- Mesaj Gösterimi -->
+@if (TempData["Success"] != null)
+{
+    <div id="successAlert" class="alert-custom alert-success-custom">
+        @TempData["Success"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div id="errorAlert" class="alert-custom alert-danger-custom">
+        @TempData["Error"]
+    </div>
+}
+
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -35,8 +71,21 @@
                                 <td>@item.Icon</td>
                                 <td>@item.Description</td>
                                 <td>@item.Date.ToString("dd.MM.yyyy HH:mm")</td>
-                                <td style="color:@(item.Status ? "green" : "red")">
-                                    @(item.Status ? "Görüldü" : "Görülmedi")
+                                <td>
+                                    @if (item.Status == false)
+                                    {
+                                        @using (Html.BeginForm("ChangeStatusToTrue", "Notification", new { id = item.NotificationId }, FormMethod.Post))
+                                        {
+                                            <button type="submit" class="btn btn-danger">Görülmedi</button>
+                                        }
+                                    }
+                                    else if (item.Status == true)
+                                    {
+                                        @using (Html.BeginForm("ChangeStatusToFalse", "Notification", new { id = item.NotificationId }, FormMethod.Post))
+                                        {
+                                            <button type="submit" class="btn btn-success">Görüldü</button>
+                                        }
+                                    }
                                 </td>
                                 <td><a href="/Notification/UpdateNotification/@item.NotificationId" class="btn btn-outline-warning">Güncelle</a></td>
                                 <td><a href="/Notification/DeleteNotification/@item.NotificationId" class="btn btn-outline-danger" onclick="return confirm('Bu bildirimi silmek istediğinize emin misiniz?');">Sil</a></td>
@@ -48,3 +97,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Sayfa yüklendikten sonra çalışacak fonksiyon
+    document.addEventListener("DOMContentLoaded", function() {
+        // Başarı mesajı varsa göster
+        if (document.getElementById("successAlert")) {
+            var successAlert = document.getElementById("successAlert");
+            successAlert.style.display = "block"; // Mesajı göster
+            setTimeout(function() {
+                successAlert.style.display = "none"; // 2 saniye sonra mesajı gizle
+            }, 2000);
+        }
+
+        // Hata mesajı varsa göster
+        if (document.getElementById("errorAlert")) {
+            var errorAlert = document.getElementById("errorAlert");
+            errorAlert.style.display = "block";
+            setTimeout(function() {
+                errorAlert.style.display = "none";
+            }, 2000);
+        }
+    });
+</script>

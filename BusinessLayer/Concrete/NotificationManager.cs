@@ -16,7 +16,7 @@ namespace BusinessLayer.Concrete
 
         public void TChangeStatusToFalse(int id)
         {
-            _notificationDal.ChangeStatusToTrue(id);
+            _notificationDal.ChangeStatusToFalse(id);
         }
 
         public void TChangeStatusToTrue(int id)

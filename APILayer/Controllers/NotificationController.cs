@@ -36,14 +36,14 @@ namespace APILayer.Controllers
             return NotFound("Kayıt bulunamadı");
         }
 
-        [HttpPut("{id}/ChangeStatusToTrue")]
+        [HttpPut("ChangeStatusToTrue/{id}")]
         public IActionResult ChangeStatusToTrue(int id)
         {
             _notificationService.TChangeStatusToTrue(id);
             return Ok("Durum başarıyla güncellendi");
         }
 
-        [HttpPut("{id}/ChangeStatusToFalse")]
+        [HttpPut("ChangeStatusToFalse/{id}")]
         public IActionResult ChangeStatusToFalse(int id)
         {
             _notificationService.TChangeStatusToFalse(id);

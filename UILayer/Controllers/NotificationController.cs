@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer.Abstract;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 using UILayer.DTO.NotificationDTO;
@@ -71,15 +72,56 @@ namespace UILayer.Controllers
             }
             return View();
         }
+
         public async Task<IActionResult> DeleteNotification(int id)
         {
             var client = _httpClientFactory.CreateClient();
             var response = await client.DeleteAsync($"https://localhost:7068/api/Notification/{id}");
+
             if (response.IsSuccessStatusCode)
             {
+                TempData["Success"] = "Bildirim başarıyla silindi.";
                 return RedirectToAction("Index");
             }
-            return NoContent();
+
+            TempData["Error"] = "Bildirim silinirken bir hata oluştu.";
+            return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeStatusToTrue(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var request = new HttpRequestMessage(HttpMethod.Put, $"https://localhost:7068/api/Notification/ChangeStatusToTrue/{id}");
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["Success"] = "Bildirim başarıyla 'Görüldü' olarak güncellendi.";
+                return RedirectToAction("Index");
+            }
+
+            TempData["Error"] = "Bildirim durumu güncellenirken bir hata oluştu.";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeStatusToFalse(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var request = new HttpRequestMessage(HttpMethod.Put, $"https://localhost:7068/api/Notification/ChangeStatusToFalse/{id}");
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["Success"] = "Bildirim başarıyla 'Görülmedi' olarak güncellendi.";
+                return RedirectToAction("Index");
+            }
+
+            TempData["Error"] = "Bildirim durumu güncellenirken bir hata oluştu.";
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
