@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IFeatureDal:IGenericDal<Feature>
+    public interface IFeatureDal : IGenericDal<Feature>
     {
     }
 }
