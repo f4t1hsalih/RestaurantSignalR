@@ -6,5 +6,7 @@ namespace BusinessLayer.Abstract
     {
         int TGetNotificationCountByStatusFalse();
         List<Notification> TGetNotificationsByStatusFalse();
+        void TChangeStatusToTrue(int id);
+        void TChangeStatusToFalse(int id);
     }
 }

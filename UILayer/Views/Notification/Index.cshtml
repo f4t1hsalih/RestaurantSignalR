@@ -36,7 +36,7 @@
                                 <td>@item.Description</td>
                                 <td>@item.Date.ToString("dd.MM.yyyy HH:mm")</td>
                                 <td style="color:@(item.Status ? "green" : "red")">
-                                    @(item.Status ? "Aktif" : "Pasif")
+                                    @(item.Status ? "Görüldü" : "Görülmedi")
                                 </td>
                                 <td><a href="/Notification/UpdateNotification/@item.NotificationId" class="btn btn-outline-warning">Güncelle</a></td>
                                 <td><a href="/Notification/DeleteNotification/@item.NotificationId" class="btn btn-outline-danger" onclick="return confirm('Bu bildirimi silmek istediğinize emin misiniz?');">Sil</a></td>

@@ -14,6 +14,16 @@ namespace BusinessLayer.Concrete
             _notificationDal = notificationDal;
         }
 
+        public void TChangeStatusToFalse(int id)
+        {
+            _notificationDal.ChangeStatusToTrue(id);
+        }
+
+        public void TChangeStatusToTrue(int id)
+        {
+            _notificationDal.ChangeStatusToTrue(id);
+        }
+
         public void TDelete(Notification entity)
         {
             _notificationDal.Delete(entity);

@@ -11,6 +11,22 @@ namespace DataAccessLayer.EntityFramework
         {
         }
 
+        public void ChangeStatusToFalse(int id)
+        {
+            var notification = _context.Notifications.Find(id);
+            if (notification != null)
+                notification.Status = false;
+            _context.SaveChanges();
+        }
+
+        public void ChangeStatusToTrue(int id)
+        {
+            var notification = _context.Notifications.Find(id);
+            if (notification != null)
+                notification.Status = true;
+            _context.SaveChanges();
+        }
+
         public int GetNotificationCountByStatusFalse()
         {
             return _context.Notifications.Where(x => x.Status == false).Count();
@@ -18,7 +34,7 @@ namespace DataAccessLayer.EntityFramework
 
         public List<Notification> GetNotificationsByStatusFalse()
         {
-            return _context.Notifications.Where(x=>x.Status==false).ToList();
+            return _context.Notifications.Where(x => x.Status == false).ToList();
         }
     }
 }
