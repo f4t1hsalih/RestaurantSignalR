@@ -1,0 +1,34 @@
+﻿@model NotificationCreateDTO
+@{
+    ViewData["Title"] = "Bildirim Ekle";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Bildirim Ekle</div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="type">Bildirim Türü</label>
+                        <input type="text" class="form-control" asp-for="Type" id="type">
+                    </div>
+                    <div class="form-group">
+                        <label for="icon">Icon</label>
+                        <input type="text" class="form-control" asp-for="Icon" id="icon">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Açıklama</label>
+                        <input type="text" class="form-control" asp-for="Description" id="description">
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button type="submit" class="btn btn-success">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

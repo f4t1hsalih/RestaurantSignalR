@@ -52,6 +52,8 @@ namespace APILayer.Controllers
         [HttpPost]
         public IActionResult InsertNotification(InsertNotificationDto insertNotificationDto)
         {
+            insertNotificationDto.Date = Convert.ToDateTime(DateTime.Now);
+
             var value = _mapper.Map<Notification>(insertNotificationDto);
             _notificationService.TInsert(value);
             return Ok("Kayıt Başarıyla Eklendi");
@@ -66,7 +68,7 @@ namespace APILayer.Controllers
             return Ok("Kayıt Başarıyla Güncellendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteNotification(int id)
         {
             var value = _notificationService.TGetById(id);
