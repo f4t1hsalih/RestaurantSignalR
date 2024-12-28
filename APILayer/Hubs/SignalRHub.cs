@@ -113,10 +113,14 @@ namespace APILayer.Hubs
             await Clients.All.SendAsync("ReceiveBookingList", values);
         }
 
-        public async Task SendNotificatioCount()
+        public async Task SendNotification()
         {
             var value = _notificationService.TGetNotificationCountByStatusFalse();
             await Clients.All.SendAsync("ReceiveNotificationCount", value);
+
+            var notifications = _notificationService.TGetNotificationsByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationList", notifications);
+
         }
 
     }
