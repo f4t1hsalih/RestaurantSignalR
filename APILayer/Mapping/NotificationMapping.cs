@@ -8,7 +8,10 @@ namespace APILayer.Mapping
     {
         public NotificationMapping()
         {
+            CreateMap<Notification, ResultNotificationDto>().ReverseMap();
             CreateMap<Notification, InsertNotificationDto>().ReverseMap();
+            CreateMap<Notification, UpdateNotificationDto>().ReverseMap();
+            CreateMap<Notification, GetNotificationDto>().ReverseMap();
         }
     }
 }
