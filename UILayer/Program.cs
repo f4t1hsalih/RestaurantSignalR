@@ -23,6 +23,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Notification}/{action=Index}/{id?}");
+    pattern: "{controller=Table}/{action=Index}/{id?}");
 
 app.Run();

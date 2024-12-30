@@ -34,6 +34,7 @@ namespace UILayer.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTable(TableCreateDTO table)
         {
+            table.Status = false;
             var client = _httpClientFactory.CreateClient();
             var json = JsonConvert.SerializeObject(table);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
