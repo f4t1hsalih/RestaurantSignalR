@@ -5,30 +5,47 @@ const connection = new signalR.HubConnectionBuilder()
 document.getElementById("sendbutton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
-    var currentTime = new Date();
-    var currentHour = currentTime.getHours();
-    var currentMinute = currentTime.getMinutes();
+    const placeholder = document.getElementById("placeholder-message");
+    if (placeholder) {
+        // Varsayýlan mesajý kaldýr
+        placeholder.remove();
+    }
 
-    var li = document.createElement("li");
-    var span = document.createElement("span");
+    const currentTime = new Date();
+    const currentHour = String(currentTime.getHours()).padStart(2, '0');
+    const currentMinute = String(currentTime.getMinutes()).padStart(2, '0');
+
+    const li = document.createElement("li");
+    const span = document.createElement("span");
     span.style.fontWeight = "bold";
     span.textContent = user;
     li.appendChild(span);
-    li.innerHTML += ` :${message} - ${currentHour}:${currentMinute}`;
+    li.innerHTML += `: ${message} - ${currentHour}:${currentMinute}`;
     document.getElementById("messagelist").appendChild(li);
 });
 
 connection.start().then(function () {
     document.getElementById("sendbutton").disabled = false;
 }).catch(function (err) {
-    return console.error(err.toString());
+    console.error(err.toString());
+    alert("Baðlantý kurulamadý, lütfen tekrar deneyin.");
 });
 
 document.getElementById("sendbutton").addEventListener("click", function (event) {
-    var user = document.getElementById("userinput").value;
-    var message = document.getElementById("messageinput").value;
-    connection.invoke("SendMessage", user, message).catch(function (err) {
-        return console.error(err.toString());
+    const user = document.getElementById("userinput").value.trim();
+    const message = document.getElementById("messageinput").value.trim();
+
+    if (!user || !message) {
+        alert("Lütfen kullanýcý adýnýzý ve mesajýnýzý girin.");
+        return;
+    }
+
+    connection.invoke("SendMessage", user, message).then(() => {
+        document.getElementById("messageinput").value = ""; // Mesaj alanýný temizle
+    }).catch(function (err) {
+        console.error(err.toString());
+        alert("Mesaj gönderilemedi, lütfen tekrar deneyin.");
     });
+
     event.preventDefault();
 });
