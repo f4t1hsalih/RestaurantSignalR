@@ -5,7 +5,7 @@ namespace APILayer.Hubs
 {
     public class SignalRHub : Hub
     {
-        int clientCount = 0;
+        public static int clientCount { get; set; } = 0;
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
         private readonly IOrderService _orderService;
