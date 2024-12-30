@@ -23,6 +23,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Table}/{action=Index}/{id?}");
+    pattern: "{controller=Table}/{action=TableListByStatus}/{id?}");
 
 app.Run();

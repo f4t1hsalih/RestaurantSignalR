@@ -83,5 +83,19 @@ namespace UILayer.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> TableListByStatus()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync("https://localhost:7068/api/Table");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                var categories = JsonConvert.DeserializeObject<List<TableResultDTO>>(jsonData);
+                return View(categories);
+            }
+            return View();
+        }
     }
 }

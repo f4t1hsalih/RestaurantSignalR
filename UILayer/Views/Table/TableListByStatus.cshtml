@@ -1,0 +1,56 @@
+﻿@model List<TableResultDTO>
+@{
+    ViewData["Title"] = "Durumlarına Göre Masalar";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<style>
+    .card-stats {
+        transition: all 0.3s ease;
+    }
+
+        .card-stats:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+    .icon-big {
+        font-size: 2.5rem;
+    }
+
+    .card-category {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+<div class="container-fluid">
+    <h4 class="page-title mb-4">Anlık Masa Durumları</h4>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card card-stats @(item.Status ? "card-danger" : "card-success")">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="la la-table"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <p class="card-category">@item.Name</p>
+                                    <h4 class="card-title">
+                                        @(item.Status ? "Dolu" : "Müsait")
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
