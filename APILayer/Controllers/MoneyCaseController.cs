@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -8,16 +9,19 @@ namespace APILayer.Controllers
     public class MoneyCaseController : ControllerBase
     {
         private readonly IMoneyCaseService _moneyCaseService;
+        private readonly IMapper _mapper;
 
-        public MoneyCaseController(IMoneyCaseService moneyCaseService)
+        public MoneyCaseController(IMoneyCaseService moneyCaseService, IMapper mapper)
         {
             _moneyCaseService = moneyCaseService;
+            _mapper = mapper;
         }
 
         [HttpGet("GetMoneyCaseAmount")]
         public IActionResult GetMoneyCaseAmount()
         {
-            return Ok(_moneyCaseService.TGetMoneyCaseAmount());
+            var value = _moneyCaseService.TGetMoneyCaseAmount();
+            return Ok(value);
         }
     }
 }

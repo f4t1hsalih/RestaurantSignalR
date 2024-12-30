@@ -38,16 +38,16 @@ namespace APILayer.Controllers
         [HttpPost]
         public IActionResult InsertCategory(InsertCategoryDto insertCategoryDto)
         {
-            var category = _mapper.Map<Category>(insertCategoryDto);
-            _categoryService.TInsert(category);
+            var value = _mapper.Map<Category>(insertCategoryDto);
+            _categoryService.TInsert(value);
             return Ok("Kayıt başarıyla eklendi.");
         }
 
         [HttpPut]
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            var category = _mapper.Map<Category>(updateCategoryDto);
-            _categoryService.TUpdate(category);
+            var value = _mapper.Map<Category>(updateCategoryDto);
+            _categoryService.TUpdate(value);
             return Ok("Kayıt başarıyla güncellendi.");
         }
 

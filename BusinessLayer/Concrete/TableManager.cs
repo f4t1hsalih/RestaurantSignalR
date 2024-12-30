@@ -21,32 +21,32 @@ namespace BusinessLayer.Concrete
 
         public void TDelete(Table entity)
         {
-            throw new NotImplementedException();
+            _tableDal.Delete(entity);
         }
 
         public Table TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _tableDal.GetById(id);
         }
 
         public List<Table> TGetListAll()
         {
-            throw new NotImplementedException();
+            return _tableDal.GetListAll();
         }
 
         public List<Table> TGetListWhere(Expression<Func<Table, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _tableDal.GetListWhere(predicate);
         }
 
         public void TInsert(Table entity)
         {
-            throw new NotImplementedException();
+            _tableDal.Insert(entity);
         }
 
         public void TUpdate(Table entity)
         {
-            throw new NotImplementedException();
+            _tableDal.Update(entity);
         }
     }
 }
