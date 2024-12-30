@@ -26,36 +26,10 @@
 
 <h4 class="page-title mb-4">Anlık Masa Durumları</h4>
 
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-3 mb-4">
-            <div class="card card-stats @(item.Status ? "card-danger" : "card-success")">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="la la-table"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">@item.Name</p>
-                                <h4 class="card-title">
-                                    @(item.Status ? "Dolu" : "Müsait")
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-</div>
+    <div id="statuslist"></div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
-<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 
 <script type="text/javascript">
     $(document).ready(() => {
@@ -85,9 +59,35 @@
             $("#connstatus").text("Bağlantı kapalı");
         });
 
-        connection.on("ReceiveTableList",(value)=>{
-            console.log(value);
+        connection.on("ReceiveTableList", (value) => {
+        // console.log(value);
+        let tableHtml = `<div class="row">`;
+        $.each(value, (index, item) => {
+            tableHtml += `
+                <div class="col-md-3 mb-4">
+                    <div class="card card-stats ${item.status ? "card-danger" : "card-success"}">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="la la-table"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 d-flex align-items-center">
+                                    <div class="numbers">
+                                        <p class="card-category">${item.name}</p>
+                                        <h4 class="card-title">
+                                            ${item.status ? "Dolu" : "Müsait"}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
         });
-
+        tableHtml += "</div>";
+        $("#statuslist").html(tableHtml);
+    });
     });
 </script>
