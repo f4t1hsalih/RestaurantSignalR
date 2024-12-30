@@ -120,7 +120,12 @@ namespace APILayer.Hubs
 
             var notifications = _notificationService.TGetNotificationsByStatusFalse();
             await Clients.All.SendAsync("ReceiveNotificationList", notifications);
+        }
 
+        public async Task GetTableStatus()
+        {
+            var values = _tableService.TGetListAll();
+            await Clients.All.SendAsync("ReceiveTableList", values);
         }
 
     }

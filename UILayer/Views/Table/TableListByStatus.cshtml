@@ -24,33 +24,70 @@
     }
 </style>
 
-<div class="container-fluid">
-    <h4 class="page-title mb-4">Anlık Masa Durumları</h4>
+<h4 class="page-title mb-4">Anlık Masa Durumları</h4>
 
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-3 mb-4">
-                <div class="card card-stats @(item.Status ? "card-danger" : "card-success")">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="la la-table"></i>
-                                </div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card card-stats @(item.Status ? "card-danger" : "card-success")">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-table"></i>
                             </div>
-                            <div class="col-7 d-flex align-items-center">
-                                <div class="numbers">
-                                    <p class="card-category">@item.Name</p>
-                                    <h4 class="card-title">
-                                        @(item.Status ? "Dolu" : "Müsait")
-                                    </h4>
-                                </div>
+                        </div>
+                        <div class="col-7 d-flex align-items-center">
+                            <div class="numbers">
+                                <p class="card-category">@item.Name</p>
+                                <h4 class="card-title">
+                                    @(item.Status ? "Dolu" : "Müsait")
+                                </h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        }
-    </div>
+        </div>
+    }
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(() => {
+        // SignalR bağlantısı oluştur
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:7068/SignalRHub")
+            .build();
+
+        // Başlangıç durumu
+        $("#connstatus").text(connection.state);
+
+        // Bağlantı başlatma
+        connection.start()
+            .then(() => {
+                $("#connstatus").text("Bağlantı kuruldu");
+                setInterval(() => {
+                    connection.invoke("GetTableStatus");
+                }, 1000);
+            })
+            .catch((err) => {
+                $("#connstatus").text("Bağlantı hatası");
+                console.error(err.toString());
+            });
+
+        // Bağlantı durum değişikliklerini dinle
+        connection.onclose(() => {
+            $("#connstatus").text("Bağlantı kapalı");
+        });
+
+        connection.on("ReceiveTableList",(value)=>{
+            console.log(value);
+        });
+
+    });
+</script>
