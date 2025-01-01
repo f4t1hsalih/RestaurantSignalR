@@ -1,4 +1,4 @@
-﻿namespace UILayer.DTO.IdentityDto
+﻿namespace UILayer.DTO.IdentityDTO
 {
     public class RegisterDTO
     {

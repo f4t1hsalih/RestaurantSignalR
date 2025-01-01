@@ -1,7 +1,7 @@
 ﻿using EntityLayer.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using UILayer.DTO.IdentityDto;
+using UILayer.DTO.IdentityDTO;
 
 namespace UILayer.Controllers
 {
@@ -34,7 +34,7 @@ namespace UILayer.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            return View();
+            return View(registerDto);
         }
     }
 }
