@@ -1,6 +1,6 @@
-﻿namespace DTOLayer.IdentityDto
+﻿namespace UILayer.DTO.IdentityDto
 {
-    public class RegisterDto
+    public class RegisterDTO
     {
         public string Name { get; set; }
         public string Surname { get; set; }

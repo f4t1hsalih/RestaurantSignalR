@@ -1,41 +1,45 @@
-﻿@{
+﻿@model RegisterDTO
+@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Kayıt Sayfası</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" type="text/css" href="~/Templates/Register/css/nunito-font.css">
-	<link rel="stylesheet" href="~/Templates/Register/css/style.css" />
+    <meta charset="utf-8">
+    <title>Kayıt Sayfası</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Templates/Register/css/nunito-font.css">
+    <link rel="stylesheet" href="~/Templates/Register/css/style.css" />
 </head>
 <body class="form-v6">
-	<div class="page-content">
-		<div class="form-v6-content">
-			<div class="form-left">
-				<img src="~/Templates/Register/images/form-v6.jpg" alt="form">
-			</div>
-			<form class="form-detail" action="#" method="post">
-				<h2>Register Form</h2>
-				<div class="form-row">
-					<input type="text" name="full-name" id="full-name" class="input-text" placeholder="Your Name" required>
-				</div>
-				<div class="form-row">
-					<input type="text" name="your-email" id="your-email" class="input-text" placeholder="Email Address" required pattern="[^@@]+@@[^@@]+.[a-zA-Z]{2,6}">
-				</div>
-				<div class="form-row">
-					<input type="password" name="password" id="password" class="input-text" placeholder="Password" required>
-				</div>
-				<div class="form-row">
-					<input type="password" name="comfirm-password" id="comfirm-password" class="input-text" placeholder="Comfirm Password" required>
-				</div>
-				<div class="form-row-last">
-					<input type="submit" name="register" class="register" value="Register">
-				</div>
-			</form>
-		</div>
-	</div>
+    <div class="page-content">
+        <div class="form-v6-content">
+            <div class="form-left">
+                <img src="~/Templates/Register/images/burger.jpg" style="height:584px; width:auto;" alt="form">
+            </div>
+            <form class="form-detail" method="post">
+                <h2>Kayıt Formu</h2>
+                <div class="form-row">
+                    <input type="text" id="full-name" class="input-text" placeholder="İsim" asp-for="Name" required>
+                </div>
+                <div class="form-row">
+                    <input type="text" id="full-surname" class="input-text" placeholder="Soyisim" asp-for="Surname" required>
+                </div>
+                <div class="form-row">
+                    <input type="text" id="full-username" class="input-text" placeholder="Kullanıcı Adı" asp-for="Username" required>
+                </div>
+                <div class="form-row">
+                    <input type="text" id="your-email" class="input-text" placeholder="Email Adresi" asp-for="Email" required pattern="[^@@]+@@[^@@]+.[a-zA-Z]{2,6}">
+                </div>
+                <div class="form-row">
+                    <input type="password" id="password" class="input-text" placeholder="Şifre" asp-for="Password" required>
+                </div>
+                <div class="form-row-last">
+                    <input type="submit" name="register" class="register" value="Kayıt Ol">
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

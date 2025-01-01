@@ -1,7 +1,7 @@
 ﻿using EntityLayer.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using DTOLayer.IdentityDto;
+using UILayer.DTO.IdentityDto;
 
 namespace UILayer.Controllers
 {
@@ -20,7 +20,7 @@ namespace UILayer.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Index(RegisterDto registerDto)
+        public async Task<IActionResult> Index(RegisterDTO registerDto)
         {
             var appUser = new AppUser()
             {
