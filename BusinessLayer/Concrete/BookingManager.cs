@@ -13,6 +13,16 @@ namespace BusinessLayer.Concrete
             _bookingDal = bookingDal;
         }
 
+        public void TBookingStatusApproved(int id)
+        {
+            _bookingDal.BookingStatusApproved(id);
+        }
+
+        public void TBookingStatusCancelled(int id)
+        {
+            _bookingDal.BookingStatusCancelled(id);
+        }
+
         public void TDelete(Booking entity)
         {
             _bookingDal.Delete(entity);

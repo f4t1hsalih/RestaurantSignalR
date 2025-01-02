@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
 using DTOLayer.BookingDto;
-using DTOLayer.ContactDto;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -72,5 +71,19 @@ namespace APILayer.Controllers
             _bookingService.TDelete(value);
             return Ok("Kayıt Başarıyla Silindi");
         }
+
+        [HttpGet("BookingStatusApproved/{id}")]
+        public IActionResult BookingStatusApproved(int id)
+        {
+            _bookingService.TBookingStatusApproved(id);
+            return Ok("Rezervasyon Onaylandı");
+        }
+        [HttpGet("BookingStatusCancelled/{id}")]
+        public IActionResult BookingStatusCancelled(int id)
+        {
+            _bookingService.TBookingStatusCancelled(id);
+            return Ok("Rezervasyon İptal Edildi");
+        }
+
     }
 }
