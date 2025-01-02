@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Ürünler";
     Layout = "~/Views/Admin/Index.cshtml";
+    int count = 0;
 }
 
 <h4 class="page-title">Ürünler</h4>
@@ -28,8 +29,9 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            count++;
                             <tr>
-                                <td>@item.ProductId</td>
+                                <th>@count</th>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <img class="photo mr-2" src="@item.ImageUrl" alt="@item.Name">

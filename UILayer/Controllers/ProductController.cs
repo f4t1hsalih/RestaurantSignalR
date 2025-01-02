@@ -97,6 +97,7 @@ namespace UILayer.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateProduct(ProductUpdateDTO product)
         {
+            product.Status = true;
             var client = _httpClientFactory.CreateClient();
             var json = JsonConvert.SerializeObject(product);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
