@@ -93,10 +93,10 @@
                 <a href="/Booking/DeleteBooking/${item.bookingId}" class="btn btn-outline-danger btn-round" onclick="return confirm('Bu rezervasyonu silmek istediğinize emin misiniz?');">Sil</a>
                 </td>
                 <td>
-                <a href="/Booking/DeleteBooking/${item.bookingId}" class="btn btn-outline-info btn-round">Onayla</a>
+                <a href="/Booking/BookingStatusApproved/${item.bookingId}" class="btn btn-outline-info btn-round">Onayla</a>
                 </td>
                 <td>
-                <a href="/Booking/DeleteBooking/${item.bookingId}" class="btn btn-outline-dark btn-round">İptal Et</a>
+                <a href="/Booking/BookingStatusCancelled/${item.bookingId}" class="btn btn-outline-dark btn-round">İptal Et</a>
                 </td>
             </tr>`;
     });

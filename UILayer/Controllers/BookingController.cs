@@ -82,5 +82,21 @@ namespace UILayer.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> BookingStatusApproved(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync($"https://localhost:7068/api/Booking/BookingStatusApproved/{id}");
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> BookingStatusCancelled(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync($"https://localhost:7068/api/Booking/BookingStatusCancelled/{id}");
+
+            return RedirectToAction("Index");
+        }
     }
 }
