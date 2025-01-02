@@ -15,11 +15,12 @@
                 <table class="table mt-3">
                     <thead>
                         <tr>
-                            <th scope="col">Lokasyon</th>
-                            <th scope="col">E-Mail</th>
-                            <th scope="col">Telefon</th>
-                            <th scope="col">Alt Açıklama</th>
-                            <th scope="col">Düzenle</th>
+                            <th scope="col" style="width: 10%;">Lokasyon</th>
+                            <th scope="col" style="width: 15%;">E-Mail</th>
+                            <th scope="col" style="width: 10%;">Telefon</th>
+                            <th scope="col" style="width: 15%;">Alt Başlık</th>
+                            <th scope="col" style="width: 35%;">Alt Açıklama</th>
+                            <th scope="col" style="width: 15%;">Düzenle</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,6 +30,7 @@
                                 <td>@item.Location</td>
                                 <td>@item.Email</td>
                                 <td>@item.PhoneNumber</td>
+                                <td>@item.FooterTitle</td>
                                 <td>@item.FooterDescription</td>
                                 <td><a href="/Contact/UpdateContact/@item.ContactId" class="btn btn-outline-primary btn-round">Düzenle</a></td>
                             </tr>

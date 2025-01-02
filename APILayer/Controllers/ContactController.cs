@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
 using DTOLayer.ContactDto;
+using DTOLayer.SliderDto;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,14 +36,6 @@ namespace APILayer.Controllers
             return NotFound("Kayıt Bulunamadı");
         }
 
-        [HttpPost]
-        public IActionResult InsertContact(InsertContactDto insertContactDto)
-        {
-            var value = _mapper.Map<Contact>(insertContactDto);
-            _contactService.TInsert(value);
-            return Ok("Kayıt Başarıyla Eklendi");
-        }
-
         [HttpPut]
         public IActionResult UpdateContact(UpdateContactDto updateContactDto)
         {
@@ -51,16 +44,5 @@ namespace APILayer.Controllers
             return Ok("Kayıt Başarıyla Güncellendi");
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeleteContact(int id)
-        {
-            var value = _contactService.TGetById(id);
-            if (value != null)
-            {
-                _contactService.TDelete(value);
-                return Ok("Kayıt Başarıyla Silindi");
-            }
-            return NotFound("Kayıt Bulunamadı");
-        }
     }
 }
