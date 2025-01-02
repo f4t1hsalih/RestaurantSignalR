@@ -9,6 +9,8 @@ namespace APILayer.Mapping
         public SliderMapping()
         {
             CreateMap<Slider, ResultSliderDto>().ReverseMap();
+            CreateMap<Slider, UpdateSliderDto>().ReverseMap();
+            CreateMap<Slider, GetSliderDto>().ReverseMap();
         }
     }
 }

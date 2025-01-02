@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
-using UILayer.DTO.FeatureDTO;
+using UILayer.DTO.SliderDTO;
 
 namespace UILayer.Controllers
 {
-    public class FeatureController : Controller
+    public class SliderController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        public FeatureController(IHttpClientFactory httpClientFactory)
+        public SliderController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -16,36 +16,36 @@ namespace UILayer.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7068/api/Feature");
+            var response = await client.GetAsync("https://localhost:7068/api/Slider");
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();
-                var features = JsonConvert.DeserializeObject<List<FeatureResultDTO>>(jsonData);
-                return View(features);
+                var sliders = JsonConvert.DeserializeObject<List<SliderResultDTO>>(jsonData);
+                return View(sliders);
             }
             return View();
         }
 
         [HttpGet]
-        public async Task<IActionResult> UpdateFeature(int id)
+        public async Task<IActionResult> UpdateSlider(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync($"https://localhost:7068/api/Feature/{id}");
+            var response = await client.GetAsync($"https://localhost:7068/api/Slider/{id}");
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();
-                var feature = JsonConvert.DeserializeObject<FeatureUpdateDTO>(jsonData);
-                return View(feature);
+                var slider = JsonConvert.DeserializeObject<SliderUpdateDTO>(jsonData);
+                return View(slider);
             }
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateFeature(FeatureUpdateDTO feature)
+        public async Task<IActionResult> UpdateSlider(SliderUpdateDTO slider)
         {
             var client = _httpClientFactory.CreateClient();
-            var json = JsonConvert.SerializeObject(feature);
+            var json = JsonConvert.SerializeObject(slider);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PutAsync("https://localhost:7068/api/Feature/", data);
+            var response = await client.PutAsync("https://localhost:7068/api/Slider/", data);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

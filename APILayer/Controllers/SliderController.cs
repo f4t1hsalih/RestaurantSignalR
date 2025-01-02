@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
 using DTOLayer.SliderDto;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -21,8 +22,28 @@ namespace APILayer.Controllers
         [HttpGet]
         public IActionResult SliderList()
         {
-            var values = _mapper.Map<List<ResultSliderDto>>(_sliderService.TGetListAll());
-            return Ok(values);
+            var sliders = _mapper.Map<List<ResultSliderDto>>(_sliderService.TGetListAll());
+            return Ok(sliders);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult SliderDetail(int id)
+        {
+            var slider = _mapper.Map<GetSliderDto>(_sliderService.TGetById(id));
+            if (slider != null)
+            {
+                return Ok(slider);
+            }
+            return NotFound("Kayıt Bulunamadı");
+        }
+
+        [HttpPut]
+        public IActionResult UpdateSlider(UpdateSliderDto updateSliderDto)
+        {
+            var slider = _mapper.Map<Slider>(updateSliderDto);
+            _sliderService.TUpdate(slider);
+            return Ok("Kayıt Başarıyla Güncellendi");
+        }
+
     }
 }

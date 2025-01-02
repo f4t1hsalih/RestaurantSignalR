@@ -1,4 +1,4 @@
-﻿@model List<FeatureResultDTO>
+﻿@model List<SliderResultDTO>
 @{
     ViewData["Title"] = "Slider'lar";
     Layout = "~/Views/Admin/Index.cshtml";
@@ -34,7 +34,7 @@
                                 <td>@item.Description2</td>
                                 <td>@item.Title3</td>
                                 <td>@item.Description3</td>
-                                <td><a href="/Feature/UpdateFeature/@item.FeatureId" class="btn btn-outline-primary">Düzenle</a></td>
+                                <td><a href="/Slider/UpdateSlider/@item.SliderId" class="btn btn-outline-primary">Düzenle</a></td>
                             </tr>
                         }
                     </tbody>

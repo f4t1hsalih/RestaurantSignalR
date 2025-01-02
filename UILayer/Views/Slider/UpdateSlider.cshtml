@@ -1,4 +1,4 @@
-﻿@model FeatureUpdateDTO
+﻿@model SliderUpdateDTO
 @{
     ViewData["Title"] = "Slider Düzenle";
     Layout = "~/Views/Admin/Index.cshtml";
@@ -12,7 +12,7 @@
                     <div class="card-title">Slider'ları Düzenle</div>
                 </div>
                 <div class="card-body">
-                    <input type="hidden" asp-for="FeatureId" />
+                    <input type="hidden" asp-for="SliderId" />
                     <div class="form-group">
                         <label for="title1">Başlık1</label>
                         <input type="text" class="form-control" asp-for="Title1" id="title1">
