@@ -1,10 +1,12 @@
 ﻿using EntityLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UILayer.DTO.IdentityDTO;
 
 namespace UILayer.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;

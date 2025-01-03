@@ -22,7 +22,7 @@ builder.Services.ConfigureApplicationCookie(opt =>
 {
     opt.LoginPath = "/Login/Index";
     opt.LogoutPath = "/Login/Logout";
-    opt.Cookie.MaxAge = TimeSpan.FromDays(1);
+    opt.Cookie.MaxAge = TimeSpan.FromDays(1); //Oturumun açýk kalacaðý süre
 });
 
 var app = builder.Build();
