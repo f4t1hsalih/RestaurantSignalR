@@ -43,7 +43,7 @@ namespace APILayer.Controllers
                 Count = 1,
                 TableId = 4,
                 Price = context.Products.Where(x => x.ProductId == insertBasketDto.ProductId).Select(x => x.Price).FirstOrDefault(),
-                TotalPrice = 0
+                TotalPrice = 1 * context.Products.Where(x => x.ProductId == insertBasketDto.ProductId).Select(x => x.Price).FirstOrDefault()
             });
             return Ok();
         }
