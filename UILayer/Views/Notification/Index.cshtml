@@ -2,25 +2,26 @@
 @{
     ViewData["Title"] = "Bildirimler";
     Layout = "~/Views/Admin/Index.cshtml";
+    int count = 0;
 }
 
 <h4 class="page-title">Bildirimler</h4>
 
 <style>
     .alert-custom {
-        padding: 15px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-        color: white;
-        display: none;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: white;
+    display: none;
     }
 
     .alert-success-custom {
-        background-color: #81c784;
+    background-color: #81c784;
     }
 
     .alert-danger-custom {
-        background-color: #dc3545;
+    background-color: #dc3545;
     }
 </style>
 
@@ -65,8 +66,9 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            count++;
                             <tr>
-                                <td>@item.NotificationId</td>
+                                <th>@count</th>
                                 <td>@item.Type</td>
                                 <td>@item.Icon</td>
                                 <td>@item.Description</td>
