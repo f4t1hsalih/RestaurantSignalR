@@ -13,24 +13,24 @@ namespace UILayer.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(MailCreateDTO mailCreateDTO)
+        public IActionResult Index(MailCreateDTO createMailDto)
         {
             MimeMessage mimeMessage = new MimeMessage();
 
             MailboxAddress mailboxAddressFrom = new MailboxAddress("SignalR Rezervasyon", "projekursapi@gmail.com");
             mimeMessage.From.Add(mailboxAddressFrom);
 
-            MailboxAddress mailboxAddressTo = new MailboxAddress("User", mailCreateDTO.ReceiverEMail);
+            MailboxAddress mailboxAddressTo = new MailboxAddress("User", createMailDto.ReceiverEMail);
             mimeMessage.To.Add(mailboxAddressTo);
 
             var bodyBuilder = new BodyBuilder();
-            bodyBuilder.TextBody = mailCreateDTO.Message;
+            bodyBuilder.TextBody = createMailDto.Message;
             mimeMessage.Body = bodyBuilder.ToMessageBody();
 
-            mimeMessage.Subject = mailCreateDTO.Subject;
+            mimeMessage.Subject = createMailDto.Subject;
 
             SmtpClient client = new SmtpClient();
-            client.Connect("smtp.gmail.com", 587, true);
+            client.Connect("smtp.gmail.com", 587, false);
             client.Authenticate("projekursapi@gmail.com", "itcs zbby vbzk uugm");
 
             client.Send(mimeMessage);

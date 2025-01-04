@@ -1,0 +1,34 @@
+﻿@model MailCreateDTO
+@{
+    ViewData["Title"] = "Mail Gönderme";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Mail Gönderme Sayfası</div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="mail">Alıcı Mail Adresi</label>
+                        <input type="email" class="form-control" asp-for="ReceiverEMail" id="mail">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Konu</label>
+                        <input type="text" class="form-control" asp-for="Subject" id="subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mesaj</label>
+                        <textarea rows="5" class="form-control" asp-for="Message" id="message"></textarea>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button type="submit" class="btn btn-success">Gönder</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
