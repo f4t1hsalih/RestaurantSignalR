@@ -31,5 +31,11 @@ namespace UILayer.Controllers
             }
             return View(loginDTO);
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
