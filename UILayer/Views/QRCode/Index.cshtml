@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "QR Code";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<h4 class="page-title text-center">QR Code Oluşturma</h4>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-lg">
+            <div class="card-header bg-warning text-white text-center">
+                <h5>QR Code İşlemleri</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted text-center">
+                    QR kod oluşturmak için aşağıdaki kutuya metni girin ve butona tıklayın.
+                </p>
+
+                <form method="post" asp-action="Index" asp-controller="QRCode" class="mt-4">
+                    <div class="form-group">
+                        <label for="qrInput" class="form-label">QR Kod İçeriği:</label>
+                        <input type="text" id="qrInput" name="value" class="form-control" placeholder="QR Kod için metin giriniz" />
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-warning btn-lg px-4">QR Code Oluştur</button>
+                    </div>
+
+                    @if (ViewBag.QRCodeImage != null)
+                    {
+                        <div class="text-center mt-4">
+                            <h6>Oluşturulan QR Kod:</h6>
+                            <img src="@ViewBag.QRCodeImage" alt="QR Code" class="img-fluid rounded shadow" style="max-width: 400px; height: auto;" />
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

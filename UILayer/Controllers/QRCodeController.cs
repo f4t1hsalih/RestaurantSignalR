@@ -7,6 +7,12 @@ namespace UILayer.Controllers
 {
     public class QRCodeController : Controller
     {
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
         public IActionResult Index(string value)
         {
             //using (MemoryStream memoryStream = new MemoryStream())
