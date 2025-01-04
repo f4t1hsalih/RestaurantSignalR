@@ -17,7 +17,7 @@ namespace UILayer.Controllers
         {
             MimeMessage mimeMessage = new MimeMessage();
 
-            MailboxAddress mailboxAddressFrom = new MailboxAddress("SignalR Rezervasyon", "mail adresi");
+            MailboxAddress mailboxAddressFrom = new MailboxAddress("SignalR Rezervasyon", "projekursapi@gmail.com");
             mimeMessage.From.Add(mailboxAddressFrom);
 
             MailboxAddress mailboxAddressTo = new MailboxAddress("User", mailCreateDTO.ReceiverEMail);
@@ -31,7 +31,7 @@ namespace UILayer.Controllers
 
             SmtpClient client = new SmtpClient();
             client.Connect("smtp.gmail.com", 587, true);
-            client.Authenticate("mail adresi", "key");
+            client.Authenticate("projekursapi@gmail.com", "itcs zbby vbzk uugm");
 
             client.Send(mimeMessage);
             client.Disconnect(true);
