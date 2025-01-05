@@ -67,6 +67,7 @@ namespace APILayer.Hubs
             // Hamburger Kategorisindeki Ürünlerin Ortalama Fiyatı
             var avgHamburgerPrice = _productService.TProductAvgPriceByHamburger();
             await Clients.All.SendAsync("ReceiveAvgHamburgerPrice", avgHamburgerPrice.ToString("0.00" + " ₺"));
+            await Clients.All.SendAsync("ReceiveAvgHamburgerPriceNotRounded", avgHamburgerPrice);
 
             // Toplam Sipariş Sayısı
             var totalOrderCount = _orderService.TTotalOrderCount();
