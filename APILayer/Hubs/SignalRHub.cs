@@ -54,6 +54,7 @@ namespace APILayer.Hubs
             // Ürünlerin Ortalama Fiyatı
             var productPriceAvg = _productService.TProductPriceAvg();
             await Clients.All.SendAsync("ReceiveProductPriceAvg", productPriceAvg.ToString("0.00" + " ₺"));
+            await Clients.All.SendAsync("ReceiveProductPriceAvgNotRounded", productPriceAvg);
 
             // En Pahalı Ürünün Adı
             var maxPriceProductName = _productService.TMaxPriceProductName();
