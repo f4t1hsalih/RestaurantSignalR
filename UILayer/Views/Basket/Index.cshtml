@@ -14,7 +14,7 @@
     @await Component.InvokeAsync("_UILayoutHeader")
 
     @await Component.InvokeAsync("_UILayoutNavbar")
-    </div>
+    </div> @*Bu div'i silme *@
 
     <br />
     <div class="container-fluid py-4">
@@ -50,7 +50,7 @@
                                         <a class="btn btn-sm btn-danger btn-delete"
                                            title="Bu ürünü sepetten sil"
                                            href="/Basket/DeleteProduct/@item.BasketId">
-                                           <i class="fa fa-times"></i>
+                                            <i class="fa fa-times"></i>
                                         </a>
                                     </td>
                                 </tr>

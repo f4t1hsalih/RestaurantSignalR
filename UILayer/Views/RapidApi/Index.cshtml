@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_UILayoutHeader")
+
+    @await Component.InvokeAsync("_UILayoutNavbar")
+    </div> @*Bu div'i silme *@
+
+    <br />
+    <div class="container-fluid py-4">
+
+        <div class="row px-xl-5">
+            <div class="col-lg-12 table-responsive">
+                <table class="table table-bordered table-hover text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Masa Adı</th>
+                            <th>Ürün Adı</th>
+                            <th>Adet</th>
+                            <th>Fiyat</th>
+                            <th>Toplam</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        @if (Model?.Any() == true)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a class="btn btn-sm btn-danger btn-delete"
+                                           title="Bu ürünü sepetten sil"
+                                           href="/Basket/DeleteProduct/">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center text-muted"><i>Sayfaya Veri Yüklenemedi!</i></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    @await Component.InvokeAsync("_UILayoutFooter")
+    @await Component.InvokeAsync("_UILayoutScripts")
+
+</body>
+</html>
+
