@@ -1,5 +1,9 @@
 ﻿namespace UILayer.DTO.RapidApiDTO
 {
+    public class RootTastyApi
+    {
+        public List<ResultTastyApi> results { get; set; }
+    }
     public class ResultTastyApi
     {
         public string name { get; set; }

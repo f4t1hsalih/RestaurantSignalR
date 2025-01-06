@@ -23,7 +23,8 @@ namespace UILayer.Controllers
             {
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<ResultTastyApi>(body);
+                var root = JsonConvert.DeserializeObject<RootTastyApi>(body);
+                var values = root.results;
                 return View(values);
             }
         }
