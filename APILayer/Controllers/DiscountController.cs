@@ -12,6 +12,7 @@ namespace APILayer.Controllers
     {
         private readonly IDiscountService _discountService;
         private readonly IMapper _mapper;
+
         public DiscountController(IDiscountService discountService, IMapper mapper)
         {
             _discountService = discountService;
@@ -24,15 +25,15 @@ namespace APILayer.Controllers
             var values = _mapper.Map<List<ResultDiscountDto>>(_discountService.TGetListAll());
             return Ok(values);
         }
+
         [HttpGet("{id}")]
         public IActionResult DiscountListByID(int id)
         {
             var value = _mapper.Map<GetDiscountDto>(_discountService.TGetById(id));
-            if (value != null)
-            {
-                return Ok(value);
-            }
-            return NotFound("Kayıt Bulunamadı");
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            return Ok(value);
         }
 
         [HttpPost]
@@ -55,12 +56,12 @@ namespace APILayer.Controllers
         public IActionResult DeleteDiscount(int id)
         {
             var value = _discountService.TGetById(id);
-            if (value != null)
-            {
-                _discountService.TDelete(value);
-                return Ok("Kayıt Başarıyla Silindi");
-            }
-            return NotFound("Kayıt Bulunamadı");
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            _discountService.TDelete(value);
+            return Ok("Kayıt Başarıyla Silindi");
         }
+
     }
 }

@@ -12,6 +12,7 @@ namespace APILayer.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+
         public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
@@ -24,15 +25,15 @@ namespace APILayer.Controllers
             var values = _mapper.Map<List<ResultCategoryDto>>(_categoryService.TGetListAll());
             return Ok(values);
         }
+
         [HttpGet("{id}")]
         public IActionResult GetCategoryByID(int id)
         {
-            var category = _mapper.Map<GetCategoryDto>(_categoryService.TGetById(id));
-            if (category != null)
-            {
-                return Ok(category);
-            }
-            return NotFound();
+            var value = _mapper.Map<GetCategoryDto>(_categoryService.TGetById(id));
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            return Ok(value);
         }
 
         [HttpPost]
@@ -57,10 +58,10 @@ namespace APILayer.Controllers
             var value = _categoryService.TGetById(id);
             if (value == null)
             {
-                return NotFound("Kategori bulunamadı.");
+                return NotFound("Kategori Bulunamadı");
             }
             _categoryService.TDelete(value);
-            return Ok("Kayıt başarıyla silindi.");
+            return Ok("Kayıt Başarıyla Silindi");
         }
 
         [HttpGet("CategoryCount")]
@@ -74,10 +75,12 @@ namespace APILayer.Controllers
         {
             return Ok(_categoryService.TActiveCategoryCount());
         }
+
         [HttpGet("PassiveCategoryCount")]
         public IActionResult PassiveCategoryCount()
         {
             return Ok(_categoryService.TPassiveCategoryCount());
         }
+
     }
 }

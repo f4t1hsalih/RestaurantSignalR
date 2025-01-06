@@ -12,6 +12,7 @@ namespace APILayer.Controllers
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
+
         public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
@@ -24,27 +25,15 @@ namespace APILayer.Controllers
             var products = _mapper.Map<List<ResultProductDto>>(_productService.TGetListAll());
             return Ok(products);
         }
+
         [HttpGet("{id}")]
         public IActionResult ProductListByID(int id)
         {
             var product = _mapper.Map<GetProductDto>(_productService.TGetById(id));
-            if (product != null)
-            {
-                return Ok(product);
-            }
-            return NotFound("Kayıt Bulunamadı");
-        }
-        [HttpGet("ProductWithCategories")]
-        public IActionResult ProductWithCategories()
-        {
-            var products = _mapper.Map<List<GetProductWithCategoryDto>>(_productService.TGetProductsWithCategories());
-            return Ok(products);
-        }
-        [HttpGet("ProductWithCategoriesFirstNine")]
-        public IActionResult ProductWithCategoriesFirstNine()
-        {
-            var products = _mapper.Map<List<GetProductWithCategoryDto>>(_productService.TGetProductsWithCategoriesFirstNine());
-            return Ok(products);
+            if (product == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            return Ok(product);
         }
 
         [HttpPost]
@@ -67,12 +56,25 @@ namespace APILayer.Controllers
         public IActionResult DeleteProduct(int id)
         {
             var value = _productService.TGetById(id);
-            if (value != null)
-            {
-                _productService.TDelete(value);
-                return Ok("Kayıt Başarıyla Silindi");
-            }
-            return NotFound("Kayıt Bulunamadı");
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            _productService.TDelete(value);
+            return Ok("Kayıt Başarıyla Silindi");
+        }
+
+        [HttpGet("ProductWithCategories")]
+        public IActionResult ProductWithCategories()
+        {
+            var products = _mapper.Map<List<GetProductWithCategoryDto>>(_productService.TGetProductsWithCategories());
+            return Ok(products);
+        }
+
+        [HttpGet("ProductWithCategoriesFirstNine")]
+        public IActionResult ProductWithCategoriesFirstNine()
+        {
+            var products = _mapper.Map<List<GetProductWithCategoryDto>>(_productService.TGetProductsWithCategoriesFirstNine());
+            return Ok(products);
         }
 
         [HttpGet("ProductCount")]
@@ -86,30 +88,36 @@ namespace APILayer.Controllers
         {
             return Ok(_productService.TProductCountByCategoryNameHamburger());
         }
+
         [HttpGet("ProductCountByCategoryNameDrink")]
         public IActionResult ProductCountByCategoryNameDrink()
         {
             return Ok(_productService.TProductCountByCategoryNameDrink());
         }
+
         [HttpGet("ProductPriceAvg")]
         public IActionResult ProductPriceAvg()
         {
             return Ok(_productService.TProductPriceAvg());
         }
+
         [HttpGet("MinPriceProductName")]
         public IActionResult MinPriceProductName()
         {
             return Ok(_productService.TMinPriceProductName());
         }
+
         [HttpGet("MaxPriceProductName")]
         public IActionResult MaxPriceProductName()
         {
             return Ok(_productService.TMaxPriceProductName());
         }
+
         [HttpGet("ProductAvgPriceByHamburger")]
         public IActionResult ProductAvgPriceByHamburger()
         {
             return Ok(_productService.TProductAvgPriceByHamburger());
         }
+
     }
 }

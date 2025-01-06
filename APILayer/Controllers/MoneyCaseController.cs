@@ -23,5 +23,6 @@ namespace APILayer.Controllers
             var value = _moneyCaseService.TGetMoneyCaseAmount();
             return Ok(value);
         }
+
     }
 }

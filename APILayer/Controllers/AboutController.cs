@@ -5,11 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
 {
+    //Bu controllerda bilinçli olarak Dto kullanmadım. Diğer bir şekilde nasıl yapıldığına dair bir örnek olması açısından.
+
     [Route("api/[controller]")]
     [ApiController]
     public class AboutController : ControllerBase
     {
         private readonly IAboutService _aboutService;
+
         public AboutController(IAboutService aboutService)
         {
             _aboutService = aboutService;
@@ -21,15 +24,16 @@ namespace APILayer.Controllers
             var value = _aboutService.TGetListAll();
             return Ok(value);
         }
+
         [HttpGet("{id}")]
         public IActionResult GetAboutByID(int id)
         {
-            var about = _aboutService.TGetById(id);
-            if (about != null)
-                return Ok(about);
-            return NotFound("Kayıt bulunamadı");
-        }
+            var value = _aboutService.TGetById(id);
+            if (value == null)
+                return NotFound("Kayıt bulunamadı");
 
+            return Ok(value);
+        }
 
         [HttpPost]
         public IActionResult InsertAbout(InsertAboutDto insertAboutDto)
@@ -61,12 +65,12 @@ namespace APILayer.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteAbout(int id)
         {
-            var about = _aboutService.TGetById(id);
-            if (about == null)
-                return NotFound("Kayıt bulunamadı");
+            var value = _aboutService.TGetById(id);
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
 
-            _aboutService.TDelete(about);
-            return NoContent(); // Veri dönmeden başarılı silme işlemi
+            _aboutService.TDelete(value);
+            return Ok("Kayıt Başarıyla Silindi");
         }
 
     }

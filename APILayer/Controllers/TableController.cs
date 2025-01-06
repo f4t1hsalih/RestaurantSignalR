@@ -22,18 +22,19 @@ namespace APILayer.Controllers
         [HttpGet]
         public IActionResult TableList()
         {
-            var value = _tableService.TGetListAll();
-            return Ok(value);
+            var values = _mapper.Map<List<ResultTableDto>>(_tableService.TGetListAll());
+            return Ok(values);
         }
+
         [HttpGet("{id}")]
         public IActionResult GetTableByID(int id)
         {
-            var table = _tableService.TGetById(id);
-            if (table != null)
-                return Ok(table);
-            return NotFound("Kayıt bulunamadı");
-        }
+            var value = _mapper.Map<GetTableDto>(_tableService.TGetById(id));
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
 
+            return Ok(value);
+        }
 
         [HttpPost]
         public IActionResult InsertTable(InsertTableDto insertTableDto)
@@ -48,20 +49,19 @@ namespace APILayer.Controllers
         {
             var value = _mapper.Map<Table>(updateTableDto);
             _tableService.TUpdate(value);
-            return Ok("Kayıt başarıyla güncellendi.");
+            return Ok("Kayıt Başarıyla Güncellendi.");
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteTable(int id)
         {
-            var table = _tableService.TGetById(id);
-            if (table == null)
-                return NotFound("Kayıt bulunamadı");
+            var value = _tableService.TGetById(id);
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
 
-            _tableService.TDelete(table);
-            return NoContent(); // Veri dönmeden başarılı silme işlemi
+            _tableService.TDelete(value);
+            return Ok("Kayıt Başarıyla Silindi");
         }
-
 
         [HttpGet("TableCount")]
         public IActionResult TableCount()

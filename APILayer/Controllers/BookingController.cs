@@ -22,18 +22,18 @@ namespace APILayer.Controllers
         [HttpGet]
         public IActionResult BookingList()
         {
-            var values = _bookingService.TGetListAll();
+            var values = _mapper.Map<List<ResultBookingDto>>(_bookingService.TGetListAll());
             return Ok(values);
         }
+
         [HttpGet("{id}")]
         public IActionResult BookingListBtID(int id)
         {
-            var value = _bookingService.TGetById(id);
-            if (value != null)
-            {
-                return Ok(value);
-            }
-            return NotFound();
+            var value = _mapper.Map<GetBookingDto>(_bookingService.TGetById(id));
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            return Ok(value);
         }
 
         [HttpPost]
@@ -47,16 +47,8 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateBooking(UpdateBookingDto updateBookingDto)
         {
-            Booking booking = new Booking
-            {
-                BookingId = updateBookingDto.BookingId,
-                Name = updateBookingDto.Name,
-                Phone = updateBookingDto.Phone,
-                Email = updateBookingDto.Email,
-                PersonCount = updateBookingDto.PersonCount,
-                Date = updateBookingDto.Date
-            };
-            _bookingService.TUpdate(booking);
+            var value = _mapper.Map<Booking>(updateBookingDto);
+            _bookingService.TUpdate(value);
             return Ok("Kayıt Başarıyla Güncellendi");
         }
 
@@ -65,9 +57,8 @@ namespace APILayer.Controllers
         {
             var value = _bookingService.TGetById(id);
             if (value == null)
-            {
-                return NotFound();
-            }
+                return NotFound("Kayıt Bulunamadı");
+
             _bookingService.TDelete(value);
             return Ok("Kayıt Başarıyla Silindi");
         }
@@ -78,6 +69,7 @@ namespace APILayer.Controllers
             _bookingService.TBookingStatusApproved(id);
             return Ok("Rezervasyon Onaylandı");
         }
+
         [HttpGet("BookingStatusCancelled/{id}")]
         public IActionResult BookingStatusCancelled(int id)
         {

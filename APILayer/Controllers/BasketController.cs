@@ -13,6 +13,7 @@ namespace APILayer.Controllers
     {
         private readonly IBasketService _basketService;
         private readonly IMapper _mapper;
+
         public BasketController(IBasketService basketService, IMapper mapper)
         {
             _basketService = basketService;
@@ -47,12 +48,17 @@ namespace APILayer.Controllers
             });
             return Ok();
         }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteBasket(int id)
         {
             var value = _basketService.TGetById(id);
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
+
             _basketService.TDelete(value);
-            return Ok();
+            return Ok("Kayıt Başarıyla Silindi");
         }
+
     }
 }

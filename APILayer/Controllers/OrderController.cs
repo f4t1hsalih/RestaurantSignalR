@@ -8,6 +8,7 @@ namespace APILayer.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+
         public OrderController(IOrderService orderService)
         {
             _orderService = orderService;
@@ -18,20 +19,24 @@ namespace APILayer.Controllers
         {
             return Ok(_orderService.TTotalOrderCount());
         }
+
         [HttpGet("ActiveOrderCount")]
         public IActionResult ActiveOrderCount()
         {
             return Ok(_orderService.TActiveOrderCount());
         }
+
         [HttpGet("LastOrderPrice")]
         public IActionResult LastOrderPrice()
         {
             return Ok(_orderService.TLastOrderPrice());
         }
+
         [HttpGet("TodayTotalPrice")]
         public IActionResult TodayTotalPrice()
         {
             return Ok(_orderService.TTodayTotalPrice());
         }
+
     }
 }

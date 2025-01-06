@@ -29,38 +29,11 @@ namespace APILayer.Controllers
         [HttpGet("{id}")]
         public IActionResult GetNotificationByID(int id)
         {
-            var notification = _notificationService.TGetById(id);
-            if (notification != null)
-                return Ok(notification);
+            var value = _mapper.Map<GetNotificationDto>(_notificationService.TGetById(id));
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
 
-            return NotFound("Kayıt bulunamadı");
-        }
-
-        [HttpPut("ChangeStatusToTrue/{id}")]
-        public IActionResult ChangeStatusToTrue(int id)
-        {
-            _notificationService.TChangeStatusToTrue(id);
-            return Ok("Durum başarıyla güncellendi");
-        }
-
-        [HttpPut("ChangeStatusToFalse/{id}")]
-        public IActionResult ChangeStatusToFalse(int id)
-        {
-            _notificationService.TChangeStatusToFalse(id);
-            return Ok("Durum başarıyla güncellendi");
-        }
-
-        [HttpGet("StatusFalseCount")]
-        public ActionResult GetNotificationCountByStatusFalse()
-        {
-            return Ok(_notificationService.TGetNotificationCountByStatusFalse());
-        }
-
-        [HttpGet("StatusFalse")]
-        public ActionResult GetNotificationByStatusFalse()
-        {
-            var notifications = _mapper.Map<List<ResultNotificationDto>>(_notificationService.TGetNotificationsByStatusFalse());
-            return Ok(notifications);
+            return Ok(value);
         }
 
         [HttpPost]
@@ -87,10 +60,37 @@ namespace APILayer.Controllers
         {
             var value = _notificationService.TGetById(id);
             if (value == null)
-                return NotFound("Kayıt bulunamadı");
+                return NotFound("Kayıt Bulunamadı");
 
             _notificationService.TDelete(value);
-            return Ok("Kayıt Başarıyla Eklendi");
+            return Ok("Kayıt Başarıyla Silindi");
+        }
+
+        [HttpPut("ChangeStatusToTrue/{id}")]
+        public IActionResult ChangeStatusToTrue(int id)
+        {
+            _notificationService.TChangeStatusToTrue(id);
+            return Ok("Durum True Olarak Güncellendi");
+        }
+
+        [HttpPut("ChangeStatusToFalse/{id}")]
+        public IActionResult ChangeStatusToFalse(int id)
+        {
+            _notificationService.TChangeStatusToFalse(id);
+            return Ok("Durum False Olarak Güncellendi");
+        }
+
+        [HttpGet("StatusFalseCount")]
+        public ActionResult GetNotificationCountByStatusFalse()
+        {
+            return Ok(_notificationService.TGetNotificationCountByStatusFalse());
+        }
+
+        [HttpGet("StatusFalse")]
+        public ActionResult GetNotificationByStatusFalse()
+        {
+            var notifications = _mapper.Map<List<ResultNotificationDto>>(_notificationService.TGetNotificationsByStatusFalse());
+            return Ok(notifications);
         }
 
     }

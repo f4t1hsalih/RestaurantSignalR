@@ -24,15 +24,15 @@ namespace APILayer.Controllers
             var socialMedia = _mapper.Map<List<ResultSocialMediaDto>>(_socialMediaService.TGetListAll());
             return Ok(socialMedia);
         }
+
         [HttpGet("{id}")]
         public IActionResult SocialMediaById(int id)
         {
-            var socialMedia = _mapper.Map<GetSocialMediaDto>(_socialMediaService.TGetById(id));
-            if (socialMedia != null)
-            {
-                return Ok(socialMedia);
-            }
-            return NotFound("Kayıt Bulunamadı");
+            var value = _mapper.Map<GetSocialMediaDto>(_socialMediaService.TGetById(id));
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            return Ok(value);
         }
 
         [HttpPost]
@@ -55,12 +55,11 @@ namespace APILayer.Controllers
         public IActionResult SocialMediaDelete(int id)
         {
             var value = _socialMediaService.TGetById(id);
-            if (value != null)
-            {
-                _socialMediaService.TDelete(value);
-                return Ok("Kayıt Başarıyla Silindi");
-            }
-            return NotFound("Kayıt Bulunamadı");
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            _socialMediaService.TDelete(value);
+            return Ok("Kayıt Başarıyla Silindi");
         }
 
     }

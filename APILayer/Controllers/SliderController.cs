@@ -30,11 +30,10 @@ namespace APILayer.Controllers
         public IActionResult SliderDetail(int id)
         {
             var slider = _mapper.Map<GetSliderDto>(_sliderService.TGetById(id));
-            if (slider != null)
-            {
-                return Ok(slider);
-            }
-            return NotFound("Kayıt Bulunamadı");
+            if (slider == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            return Ok(slider);
         }
 
         [HttpPut]

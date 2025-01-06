@@ -12,6 +12,7 @@ namespace APILayer.Controllers
     {
         private readonly ITestimonialService _testimonialService;
         private readonly IMapper _mapper;
+
         public TestimonialController(ITestimonialService testimonialService, IMapper mapper)
         {
             _testimonialService = testimonialService;
@@ -24,15 +25,15 @@ namespace APILayer.Controllers
             var testimonials = _mapper.Map<List<ResultTestimonialDto>>(_testimonialService.TGetListAll());
             return Ok(testimonials);
         }
+
         [HttpGet("{id}")]
         public IActionResult TestimonialListByID(int id)
         {
             var testimonial = _mapper.Map<GetTestimonialDto>(_testimonialService.TGetById(id));
-            if (testimonial != null)
-            {
-                return Ok(testimonial);
-            }
-            return NotFound("Kayıt Bulunamadı");
+            if (testimonial == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            return Ok(testimonial);
         }
 
         [HttpPost]
@@ -55,12 +56,11 @@ namespace APILayer.Controllers
         public IActionResult TestimonialDelete(int id)
         {
             var value = _testimonialService.TGetById(id);
-            if (value != null)
-            {
-                _testimonialService.TDelete(value);
-                return Ok("Kayıt Başarıyla Silindi");
-            }
-            return NotFound("Kayıt Bulunamadı");
+            if (value == null)
+                return NotFound("Kayıt Bulunamadı");
+
+            _testimonialService.TDelete(value);
+            return Ok("Kayıt Başarıyla Silindi");
         }
 
     }
