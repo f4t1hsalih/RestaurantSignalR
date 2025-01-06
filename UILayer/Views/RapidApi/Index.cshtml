@@ -7,78 +7,215 @@
 <html>
 <head>
     <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        thead {
+            background: #000;
+            color: #fff;
+        }
+
+        table td, table th {
+            vertical-align: middle;
+            padding: 15px;
+            font-size: 16px;
+        }
+
         table .photo {
-            width: 50px; /* Fotoğraf çerçeve boyutu */
+            width: 50px;
             height: 50px;
             overflow: hidden;
-            border-radius: 50%; /* Yuvarlak görünüm */
-            border: 2px solid #ddd; /* Çerçeve rengi */
-            margin: 5px; /* Çerçeve etrafındaki boşluk */
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            margin-right: 10px;
+            margin-left: 40px;
         }
 
             table .photo img {
-                width: 100%; /* Çerçeveye tam oturması için */
+                width: 100%;
                 height: 100%;
-                object-fit: cover; /* Resmi çerçeveye sığdırır */
+                object-fit: cover;
+            }
+
+        td.d-flex {
+            display: flex;
+            align-items: center; 
+            justify-content: flex-start;
+        }
+
+
+
+        .btn-detail, .btn-watch, .btn-close {
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .btn-detail {
+            background-color: #17a2b8 !important;
+            color: #fff !important;
+        }
+
+            .btn-detail:hover {
+                background-color: #138496;
+            }
+
+        .btn-watch {
+            background-color: #28a745 !important;
+            color: #fff !important;
+        }
+
+            .btn-watch:hover {
+                background-color: #218838;
+            }
+
+        .btn-close {
+            background-color: #dc3545 !important;
+            color: #fff !important;
+            filter: invert(1);
+        }
+
+            .btn-close:hover {
+                background-color: #c82333;
+            }
+
+        .modal-content {
+            text-align: center;
+        }
+
+            .modal-content h5 {
+                width: 100%;
+                text-align: center;
+                margin: 10px 0;
+                font-size: 22px;
+                font-weight: bold;
+            }
+
+            .modal-content img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 15px;
+            }
+
+            .modal-content p {
+                font-size: 16px;
+                color: #555;
+                margin: 15px 0;
             }
 
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="sub_page">
 
     @await Component.InvokeAsync("_UILayoutHeader")
-
     @await Component.InvokeAsync("_UILayoutNavbar")
-    </div> @*Bu div'i silme *@
+    </div>
 
-    <br />
     <div class="container-fluid py-4">
-
-        <div class="row px-xl-5">
+        <div class="row">
             <div class="col-lg-12 table-responsive">
-                <table class="table table-bordered table-hover text-center">
-                    <thead class="table-dark">
+                <table class="table table-hover table-striped table-responsive-md text-center align-middle">
+                    <thead>
                         <tr>
                             <th>Ürün</th>
-                            <th>Adet</th>
-                            <th>Fiyat</th>
-                            <th>Toplam</th>
-                            <th>Sil</th>
-                            <th>Sil</th>
+                            <th>Açıklama</th>
+                            <th>Tahmini Süre</th>
+                            <th>Detay</th>
+                            <th>Tarifi İzle</th>
                         </tr>
                     </thead>
-                    <tbody class="align-middle">
+                    <tbody>
                         @if (Model?.Any() == true)
                         {
                             foreach (var item in Model)
                             {
+                                var uniqueId = item.name.Replace(" ", "-");
                                 <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="photo">
-                                                <img src="@item.thumbnail_url" alt="@item.name">
-                                            </div>
-                                            <span style="margin-left: 10px;">@item.name</span>
+                                    <td class="d-flex align-items-center">
+                                        <div class="photo">
+                                            <img src="@item.thumbnail_url" alt="@item.name">
                                         </div>
+                                        <span>@item.name</span>
                                     </td>
-                                    <td>@item.total_time_minutes</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
                                     <td>
-                                        <a class="btn btn-sm btn-danger btn-delete"
-                                           title="Bu ürünü sepetten sil"
-                                           href="/Basket/DeleteProduct/">
-                                            <i class="fa fa-times"></i>
+                                        @if (!string.IsNullOrEmpty(item.description))
+                                        {
+                                            @((item.description.Length > 50) ? item.description.Substring(0, 50) + "..." : item.description)
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Açıklama Yok</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (@item.total_time_minutes == 0)
+                                        {
+                                            <span>5 dakika</span>
+                                        }
+                                        else
+                                        {
+                                        <span>@item.total_time_minutes dakika</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-detail btn-sm" data-bs-toggle="modal" data-bs-target="#recipeModal-@uniqueId">
+                                            <i class="fa fa-eye"></i> Detay
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <a href="@item.original_video_url" class="btn btn-watch btn-sm" target="_blank">
+                                            <i class="fa fa-video"></i> Videoyu İzle
                                         </a>
                                     </td>
                                 </tr>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="recipeModal-@uniqueId" tabindex="-1" aria-labelledby="recipeModalLabel-@uniqueId" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title mx-auto" id="recipeModalLabel-@uniqueId">@item.name</h5>
+                                                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="@item.thumbnail_url" alt="@item.name">
+                                                <p>@item.description</p>
+                                                <a href="@item.original_video_url" class="btn btn-watch" target="_blank">
+                                                    <i class="fa fa-play"></i> Videoyu İzle
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             }
                         }
                         else
                         {
                             <tr>
-                                <td colspan="7" class="text-center text-muted"><i>Sayfaya Veri Yüklenemedi!</i></td>
+                                <td colspan="5" class="text-center text-muted"><i>Sayfaya Veri Yüklenemedi!</i></td>
                             </tr>
                         }
                     </tbody>
@@ -87,10 +224,7 @@
         </div>
     </div>
 
-
     @await Component.InvokeAsync("_UILayoutFooter")
-    @await Component.InvokeAsync("_UILayoutScripts")
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
