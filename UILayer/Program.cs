@@ -18,6 +18,7 @@ builder.Services.AddControllersWithViews(opt =>
     opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
 });
 
+// Giriþ yapma iþlemi için gerekli ayarlar. Eðer giriþ yapmamýþ bir kullanýcý bir sayfaya eriþmeye çalýþýrsa yönlendirileceði sayfa.
 builder.Services.ConfigureApplicationCookie(opt =>
 {
     opt.LoginPath = "/Login/Index";
@@ -26,6 +27,15 @@ builder.Services.ConfigureApplicationCookie(opt =>
 });
 
 var app = builder.Build();
+
+// Error sayfalarý için yönlendirme iþlemi. Eðer bir hata oluþursa kullanýcýya hata sayfasý gösterilecek.
+app.UseStatusCodePages(async x =>
+{
+    if (x.HttpContext.Response.StatusCode == 404)
+    {
+        x.HttpContext.Response.Redirect("/Error/NotFound404Page/");
+    }
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
