@@ -30,7 +30,7 @@ namespace APILayer.Controllers
         public IActionResult ContactListByID(int id)
         {
             var value = _mapper.Map<GetContactDto>(_contactService.TGetById(id));
-            if (value != null)
+            if (value == null)
                 return NotFound("Kayıt Bulunamadı");
 
             return Ok(value);
