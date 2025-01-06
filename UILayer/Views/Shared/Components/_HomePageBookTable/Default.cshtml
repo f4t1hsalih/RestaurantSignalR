@@ -8,6 +8,7 @@
             </h2>
         </div>
         <div class="row">
+            <!-- Form Alanı -->
             <div class="col-md-6">
                 <div class="form_container">
                     @using (Html.BeginForm("Index", "BookATable", FormMethod.Post))
@@ -34,7 +35,7 @@
                             </select>
                         </div>
                         <div>
-                            <input type="date" class="form-control" asp-for="Date">
+                            <input type="date" class="form-control" asp-for="Date" />
                         </div>
                         <div class="btn_box">
                             <button type="submit" class="btn btn-primary">Yerinizi Ayırtın</button>
@@ -42,11 +43,30 @@
                     }
                 </div>
             </div>
+
+            <!-- Harita Alanı -->
             <div class="col-md-6">
-                <div class="map_container ">
-                    <div id="googleMap"></div>
-                </div>
+                <div id="map" style="height: 350px; width: 100%; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"></div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Leaflet.js Kütüphaneleri -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Harita Oluşturma
+    var map = L.map('map').setView([41.016430, 28.949360], 18); // Fatih, İstanbul koordinatları
+
+    // Harita Katmanı Ekle
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // İşaretçi Ekle
+    L.marker([41.020437, 28.933882]).addTo(map)
+        .bindPopup('Rezervasyon Lokasyonu: Fatih, İstanbul')
+        .openPopup();
+</script>
