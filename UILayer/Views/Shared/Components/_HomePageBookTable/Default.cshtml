@@ -14,32 +14,40 @@
                     @using (Html.BeginForm("Index", "BookATable", FormMethod.Post))
                     {
                         <div>
-                            <input type="text" class="form-control" placeholder="İsmin" asp-for="Name" />
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Adınızı Girin" })
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.TextBoxFor(m => m.Phone, new
+                            {
+                                @class = "form-control",
+                                placeholder = "Telefon Numaranız (Örn: 5XXXXXXXXX)",
+                                type = "tel",
+                                pattern = @"5\d{9}", // 5 ile başlar ve 9 rakam daha gelir (toplamda 10 rakam)
+                                maxlength = "10", // maksimum 10 karakter
+                                title = "Lütfen geçerli bir telefon numarası girin (5XXXXXXXXX)."
+                            })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                        <div>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "E-Mail Adresiniz", type = "email" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                         <div>
-                            <input type="text" class="form-control" placeholder="Telefon Numarası" asp-for="Phone" />
+                            @Html.DropDownListFor(m => m.PersonCount,
+                                     new SelectList(Enumerable.Range(1, 10).Select(i => new { Value = i, Text = i }), "Value", "Text"),
+                                     "Kaç Kişi?",
+                                     new { @class = "form-control nice-select wide" })
+                            @Html.ValidationMessageFor(m => m.PersonCount, "", new { @class = "text-danger" })
                         </div>
                         <div>
-                            <input type="email" class="form-control" placeholder="E-Mail" asp-for="Email" />
-                        </div>
-                        <div>
-                            <select class="form-control nice-select wide" asp-for="PersonCount">
-                                <option value="" disabled selected>
-                                    Kaç Kişi?
-                                </option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <div>
-                            <input type="date" class="form-control" asp-for="Date" />
+                            @Html.TextBoxFor(m => m.Date, new { @class = "form-control", type = "date" })
+                            @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
                         </div>
                         <div class="btn_box">
                             <button type="submit" class="btn btn-primary">Yerinizi Ayırtın</button>
                         </div>
+                        @* <div>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        </div> *@
                     }
                 </div>
             </div>
@@ -56,6 +64,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<!-- Harita Stili -->
 <script>
     // Harita Oluşturma
     var map = L.map('map').setView([41.016430, 28.949360], 18); // Fatih, İstanbul koordinatları
@@ -69,4 +78,17 @@
     L.marker([41.020437, 28.933882]).addTo(map)
         .bindPopup('Rezervasyon Lokasyonu: Fatih, İstanbul')
         .openPopup();
+</script>
+
+<!-- Telefon Numarası Kontrolü -->
+<script>
+        document.getElementById('Phone').addEventListener('input', function () {
+        var phoneValue = this.value;
+        var regex = /^5\d{9}$/; // 5 ile başlar ve 9 haneli
+        if (!regex.test(phoneValue)) {
+            this.setCustomValidity('Telefon numarası 5 ile başlamalı ve 10 haneli olmalıdır.');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
 </script>

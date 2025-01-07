@@ -7,26 +7,37 @@ namespace BusinessLayer.ValidationRules.BookingValidations
     {
         public BookingAddValidation()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("İsim Alanı Boş Geçilemez");
-            RuleFor(x => x.Name).MinimumLength(3).WithMessage("İsim Alanı En Az 3 Karakter Olmalıdır");
-            RuleFor(x => x.Name).MaximumLength(50).WithMessage("İsim Alanı En Fazla 50 Karakter Olmalıdır");
+            // İsim Validasyonu
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("İsim alanı boş geçilemez.")
+                .MinimumLength(3).WithMessage("İsim alanı en az 3 karakter olmalıdır.")
+                .MaximumLength(50).WithMessage("İsim alanı en fazla 50 karakter olmalıdır.");
 
-            RuleFor(x => x.Phone).NotEmpty().WithMessage("Telefon Alanı Boş Geçilemez");
-            RuleFor(x => x.Phone).MinimumLength(10).WithMessage("Telefon Alanı En Az 10 Karakter Olmalıdır");
-            RuleFor(x => x.Phone).MaximumLength(20).WithMessage("Telefon Alanı En Fazla 20 Karakter Olmalıdır");
+            // Telefon Numarası Validasyonu
+            RuleFor(x => x.Phone)
+                .NotEmpty().WithMessage("Telefon alanı boş geçilemez.")
+                .Matches(@"^(\+90|0)?5[0-9]{9}$").WithMessage("Telefon numarası yalnızca sayılardan oluşmalı ve Türkiye formatına uygun olmalıdır (örneğin: +905XXXXXXXXX veya 05XXXXXXXXX).")
+                .MaximumLength(13).WithMessage("Telefon alanı en fazla 13 karakter olmalıdır.");
 
-            RuleFor(x => x.Email).NotEmpty().WithMessage("Email Alanı Boş Geçilemez");
-            RuleFor(x => x.Email).EmailAddress().WithMessage("Geçerli Bir Email Adresi Giriniz");
-            RuleFor(x => x.Email).MaximumLength(100).WithMessage("Email Alanı En Fazla 100 Karakter Olmalıdır");
+            // Email Validasyonu
+            RuleFor(x => x.Email)
+                .NotEmpty().WithMessage("Email alanı boş geçilemez.")
+                .EmailAddress().WithMessage("Geçerli bir email adresi giriniz.")
+                .MaximumLength(100).WithMessage("Email alanı en fazla 100 karakter olmalıdır.");
 
-            RuleFor(x => x.PersonCount).NotEmpty().WithMessage("Kişi Sayısı Alanı Boş Geçilemez");
-            RuleFor(x => x.PersonCount).InclusiveBetween(1, 10).WithMessage("Kişi Sayısı Alanı 1 ile 10 Arasında Olmalıdır");
+            // Kişi Sayısı Validasyonu
+            RuleFor(x => x.PersonCount)
+                .NotEmpty().WithMessage("Kişi sayısı alanı boş geçilemez.")
+                .InclusiveBetween(1, 10).WithMessage("Kişi sayısı 1 ile 10 arasında olmalıdır.");
 
-            RuleFor(x => x.Description).MaximumLength(250).WithMessage("Açıklama Alanı En Fazla 250 Karakter Olmalıdır");
+            // Açıklama Validasyonu
+            RuleFor(x => x.Description)
+                .MaximumLength(250).WithMessage("Açıklama alanı en fazla 250 karakter olmalıdır.");
 
-            RuleFor(x => x.Date).NotEmpty().WithMessage("Tarih Alanı Boş Geçilemez");
-            RuleFor(x => x.Date).Must(x => x.Date > System.DateTime.Now).WithMessage("Tarih Alanı Bugünden Küçük Olamaz");
-
+            // Tarih Validasyonu
+            RuleFor(x => x.Date)
+                .NotEmpty().WithMessage("Tarih alanı boş geçilemez.")
+                .Must(date => date.Date.Date >= System.DateTime.Now.Date).WithMessage("Tarih alanı bugünden küçük olamaz.");
         }
     }
 }

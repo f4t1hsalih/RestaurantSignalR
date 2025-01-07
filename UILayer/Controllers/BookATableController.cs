@@ -31,14 +31,10 @@ namespace UILayer.Controllers
             var response = await client.PostAsync("https://localhost:7068/api/Booking", data);
 
             if (response.IsSuccessStatusCode)
-            {
                 return RedirectToAction("Index", "Home");
-            }
 
-            // Hata mesajını yakalayın
             var errorContent = await response.Content.ReadAsStringAsync();
-            System.Diagnostics.Debug.WriteLine($"Hata: {response.StatusCode}, Mesaj: {errorContent}");
-
+            ModelState.AddModelError(string.Empty, errorContent);
             return View();
         }
     }
