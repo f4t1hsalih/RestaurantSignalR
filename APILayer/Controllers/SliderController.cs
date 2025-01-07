@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DTOLayer.SliderDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -12,11 +13,13 @@ namespace APILayer.Controllers
     {
         private readonly ISliderService _sliderService;
         private readonly IMapper _mapper;
+        private readonly IValidator<UpdateSliderDto> _updateValidator;
 
-        public SliderController(ISliderService sliderService, IMapper mapper)
+        public SliderController(ISliderService sliderService, IMapper mapper, IValidator<UpdateSliderDto> updateValidator)
         {
             _sliderService = sliderService;
             _mapper = mapper;
+            _updateValidator = updateValidator;
         }
 
         [HttpGet]
@@ -39,6 +42,10 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateSlider(UpdateSliderDto updateSliderDto)
         {
+            var validationResult = _updateValidator.Validate(updateSliderDto);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
+
             var slider = _mapper.Map<Slider>(updateSliderDto);
             _sliderService.TUpdate(slider);
             return Ok("Kayıt Başarıyla Güncellendi");

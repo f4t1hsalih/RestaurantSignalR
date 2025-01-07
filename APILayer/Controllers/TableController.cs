@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DTOLayer.TableDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -12,11 +13,15 @@ namespace APILayer.Controllers
     {
         private readonly ITableService _tableService;
         private readonly IMapper _mapper;
+        private readonly IValidator<InsertTableDto> _insertValidator;
+        private readonly IValidator<UpdateTableDto> _updateValidator;
 
-        public TableController(ITableService tableService, IMapper mapper)
+        public TableController(ITableService tableService, IMapper mapper, IValidator<InsertTableDto> insertValidator, IValidator<UpdateTableDto> updateValidator)
         {
             _tableService = tableService;
             _mapper = mapper;
+            _insertValidator = insertValidator;
+            _updateValidator = updateValidator;
         }
 
         [HttpGet]
@@ -39,6 +44,10 @@ namespace APILayer.Controllers
         [HttpPost]
         public IActionResult InsertTable(InsertTableDto insertTableDto)
         {
+            var result = _insertValidator.Validate(insertTableDto);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
             var value = _mapper.Map<Table>(insertTableDto);
             _tableService.TInsert(value);
             return Ok("Kayıt Başarıyla Eklendi");
@@ -47,6 +56,10 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateTable(UpdateTableDto updateTableDto)
         {
+            var result = _updateValidator.Validate(updateTableDto);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
             var value = _mapper.Map<Table>(updateTableDto);
             _tableService.TUpdate(value);
             return Ok("Kayıt Başarıyla Güncellendi.");

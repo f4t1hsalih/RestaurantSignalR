@@ -13,13 +13,15 @@ namespace APILayer.Controllers
     {
         private readonly IBookingService _bookingService;
         private readonly IMapper _mapper;
-        private readonly IValidator<InsertBookingDto> _insertBookingValidator;
+        private readonly IValidator<InsertBookingDto> _insertValidator;
+        private readonly IValidator<UpdateBookingDto> _updateValidator;
 
-        public BookingController(IBookingService bookingService, IMapper mapper, IValidator<InsertBookingDto> insertBookingValidator)
+        public BookingController(IBookingService bookingService, IMapper mapper, IValidator<InsertBookingDto> insertBookingValidator, IValidator<UpdateBookingDto> updateBookingValidator)
         {
             _bookingService = bookingService;
             _mapper = mapper;
-            _insertBookingValidator = insertBookingValidator;
+            _insertValidator = insertBookingValidator;
+            _updateValidator = updateBookingValidator;
         }
 
         [HttpGet]
@@ -42,7 +44,7 @@ namespace APILayer.Controllers
         [HttpPost]
         public IActionResult InsertBooking(InsertBookingDto insertBookingDto)
         {
-            var validationResult = _insertBookingValidator.Validate(insertBookingDto);
+            var validationResult = _insertValidator.Validate(insertBookingDto);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
 
@@ -54,6 +56,10 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateBooking(UpdateBookingDto updateBookingDto)
         {
+            var validationResult = _updateValidator.Validate(updateBookingDto);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
+
             var value = _mapper.Map<Booking>(updateBookingDto);
             _bookingService.TUpdate(value);
             return Ok("Kayıt Başarıyla Güncellendi");

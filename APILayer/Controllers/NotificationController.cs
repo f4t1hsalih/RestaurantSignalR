@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
+using DTOLayer.CategoryDto;
 using DTOLayer.NotificationDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -12,11 +14,15 @@ namespace APILayer.Controllers
     {
         private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
+        private readonly IValidator<InsertNotificationDto> _insertValidator;
+        private readonly IValidator<UpdateNotificationDto> _updateValidator;
 
-        public NotificationController(INotificationService notificationService, IMapper mapper)
+        public NotificationController(INotificationService notificationService, IMapper mapper, IValidator<InsertNotificationDto> insertValidator, IValidator<UpdateNotificationDto> updateValidator)
         {
             _notificationService = notificationService;
             _mapper = mapper;
+            _insertValidator = insertValidator;
+            _updateValidator = updateValidator;
         }
 
         [HttpGet]
@@ -41,6 +47,10 @@ namespace APILayer.Controllers
         {
             insertNotificationDto.Date = Convert.ToDateTime(DateTime.Now);
 
+            var result = _insertValidator.Validate(insertNotificationDto);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
             var value = _mapper.Map<Notification>(insertNotificationDto);
             _notificationService.TInsert(value);
             return Ok("Kayıt Başarıyla Eklendi");
@@ -49,9 +59,12 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateNotification(UpdateNotificationDto updateNotificationDto)
         {
+            var result = _updateValidator.Validate(updateNotificationDto);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
             var value = _mapper.Map<Notification>(updateNotificationDto);
             _notificationService.TUpdate(value);
-
             return Ok("Kayıt Başarıyla Güncellendi");
         }
 

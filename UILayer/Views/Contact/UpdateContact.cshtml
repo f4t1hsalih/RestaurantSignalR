@@ -13,33 +13,48 @@
                 </div>
                 <div class="card-body">
                     <input type="hidden" asp-for="ContactId" />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
                     <div class="form-group">
                         <label for="location">Lokasyon</label>
                         <input type="text" class="form-control" asp-for="Location" id="location">
+                        <span asp-validation-for="Location" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="email">E-Mail</label>
                         <input type="email" class="form-control" asp-for="Email" id="email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="phone">Telefon</label>
                         <input type="tel" class="form-control" asp-for="PhoneNumber" id="phone">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="footerTitle">Footer Başlık</label>
                         <input type="text" class="form-control" asp-for="FooterTitle" id="footerTitle">
+                        <span asp-validation-for="FooterTitle" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="footerDescription">Footer Açıklama</label>
                         <textarea class="form-control" rows="4" asp-for="FooterDescription" id="footerDescription"></textarea>
+                        <span asp-validation-for="FooterDescription" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="openingDays">Açık Olunan Günler</label>
                         <input type="text" class="form-control" asp-for="OpeningDays" id="OpeningDays">
+                        <span asp-validation-for="OpeningDays" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="OpeningHours">Açık Olunan Saatler</label>
                         <input type="text" class="form-control" asp-for="OpeningHours" id="OpeningHours">
+                        <span asp-validation-for="OpeningHours" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="card-action">

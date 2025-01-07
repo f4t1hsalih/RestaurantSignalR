@@ -20,26 +20,39 @@
             </div>
             <form class="form-detail" method="post">
                 <h2>Kayıt Formu</h2>
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
                 <div class="form-row">
                     <input type="text" id="full-name" class="input-text" placeholder="İsim" asp-for="Name" required>
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-row">
                     <input type="text" id="full-surname" class="input-text" placeholder="Soyisim" asp-for="Surname" required>
+                    <span asp-validation-for="Surname" class="text-danger"></span>
                 </div>
                 <div class="form-row">
                     <input type="text" id="full-username" class="input-text" placeholder="Kullanıcı Adı" asp-for="Username" required>
+                    <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
                 <div class="form-row">
                     <input type="text" id="your-email" class="input-text" placeholder="Email Adresi" asp-for="Email" required pattern="[^@@]+@@[^@@]+.[a-zA-Z]{2,6}">
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-row">
                     <input type="password" id="password" class="input-text" placeholder="Şifre" asp-for="Password" required>
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
+
                 <div class="form-row-last">
                     <input type="submit" name="register" class="register" value="Kayıt Ol">
                 </div>
             </form>
         </div>
     </div>
+
+    @* Client-side validation script *@
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>

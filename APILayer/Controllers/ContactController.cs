@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DTOLayer.ContactDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -12,11 +13,13 @@ namespace APILayer.Controllers
     {
         private readonly IContactService _contactService;
         private readonly IMapper _mapper;
+        private readonly IValidator<UpdateContactDto> _updateValidator;
 
-        public ContactController(IContactService contactService, IMapper mapper)
+        public ContactController(IContactService contactService, IMapper mapper, IValidator<UpdateContactDto> updateValidator)
         {
             _contactService = contactService;
             _mapper = mapper;
+            _updateValidator = updateValidator;
         }
 
         [HttpGet]
@@ -39,6 +42,10 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateContact(UpdateContactDto updateContactDto)
         {
+            var result = _updateValidator.Validate(updateContactDto);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
             var value = _mapper.Map<Contact>(updateContactDto);
             _contactService.TUpdate(value);
             return Ok("Kayıt Başarıyla Güncellendi");

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
+using DTOLayer.CategoryDto;
 using DTOLayer.DiscountDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -12,11 +14,15 @@ namespace APILayer.Controllers
     {
         private readonly IDiscountService _discountService;
         private readonly IMapper _mapper;
+        private readonly IValidator<InsertDiscountDto> _insertValidator;
+        private readonly IValidator<UpdateDiscountDto> _updateValidator;
 
-        public DiscountController(IDiscountService discountService, IMapper mapper)
+        public DiscountController(IDiscountService discountService, IMapper mapper, IValidator<InsertDiscountDto> insertValidator, IValidator<UpdateDiscountDto> updateValidator)
         {
             _discountService = discountService;
             _mapper = mapper;
+            _insertValidator = insertValidator;
+            _updateValidator = updateValidator;
         }
 
         [HttpGet]
@@ -39,6 +45,10 @@ namespace APILayer.Controllers
         [HttpPost]
         public IActionResult InsertDiscount(InsertDiscountDto insertDiscountDto)
         {
+            var validator = _insertValidator.Validate(insertDiscountDto);
+            if (!validator.IsValid)
+                return BadRequest(validator.Errors);
+
             var value = _mapper.Map<Discount>(insertDiscountDto);
             _discountService.TInsert(value);
             return Ok("Kayıt Başarıyla Eklendi");
@@ -47,6 +57,10 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDto updateDiscountDto)
         {
+            var validator = _updateValidator.Validate(updateDiscountDto);
+            if (!validator.IsValid)
+                return BadRequest(validator.Errors);
+
             var value = _mapper.Map<Discount>(updateDiscountDto);
             _discountService.TUpdate(value);
             return Ok("Kayıt Başarıyla Güncellendi");

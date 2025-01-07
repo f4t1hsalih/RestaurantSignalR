@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
+using DTOLayer.CategoryDto;
 using DTOLayer.ProductDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -12,11 +14,15 @@ namespace APILayer.Controllers
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
+        private readonly IValidator<InsertProductDto> _insertValidator;
+        private readonly IValidator<UpdateProductDto> _updateValidator;
 
-        public ProductController(IProductService productService, IMapper mapper)
+        public ProductController(IProductService productService, IMapper mapper, IValidator<UpdateProductDto> updateValidator, IValidator<InsertProductDto> insertValidator)
         {
             _productService = productService;
             _mapper = mapper;
+            _updateValidator = updateValidator;
+            _insertValidator = insertValidator;
         }
 
         [HttpGet]
@@ -39,6 +45,10 @@ namespace APILayer.Controllers
         [HttpPost]
         public IActionResult InsertProduct(InsertProductDto insertProductDto)
         {
+            var result = _insertValidator.Validate(insertProductDto);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
             var value = _mapper.Map<Product>(insertProductDto);
             _productService.TInsert(value);
             return Ok("Kayıt Başarıyla Eklendi");
@@ -47,6 +57,10 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
+            var result = _updateValidator.Validate(updateProductDto);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
             var value = _mapper.Map<Product>(updateProductDto);
             _productService.TUpdate(value);
             return Ok("Kayıt Başarıyla Güncellendi");

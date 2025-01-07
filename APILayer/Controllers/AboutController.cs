@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using DTOLayer.AboutDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -12,10 +13,14 @@ namespace APILayer.Controllers
     public class AboutController : ControllerBase
     {
         private readonly IAboutService _aboutService;
+        private readonly IValidator<InsertAboutDto> _insertValidator;
+        private readonly IValidator<UpdateAboutDto> _updateValidator;
 
-        public AboutController(IAboutService aboutService)
+        public AboutController(IAboutService aboutService, IValidator<InsertAboutDto> insertAboutValidator, IValidator<UpdateAboutDto> updateAboutValidator)
         {
             _aboutService = aboutService;
+            _insertValidator = insertAboutValidator;
+            _updateValidator = updateAboutValidator;
         }
 
         [HttpGet]
@@ -38,6 +43,10 @@ namespace APILayer.Controllers
         [HttpPost]
         public IActionResult InsertAbout(InsertAboutDto insertAboutDto)
         {
+            var validationResult = _insertValidator.Validate(insertAboutDto);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
+
             About about = new About
             {
                 ImageUrl = insertAboutDto.ImageUrl,
@@ -51,6 +60,10 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
         {
+            var validationResult = _updateValidator.Validate(updateAboutDto);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
+
             About about = new About
             {
                 AboutId = updateAboutDto.AboutId,

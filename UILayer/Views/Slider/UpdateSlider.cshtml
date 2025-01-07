@@ -13,29 +13,38 @@
                 </div>
                 <div class="card-body">
                     <input type="hidden" asp-for="SliderId" />
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
                     <div class="form-group">
                         <label for="title1">Başlık1</label>
-                        <input type="text" class="form-control" asp-for="Title1" id="title1">
+                        <input type="text" class="form-control" asp-for="Title1" id="title1" required>
+                        <span asp-validation-for="Title1" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="description1">Açıklama1</label>
-                        <textarea class="form-control" rows="4" asp-for="Description1" id="description1"></textarea>
+                        <textarea class="form-control" rows="4" asp-for="Description1" id="description1" required></textarea>
+                        <span asp-validation-for="Description1" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="title2">Başlık2</label>
-                        <input type="text" class="form-control" asp-for="Title2" id="title2">
+                        <input type="text" class="form-control" asp-for="Title2" id="title2" required>
+                        <span asp-validation-for="Title2" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="description2">Açıklama2</label>
-                        <textarea class="form-control" rows="4" asp-for="Description2" id="description2"></textarea>
+                        <textarea class="form-control" rows="4" asp-for="Description2" id="description2" required></textarea>
+                        <span asp-validation-for="Description2" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="title3">Başlık3</label>
-                        <input type="text" class="form-control" asp-for="Title3" id="title3">
+                        <input type="text" class="form-control" asp-for="Title3" id="title3" required>
+                        <span asp-validation-for="Title3" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="description3">Açıklama3</label>
-                        <textarea class="form-control" rows="4" asp-for="Description3" id="description3"></textarea>
+                        <textarea class="form-control" rows="4" asp-for="Description3" id="description3" required></textarea>
+                        <span asp-validation-for="Description3" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="card-action">

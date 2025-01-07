@@ -12,25 +12,36 @@
                     <div class="card-title">Rezervasyon Ekle</div>
                 </div>
                 <div class="card-body">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
                     <div class="form-group">
                         <label for="name">İsim</label>
                         <input type="text" class="form-control" asp-for="Name" id="name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="tel">Telefon</label>
                         <input type="tel" class="form-control" asp-for="Phone" id="tel">
+                        <span asp-validation-for="Phone" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="email">E-Mail</label>
                         <input type="email" class="form-control" asp-for="Email" id="email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="personCount">Kişi Sayısı</label>
                         <input type="number" class="form-control" asp-for="PersonCount" id="personCount">
+                        <span asp-validation-for="PersonCount" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="date">Tarih</label>
                         <input type="date" class="form-control" asp-for="Date" id="date">
+                        <span asp-validation-for="Date" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="card-action">

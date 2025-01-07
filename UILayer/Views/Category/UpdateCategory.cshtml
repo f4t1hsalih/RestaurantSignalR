@@ -9,17 +9,23 @@
         <form method="post">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Categori Güncelle</div>
+                    <div class="card-title">Kategori Güncelle</div>
                 </div>
                 <div class="card-body">
                     <input type="hidden" asp-for="CategoryId" />
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
                     <div class="form-group">
                         <label for="name">Kategori Adı</label>
                         <input type="text" class="form-control" asp-for="Name" id="name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label for="status">Kategori Durumu</label>
                         <input type="text" class="form-control" asp-for="Status" id="status">
+                        <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="card-action">

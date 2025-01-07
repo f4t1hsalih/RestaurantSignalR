@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DTOLayer.CategoryDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -12,11 +13,15 @@ namespace APILayer.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+        private readonly IValidator<InsertCategoryDto> _insertValidator;
+        private readonly IValidator<UpdateCategoryDto> _updateValidator;
 
-        public CategoryController(ICategoryService categoryService, IMapper mapper)
+        public CategoryController(ICategoryService categoryService, IMapper mapper, IValidator<InsertCategoryDto> insertValidator, IValidator<UpdateCategoryDto> updateValidator)
         {
             _categoryService = categoryService;
             _mapper = mapper;
+            _insertValidator = insertValidator;
+            _updateValidator = updateValidator;
         }
 
         [HttpGet]
@@ -39,6 +44,10 @@ namespace APILayer.Controllers
         [HttpPost]
         public IActionResult InsertCategory(InsertCategoryDto insertCategoryDto)
         {
+            var result = _insertValidator.Validate(insertCategoryDto);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
             var value = _mapper.Map<Category>(insertCategoryDto);
             _categoryService.TInsert(value);
             return Ok("Kayıt başarıyla eklendi.");
@@ -47,6 +56,10 @@ namespace APILayer.Controllers
         [HttpPut]
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
+            var result = _updateValidator.Validate(updateCategoryDto);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
             var value = _mapper.Map<Category>(updateCategoryDto);
             _categoryService.TUpdate(value);
             return Ok("Kayıt başarıyla güncellendi.");
