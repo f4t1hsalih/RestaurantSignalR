@@ -1,9 +1,11 @@
 using APILayer.Hubs;
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules.BookingValidations;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using FluentValidation;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
@@ -65,6 +67,8 @@ builder.Services.AddScoped<IBasketDal, EfBasketDal>();
 
 builder.Services.AddScoped<INotificationService, NotificationManager>();
 builder.Services.AddScoped<INotificationDal, EfNotificationDal>();
+
+builder.Services.AddValidatorsFromAssemblyContaining<BookingAddValidation>();
 
 // json tarafýnda iç içe yapý hatasýný engeller
 builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
