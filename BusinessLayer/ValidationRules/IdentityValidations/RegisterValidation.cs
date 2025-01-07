@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace BusinessLayer.ValidationRules.IdentityValidations
 {
-    public class RegisterIdentity : AbstractValidator<RegisterDto>
+    public class RegisterValidation : AbstractValidator<RegisterDto>
     {
-        public RegisterIdentity()
+        public RegisterValidation()
         {
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Ad alanı gereklidir.")

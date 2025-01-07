@@ -1,7 +1,18 @@
 using APILayer.Hubs;
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules.AboutValidations;
 using BusinessLayer.ValidationRules.BookingValidations;
+using BusinessLayer.ValidationRules.CategoryValidations;
+using BusinessLayer.ValidationRules.ContactValidations;
+using BusinessLayer.ValidationRules.DiscountValidations;
+using BusinessLayer.ValidationRules.IdentityValidations;
+using BusinessLayer.ValidationRules.NotificationValidations;
+using BusinessLayer.ValidationRules.ProductValidations;
+using BusinessLayer.ValidationRules.SliderValidations;
+using BusinessLayer.ValidationRules.SocialMediaValidations;
+using BusinessLayer.ValidationRules.TableValidations;
+using BusinessLayer.ValidationRules.TestimonialValidations;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
@@ -68,7 +79,26 @@ builder.Services.AddScoped<IBasketDal, EfBasketDal>();
 builder.Services.AddScoped<INotificationService, NotificationManager>();
 builder.Services.AddScoped<INotificationDal, EfNotificationDal>();
 
+builder.Services.AddValidatorsFromAssemblyContaining<AboutUpdateValidation>();
 builder.Services.AddValidatorsFromAssemblyContaining<BookingAddValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<BookingUpdateValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<CategoryAddValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<CategoryUpdateValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<ContactUpdateValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<DiscountAddValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<DiscountUpdateValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<NotificationAddValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<NotificationUpdateValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductAddValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductUpdateValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<SliderUpdateValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<SocialMediaAddValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<SocialMediaUpdateValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<TableAddValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<TableUpdateValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<TestimonialAddValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<TestimonialUpdateValidation>();
 
 // json tarafýnda iç içe yapý hatasýný engeller
 builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

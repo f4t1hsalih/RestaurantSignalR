@@ -1,5 +1,7 @@
+using BusinessLayer.ValidationRules.IdentityValidations;
 using DataAccessLayer.Concrete;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -10,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 var requireAuthorizePolicy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();
+
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
 
 // Add services to the container.
 builder.Services.AddDbContext<Context>();
