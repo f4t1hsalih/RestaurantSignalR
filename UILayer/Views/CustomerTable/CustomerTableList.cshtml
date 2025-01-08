@@ -1,0 +1,87 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>Bahçe Durumları</title>
+    <meta name="description" content="Bahçelerin doluluk durumlarını görüntüleyin.">
+    <style>
+        .widget {
+            width: 200px;
+            height: 100px;
+            background-color: #2ecc71;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+            .widget:hover {
+                background-color: #27ae60;
+                transform: scale(1.05);
+            }
+
+        .widget-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+            .widget-icon i {
+                font-size: 24px;
+                color: #2ecc71;
+            }
+
+        .widget-text {
+            margin-left: 20px;
+        }
+
+            .widget-text h3 {
+                margin: 0;
+                font-size: 18px;
+            }
+
+            .widget-text p {
+                margin: 0;
+                font-size: 14px;
+            }
+    </style>
+</head>
+<body class="sub_page">
+    @await Component.InvokeAsync("_UILayoutHeader")
+    @await Component.InvokeAsync("_UILayoutNavbar")
+    </div>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="widget">
+                    <div class="widget-icon">
+                        <i class="fas fa-chair"></i>
+                    </div>
+                    <div class="widget-text">
+                        <h3>Masa 01</h3>
+                        <p>Dolu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @await Component.InvokeAsync("_UILayoutFooter")
+</body>
+</html>
