@@ -53,7 +53,7 @@
                                             <h6>
                                                 @item.Price ₺
                                             </h6>
-                                            <a href="#" onclick="showproductid('@item.ProductId', '@item.Name')" class="cart_link">
+                                            <a href="#" onclick="showproductid('@item.ProductId', '@ViewBag.tableId', '@item.Name')" class="cart_link">
                                                 <i class="fa fa-shopping-cart"></i>
                                             </a>
                                         </div>
@@ -73,24 +73,24 @@
     @await Component.InvokeAsync("_UILayoutScripts")
 
     <script>
-        function showproductid(id, name)
+        function showproductid(productId, tableId, name)
         {
-            $.ajax(
-                {
-                type: "POST",
-                url: "/Menu/AddBasket/" + id,
-                data: { ProductId: id },
-                contentType: 'json',
-                success: function ()
-                {
-                    Swal.fire(
-                    {
+            $.ajax({
+            type: "POST",
+            url: "/Menu/AddBasket/",
+            data: JSON.stringify({
+                ProductId: productId,
+                TableId: tableId
+            }),
+            contentType: 'application/json',
+            success: function () {
+                Swal.fire({
                     title: name,
                     text: "Seçtiğiniz Ürün Sepete Eklendi",
                     icon: "success"
-                    });
-                }
                 });
+            }
+        });
         }
     </script>
 

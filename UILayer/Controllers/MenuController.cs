@@ -16,8 +16,11 @@ namespace UILayer.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Index()
+        [Route("Menu/Index/{tableId:int}")]
+        public async Task<IActionResult> Index(int tableId)
         {
+            ViewBag.tableId = tableId;
+
             var client = _httpClientFactory.CreateClient();
             var response = await client.GetAsync("https://localhost:7068/api/Product/ProductWithCategories");
             if (response.IsSuccessStatusCode)
@@ -30,10 +33,17 @@ namespace UILayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBasket(int id)
+        public async Task<IActionResult> AddBasket(int productId, int tableId)
         {
-            BasketInsertDTO dto = new BasketInsertDTO();
-            dto.ProductId = id;
+            if (tableId == 0)
+            {
+                return BadRequest("Lütefen Bir Masa Seçiniz");
+            }
+            BasketInsertDTO dto = new BasketInsertDTO
+            {
+                ProductId = productId,
+                TableId = tableId
+            };
 
             var client = _httpClientFactory.CreateClient();
             var json = JsonConvert.SerializeObject(dto);
