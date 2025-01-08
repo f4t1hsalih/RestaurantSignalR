@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<TableResultDTO>
+@{
     Layout = null;
 }
 
@@ -11,10 +12,21 @@
     <title>Bahçe Durumları</title>
     <meta name="description" content="Bahçelerin doluluk durumlarını görüntüleyin.">
     <style>
+        .container-fluid {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
         .widget {
             width: 200px;
             height: 100px;
-            background-color: #2ecc71;
             display: flex;
             align-items: center;
             border-radius: 10px;
@@ -24,14 +36,27 @@
             transition: all 0.3s ease;
         }
 
-            .widget:hover {
+        .widget-empty {
+            background-color: #2ecc71;
+        }
+
+            .widget-empty:hover {
                 background-color: #27ae60;
                 transform: scale(1.05);
             }
 
+        .widget-full {
+            background-color: #e74c3c;
+        }
+
+            .widget-full:hover {
+                background-color: #c0392b;
+                transform: scale(1.05);
+            }
+
         .widget-icon {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background-color: white;
             border-radius: 50%;
             display: flex;
@@ -42,16 +67,18 @@
 
             .widget-icon i {
                 font-size: 24px;
-                color: #2ecc71;
             }
 
         .widget-text {
-            margin-left: 20px;
+            margin-left: 15px;
         }
 
             .widget-text h3 {
                 margin: 0;
-                font-size: 18px;
+                font-size: 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .widget-text p {
@@ -67,18 +94,22 @@
 
     <div class="container-fluid py-4">
         <div class="row">
-
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="widget">
-                    <div class="widget-icon">
-                        <i class="fas fa-chair"></i>
-                    </div>
-                    <div class="widget-text">
-                        <h3>Masa 01</h3>
-                        <p>Dolu</p>
+            @foreach (var item in Model)
+            {
+                var widgetClass = item.Status ? "widget-full" : "widget-empty";
+                var iconColor = item.Status ? "color: #e74c3c;" : "color: #2ecc71;";
+                <div>
+                    <div class="widget @widgetClass">
+                        <div class="widget-icon">
+                            <i class="fas fa-chair" style="@iconColor"></i>
+                        </div>
+                        <div class="widget-text">
+                            <h3>@item.Name</h3>
+                            <p>@(item.Status ? "Dolu" : "Boş")</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 
