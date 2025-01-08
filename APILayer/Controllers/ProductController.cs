@@ -17,12 +17,12 @@ namespace APILayer.Controllers
         private readonly IValidator<InsertProductDto> _insertValidator;
         private readonly IValidator<UpdateProductDto> _updateValidator;
 
-        public ProductController(IProductService productService, IMapper mapper, IValidator<UpdateProductDto> updateValidator, IValidator<InsertProductDto> insertValidator)
+        public ProductController(IProductService productService, IMapper mapper, IValidator<InsertProductDto> insertValidator, IValidator<UpdateProductDto> updateValidator)
         {
             _productService = productService;
             _mapper = mapper;
-            _updateValidator = updateValidator;
             _insertValidator = insertValidator;
+            _updateValidator = updateValidator;
         }
 
         [HttpGet]

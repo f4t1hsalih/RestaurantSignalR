@@ -16,19 +16,19 @@
 
                     <div class="form-group">
                         <label for="name">Ürün Adı</label>
-                        <input type="text" class="form-control" asp-for="Name" id="name">
+                        <input type="text" class="form-control" asp-for="Name" id="name" required>
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="price">Ürün Fiyatı</label>
-                        <input type="text" class="form-control" asp-for="Price" id="price">
+                        <input type="text" class="form-control" asp-for="Price" id="price" required />
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="imageUrl">Resim Yolu</label>
-                        <input type="text" class="form-control" asp-for="ImageUrl" id="imageUrl">
+                        <input type="text" class="form-control" asp-for="ImageUrl" id="imageUrl" required>
                         <span asp-validation-for="ImageUrl" class="text-danger"></span>
                     </div>
 
@@ -40,7 +40,7 @@
 
                     <div class="form-group">
                         <label for="description">Ürün Açıklaması</label>
-                        <textarea class="form-control" rows="4" asp-for="Description" id="description"></textarea>
+                        <textarea class="form-control" rows="4" asp-for="Description" id="description" required></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                 </div>

@@ -16,10 +16,12 @@ namespace UILayer.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        [Route("Menu/Index/{tableId:int}")]
-        public async Task<IActionResult> Index(int tableId)
+        // Eğer menüye giriş yapılırken masa id'si ile giriş yapılacaksa bu şekilde bir route tanımlaması yapılabilir, ama menüyü görmek için giriş yapılmasına gerek yoksa bu şekilde bir route tanımlaması yapılmasına gerek yoktur. Bu yüzden program.cs dosyasındaki orjinal route tanımlamasını kullandık böylece id gelirse eğer viewbag ile view'e taşıyabiliriz ve gelmez ise id 0 olacak ve bu şekilde bir işlem yapmamıza gerek kalmayacaktır.
+        //[Route("Menu/Index/{tableId:int}")]
+        public async Task<IActionResult> Index(int id)
         {
-            ViewBag.tableId = tableId;
+            //Bu kısımda masa id'sini viewbag ile view'e taşıdık
+            ViewBag.tableId = id;
 
             var client = _httpClientFactory.CreateClient();
             var response = await client.GetAsync("https://localhost:7068/api/Product/ProductWithCategories");
