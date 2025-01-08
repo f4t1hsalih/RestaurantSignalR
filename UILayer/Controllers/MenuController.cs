@@ -37,8 +37,9 @@ namespace UILayer.Controllers
         {
             if (tableId == 0)
             {
-                return BadRequest("Lütefen Bir Masa Seçiniz");
+                return BadRequest("Lütfen Bir Masa Seçiniz");
             }
+
             BasketInsertDTO dto = new BasketInsertDTO
             {
                 ProductId = productId,
@@ -48,12 +49,21 @@ namespace UILayer.Controllers
             var client = _httpClientFactory.CreateClient();
             var json = JsonConvert.SerializeObject(dto);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
+
             var response = await client.PostAsync("https://localhost:7068/api/Basket", data);
+
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
             }
-            return Json(dto);
+            else
+            {
+                // Hata mesajını döndürüyoruz
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                return Json(new { success = false, message = errorMessage });
+            }
         }
+
+
     }
 }
