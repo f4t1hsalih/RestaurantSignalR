@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using EntityLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -37,23 +38,30 @@ namespace UILayer.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBasket(int productId, int tableId)
         {
+            // Eğer masa id'si 0 gelirse hata mesajı döndürüyoruz
             if (tableId == 0)
             {
                 return BadRequest("Lütfen Bir Masa Seçiniz");
             }
 
+            // Eğer masa id'si 0'dan farklı ise BasketInsertDTO'ya productId ve tableId'yi atıyoruz
             BasketInsertDTO dto = new BasketInsertDTO
             {
                 ProductId = productId,
                 TableId = tableId
             };
 
+            // HttpClientFactory ile bir client oluşturuyoruz
             var client = _httpClientFactory.CreateClient();
             var json = JsonConvert.SerializeObject(dto);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-
+            // PostAsync ile BasketController'daki AddBasket metoduna dto'yu gönderiyoruz
             var response = await client.PostAsync("https://localhost:7068/api/Basket", data);
 
+            var client2 = _httpClientFactory.CreateClient();
+            await client2.GetAsync($"https://localhost:7068/api/Table/ChangeTableStatusToTrue/{tableId}");
+
+            // Eğer işlem başarılı ise Index sayfasına yönlendiriyoruz
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
