@@ -88,6 +88,8 @@ namespace BusinessLayer.Container
             services.AddValidatorsFromAssemblyContaining<TableUpdateValidation>();
             services.AddValidatorsFromAssemblyContaining<TestimonialAddValidation>();
             services.AddValidatorsFromAssemblyContaining<TestimonialUpdateValidation>();
+            services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
+
         }
     }
 }
