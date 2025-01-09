@@ -1,4 +1,7 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
+using DTOLayer.OrderDto;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APILayer.Controllers
@@ -8,10 +11,20 @@ namespace APILayer.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IMapper _mapper;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, IMapper mapper)
         {
             _orderService = orderService;
+            _mapper = mapper;
+        }
+
+        [HttpPost]
+        public IActionResult InsertOrder(InsertOrderDto ınsertOrderDto)
+        {
+            var value = _mapper.Map<Order>(ınsertOrderDto);
+            _orderService.TInsert(value);
+            return Ok("Kayıt Başarıyla Eklendi");
         }
 
         [HttpGet("TotalOrderCount")]
@@ -36,6 +49,18 @@ namespace APILayer.Controllers
         public IActionResult TodayTotalPrice()
         {
             return Ok(_orderService.TTodayTotalPrice());
+        }
+
+        [HttpPost("CompleteOrder/{tableId}")]
+        public IActionResult CompleteOrder(int tableId)
+        {
+            bool result = _orderService.TCompleteOrderByTableId(tableId); // Sipariş tamamlandıysa true döner
+            if (result)
+            {
+                return Ok(new { message = "Sipariş Başarıyla Tamamlandı." });
+            }
+
+            return BadRequest(new { message = "Siparişi Tamamlarken Bir Hata Oluştu." });
         }
 
     }

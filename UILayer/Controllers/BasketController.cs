@@ -38,6 +38,22 @@ namespace UILayer.Controllers
             return View();
         }
 
+        public async Task<IActionResult> CompleteOrder(int id)
+        {
+            int tableId = id;
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.PostAsync($"https://localhost:7068/api/Order/CompleteOrder/{tableId}", null);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["Message"] = "Sipariş Başarıyla Tamamlandı!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            TempData["Error"] = "Siparişi Tamamlarken Bir Hata Oluştu.";
+            return RedirectToAction("Index", new { id = tableId });
+        }
+
         public async Task<IActionResult> DeleteProduct(int id, int tableId)
         {
             var client = _httpClientFactory.CreateClient();

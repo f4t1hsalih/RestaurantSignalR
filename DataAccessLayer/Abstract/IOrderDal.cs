@@ -8,5 +8,6 @@ namespace DataAccessLayer.Abstract
         int ActiveOrderCount();
         decimal LastOrderPrice();
         decimal TodayTotalPrice();
+        bool CompleteOrderByTableId(int tableId);
     }
 }

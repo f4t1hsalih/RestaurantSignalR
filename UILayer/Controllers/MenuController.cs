@@ -1,9 +1,9 @@
-﻿using EntityLayer.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 using UILayer.DTO.BasketDTO;
+using UILayer.DTO.OrderDTO;
 using UILayer.DTO.ProductDTO;
 
 namespace UILayer.Controllers
@@ -38,42 +38,71 @@ namespace UILayer.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBasket(int productId, int tableId)
         {
-            // Eğer masa id'si 0 gelirse hata mesajı döndürüyoruz
+            // Masa ID kontrolü
             if (tableId == 0)
             {
                 return BadRequest("Lütfen Bir Masa Seçiniz");
             }
 
-            // Eğer masa id'si 0'dan farklı ise BasketInsertDTO'ya productId ve tableId'yi atıyoruz
+            // DTO nesnesini oluştur
             BasketInsertDTO dto = new BasketInsertDTO
             {
                 ProductId = productId,
                 TableId = tableId
             };
 
-            // HttpClientFactory ile bir client oluşturuyoruz
-            var client = _httpClientFactory.CreateClient();
-            var json = JsonConvert.SerializeObject(dto);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            // PostAsync ile BasketController'daki AddBasket metoduna dto'yu gönderiyoruz
-            var response = await client.PostAsync("https://localhost:7068/api/Basket", data);
-
-            var client2 = _httpClientFactory.CreateClient();
-            await client2.GetAsync($"https://localhost:7068/api/Table/ChangeTableStatusToTrue/{tableId}");
-
-            // Eğer işlem başarılı ise Index sayfasına yönlendiriyoruz
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                // Hata mesajını döndürüyoruz
+                // HttpClient oluştur
+                var client = _httpClientFactory.CreateClient();
+
+                // Sepet işlemi
+                var json = JsonConvert.SerializeObject(dto);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("https://localhost:7068/api/Basket", data);
+
+                // Sepet işlemi başarılıysa
+                if (response.IsSuccessStatusCode)
+                {
+                    // Masa durumu güncelleme
+                    var tableResponse = await client.GetAsync($"https://localhost:7068/api/Table/ChangeTableStatusToTrue/{tableId}");
+                    if (!tableResponse.IsSuccessStatusCode)
+                    {
+                        return Json(new { success = false, message = "Masa durumu güncellenemedi." });
+                    }
+
+                    // Order tablosuna yeni kayıt ekleme
+                    var orderDto = new OrderCreateDTO
+                    {
+                        TableId = tableId,
+                        Description = "Müşteri Masada",
+                        Date = DateTime.Now,
+                        TotalPrice = 0, // Başlangıçta 0 olarak belirtiyoruz
+                    };
+
+                    var orderJson = JsonConvert.SerializeObject(orderDto);
+                    var orderData = new StringContent(orderJson, Encoding.UTF8, "application/json");
+                    var orderResponse = await client.PostAsync("https://localhost:7068/api/Order", orderData);
+
+                    if (!orderResponse.IsSuccessStatusCode)
+                    {
+                        return Json(new { success = false, message = "Sipariş oluşturulurken bir hata oluştu." });
+                    }
+
+                    // İşlem başarılıysa yönlendirme
+                    return RedirectToAction("Index");
+                }
+
+                // Sepet ekleme işlemi başarısızsa hata döndür
                 var errorMessage = await response.Content.ReadAsStringAsync();
                 return Json(new { success = false, message = errorMessage });
             }
+            catch (Exception ex)
+            {
+                // Genel hata yönetimi
+                return Json(new { success = false, message = $"Bir hata oluştu: {ex.Message}" });
+            }
         }
-
 
     }
 }

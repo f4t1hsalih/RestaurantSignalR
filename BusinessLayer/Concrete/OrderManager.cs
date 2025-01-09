@@ -20,6 +20,11 @@ namespace BusinessLayer.Concrete
             return _orderDal.ActiveOrderCount();
         }
 
+        public bool TCompleteOrderByTableId(int tableId)
+        {
+            return _orderDal.CompleteOrderByTableId(tableId);
+        }
+
         public void TDelete(Order entity)
         {
             _orderDal.Delete(entity);

@@ -16,6 +16,11 @@
     @await Component.InvokeAsync("_UILayoutNavbar")
     </div> @*Bu div'i silme *@
 
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
     <br />
     <div class="container-fluid py-4">
 
@@ -66,7 +71,7 @@
                 </table>
             </div>
             <div class="col-lg-4">
-                <form>
+                @* <form>
                     <div class="input-group">
                         <input type="text" id="salecode" class="form-control p-4" placeholder="İndirim Kodunuz" />
                         <div>
@@ -74,7 +79,7 @@
                         </div>
                     </div>
                 </form>
-                <br />
+                <br /> *@
                 <h5 class="section-title position-relative text-uppercase text-primary mb-3"><span class="pr-3">Sepet Özeti</span></h5>
                 <div class="p-30 mb-5">
                     <div class="border-bottom pb-2" id="container">
@@ -94,7 +99,10 @@
                             <h5><span id="totalpricewithkdv">@basketTotalPrice</span> ₺</h5>
                         </div>
                         <br />
-                        <button id="btnchecked" class="btn btn-block btn-primary font-weight-bold my-3">Siparişi Tamamla</button>
+                        <a href="/Basket/CompleteOrder/@ViewBag.TableId"
+                           class="btn btn-block btn-primary font-weight-bold my-3">
+                            Siparişi Tamamla
+                        </a>
                     </div>
                 </div>
             </div>

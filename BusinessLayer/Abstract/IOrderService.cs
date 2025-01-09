@@ -8,5 +8,6 @@ namespace BusinessLayer.Abstract
         int TActiveOrderCount();
         decimal TLastOrderPrice();
         decimal TTodayTotalPrice();
+        bool TCompleteOrderByTableId(int tableId);
     }
 }

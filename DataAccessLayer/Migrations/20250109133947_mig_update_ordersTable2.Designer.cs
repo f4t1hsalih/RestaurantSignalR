@@ -4,6 +4,7 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250109133947_mig_update_ordersTable2")]
+    partial class mig_update_ordersTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -380,8 +383,6 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("TableId");
-
                     b.ToTable("Orders");
                 });
 
@@ -689,17 +690,6 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Tables");
                 });
 
-            modelBuilder.Entity("EntityLayer.Entities.Order", b =>
-                {
-                    b.HasOne("EntityLayer.Entities.Table", "Tables")
-                        .WithMany("Orders")
-                        .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tables");
-                });
-
             modelBuilder.Entity("EntityLayer.Entities.OrderDetail", b =>
                 {
                     b.HasOne("EntityLayer.Entities.Order", null)
@@ -797,8 +787,6 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Entities.Table", b =>
                 {
                     b.Navigation("Baskets");
-
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
