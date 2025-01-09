@@ -103,7 +103,9 @@
                         <div class="widget-icon">
                             @if (item.Status)
                             {
-                                <i class="fas fa-chair" style="@iconColor"></i>
+                                <a href="/Basket/Index/@item.TableId" title="Öde">
+                                    <i class="fas fa-money" style="@iconColor"></i>
+                                </a>
                             }
                             else
                             {
