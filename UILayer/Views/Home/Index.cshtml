@@ -3,6 +3,13 @@
     Layout = "~/Views/UILayout/Index.cshtml";
 }
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-warning custom-alert">
+        @TempData["Message"]
+    </div>
+}
+
 @await Component.InvokeAsync("_HomePageSlider")
 
 @await Component.InvokeAsync("_HomePageOffer")

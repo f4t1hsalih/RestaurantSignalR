@@ -7,3 +7,15 @@
 <script src="~/templates/restoranttemp/js/custom.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@* Masa seçmeyince gösterilecek alert mesajı *@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const alertBox = document.querySelector(".custom-alert");
+        if (alertBox) {
+            setTimeout(() => {
+                alertBox.style.display = "none";
+            }, 3000); // 3 saniye sonra gizle
+        }
+    });
+</script>
