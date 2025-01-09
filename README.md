@@ -79,6 +79,18 @@ SignalR, gerçek zamanlı iletişim sağlamak için kullanılır. Bu sınıf, re
 ### 3. **Dependency Injection (Bağımlılık Enjeksiyonu)**
 Proje, bağımlılıkları kolay yönetebilmek ve test edilebilirliği artırmak için Dependency Injection (DI) altyapısını kullanır. Katmanlar arası iletişim, servisler ve repository sınıfları DI ile kontrol altına alınmıştır. Bu yaklaşım, bağımlılıkların gevşek bir şekilde bağlanmasını sağlar ve proje genelinde daha esnek bir yapı sunar.
 
+### 4. **RapidAPI ile Yemek Tarifleri**
+Sistem, kullanıcı deneyimini geliştirmek için **RapidAPI** entegrasyonunu kullanarak yemek tariflerini ve videolarını dinamik bir şekilde çekmektedir.
+
+### RapidAPI Özellikleri:
+- **Yemek Videolarına Erişim**: 
+  - Kullanıcılar, menüdeki yemekler için ilham verici ve eğitici yemek videolarını izleyebilir.
+- **Zengin İçerik**: 
+  - Videolar, yemeklerin hazırlanış aşamalarını ve sunum önerilerini içermektedir.
+- **API Kullanımı**: 
+  - RapidAPI üzerinden sağlanan verilerle, farklı mutfaklardan yemeklerin videolu tarifleri sunulmaktadır.
+
+Bu özellik, müşterilerin menüdeki yemekler hakkında daha fazla bilgi edinmesini sağlar ve restoranın modern bir imaj oluşturmasına katkıda bulunur.
 ## 📦 Kurulum
 
 ### Gereksinimler:
