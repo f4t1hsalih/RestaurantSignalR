@@ -48,5 +48,15 @@ namespace BusinessLayer.Concrete
         {
             _tableDal.Update(entity);
         }
+
+        public void TChangeTableStatusToTrue(int tableId)
+        {
+            _tableDal.ChangeTableStatusToTrue(tableId);
+        }
+
+        public void TChangeTableStatusToFalse(int tableId)
+        {
+            _tableDal.ChangeTableStatusToFalse(tableId);
+        }
     }
 }

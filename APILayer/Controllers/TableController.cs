@@ -82,5 +82,19 @@ namespace APILayer.Controllers
             return Ok(_tableService.TTableCount());
         }
 
+        [HttpGet("ChangeTableStatusToTrue/{tableId}")]
+        public IActionResult ChangeTableStatusToTrue(int tableId)
+        {
+            _tableService.TChangeTableStatusToTrue(tableId);
+            return Ok("Masa Durumu Aktif Hale Getirildi.");
+        }
+
+        [HttpGet("ChangeTableStatusToFalse/{tableId}")]
+        public IActionResult ChangeTableStatusToFalse(int tableId)
+        {
+            _tableService.TChangeTableStatusToFalse(tableId);
+            return Ok("Masa Durumu Pasif Hale Getirildi.");
+        }
+
     }
 }

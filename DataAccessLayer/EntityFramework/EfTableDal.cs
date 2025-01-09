@@ -11,6 +11,18 @@ namespace DataAccessLayer.EntityFramework
         {
         }
 
+        public void ChangeTableStatusToFalse(int tableId)
+        {
+            _context.Tables.Find(tableId).Status = false;
+            _context.SaveChanges();
+        }
+
+        public void ChangeTableStatusToTrue(int tableId)
+        {
+            _context.Tables.Find(tableId).Status = true;
+            _context.SaveChanges();
+        }
+
         public int TableCount()
         {
             return _context.Tables.Count();
