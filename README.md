@@ -42,6 +42,7 @@ Bu proje, **ASP.NET Core 8.0** ile geliştirilen, restoranlar ve kafeler için Q
 - **Gerçek Zamanlı İletişim**: SignalR
 - **Veritabanı**: Microsoft SQL Server
 - **QR Kod**: QRCoder Kütüphanesi
+- **RapidApi**: Tasty Apisi
 - **Frontend**: 
   - HTML5, CSS3, JavaScript
   - Bootstrap
